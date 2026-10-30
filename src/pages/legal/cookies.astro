@@ -1,0 +1,67 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+---
+
+<Base title="Política de cookies" description="Política de cookies de Central de Tornillos: sin cookies publicitarias, sin seguimiento y sin lista de cotización guardada en el navegador." noIndex>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Legal</span>
+      <h1>Política de cookies</h1>
+      <p>Qué guardamos en tu navegador y para qué. Sin seguimiento publicitario.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Cookies" }]} />
+    <section class="section section--tight">
+      <div class="prose">
+        <h2>1. Qué son las cookies</h2>
+        <p>
+          Las cookies son pequeños archivos que un sitio web puede almacenar en tu
+          dispositivo. Junto con ellas existen tecnologías similares, como el
+          almacenamiento local (<em>localStorage</em>), que permiten recordar información
+          en el navegador.
+        </p>
+
+        <h2>2. Qué utilizamos</h2>
+        <p>
+          Este sitio web <strong>no utiliza cookies publicitarias, de perfilado ni de
+          análisis de terceros</strong>. Tampoco guarda una lista de cotización ni un
+          carrito en el navegador: las referencias se envían directamente mediante el
+          formulario de cotización o por WhatsApp.
+        </p>
+        <p>
+          El proveedor de alojamiento puede registrar datos técnicos de acceso en sus
+          registros de servidor (dirección IP, fecha, página solicitada y agente de
+          usuario) con fines de seguridad y disponibilidad. Esos registros no se utilizan
+          para publicidad ni se cruzan con tus datos comerciales.
+        </p>
+
+        <h2>3. Base legal</h2>
+        <p>
+          Al no utilizar cookies no esenciales ni tecnologías de seguimiento, no se
+          requiere consentimiento previo para cookies. El tratamiento de datos personales
+          que puedas enviarnos se rige por la <a href="/legal/privacidad">política de
+          privacidad</a> y por la Ley 1581 de 2012.
+        </p>
+
+        <h2>4. Cómo eliminarlas</h2>
+        <p>
+          Puedes borrar las cookies y el almacenamiento local desde la configuración de tu
+          navegador (Privacidad → Borrar datos de navegación). Como este sitio no guarda tu
+          lista de cotización, no perderás referencias ni cantidades al hacerlo.
+        </p>
+
+        <h2>5. Cambios</h2>
+        <p>
+          Si en el futuro incorporamos analítica o cookies de terceros, actualizaremos
+          esta política y solicitaremos el consentimiento correspondiente antes de
+          activarlas.
+        </p>
+
+        <p><em>Última actualización: octubre de 2026.</em></p>
+      </div>
+    </section>
+  </div>
+</Base>

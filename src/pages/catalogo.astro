@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CatalogView from "../components/CatalogView.astro";
+import Icon from "../components/Icon.astro";
+import { categories } from "../data/categories";
+import { products, totalReferences } from "../data/products";
+import { site } from "../data/site";
+---
+
+<Base
+  title="Catálogo de tornillería estructural, drywall y cubiertas"
+  description={`Catálogo de tornillería al por mayor en Colombia: ${totalReferences} referencias de tornillos estructurales, drywall y cubiertas. Filtra por medida, material y norma; cotización bajo pedido.`}
+>
+  <section class="catalog-hero catalog-hero--store">
+    <div class="container catalog-hero__inner">
+      <div class="catalog-hero__copy">
+        <span class="eyebrow">Catálogo completo</span>
+        <h1>Tornillería técnica, sin rodeos.</h1>
+        <p>
+          {totalReferences} referencias con norma, medida, material y presentación.
+          Todas se trabajan bajo pedido: cotiza por volumen y confirmamos plazo y flete.
+        </p>
+        <div class="catalog-hero__facts">
+          <span><strong>{totalReferences}</strong> referencias</span>
+          <span><strong>{categories.length}</strong> categorías</span>
+          <span>Bajo pedido · cotización</span>
+        </div>
+        <div class="catalog-hero__actions">
+          <a class="btn btn--primary" href="/cotizacion">
+            <Icon name="file" size={16} /> Cotizar mi lista
+          </a>
+          <a class="btn btn--on-dark" href="/contacto">
+            Consultar medida especial <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+      </div>
+      <div class="catalog-hero__stats" aria-label="Datos del catálogo">
+        <div><strong>{totalReferences}</strong><span>Referencias</span></div>
+        <div><strong>{categories.length}</strong><span>Categorías</span></div>
+        <div><strong>{site.ivaLabel}</strong><span>Discriminado en factura</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Catálogo" }]} />
+    <CatalogView products={products} categories={categories} />
+  </div>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="cta-band">
+        <div>
+          <h2>¿No encuentras tu medida exacta?</h2>
+          <p>
+            Trabajamos referencias bajo pedido y medidas especiales. Cuéntanos qué
+            necesitas y te decimos viabilidad y plazo.
+          </p>
+        </div>
+        <div class="cta-band__actions">
+          <a class="btn btn--primary" href="/cotizacion">
+            <Icon name="file" size={16} /> Pedir cotización
+          </a>
+          <a class="btn btn--on-dark" href="/contacto">
+            Consultar medida <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

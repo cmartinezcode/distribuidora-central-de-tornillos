@@ -1,0 +1,75 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+---
+
+<Base
+  title="Créditos de imágenes"
+  description="Créditos, autores y licencias de las imágenes de referencia usadas en el catálogo de Central de Tornillos."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Transparencia</span>
+      <h1>Créditos de imágenes</h1>
+      <p>
+        Las imágenes de producto son referencias visuales. La referencia exacta, el
+        acabado y la presentación se confirman en la cotización.
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Créditos de imágenes" }]} />
+    <section class="section section--tight">
+      <div class="prose">
+        <h2>Imágenes de producto</h2>
+        <p>
+          Las fotografías de producto fueron suministradas por el negocio para este
+          catálogo. Se adaptaron para la web (recorte, rotación, eliminación del fondo
+          blanco y ajuste de tamaño) y se normalizaron a un lienzo cuadrado de 700 × 700 px
+          con el producto centrado y sin deformación. Antes de publicar, confirma la autoría
+          y los derechos de uso de cada archivo original.
+        </p>
+
+        <ul>
+          <li>
+            <strong>Línea drywall:</strong> fotografía de referencia del tornillo drywall
+            6 × 1&quot;.
+          </li>
+          <li>
+            <strong>Línea estructural:</strong> fotografías de referencia de los tornillos
+            truss punta aguja, truss punta broca y framing.
+          </li>
+          <li>
+            <strong>Línea cubiertas:</strong> fotografías de referencia de los tornillos
+            autoperforantes de 1&quot; y 2&quot;. Las medidas 1 1/2&quot; y 12 × 3&quot;
+            comparten la imagen de referencia de su familia hasta contar con una foto
+            propia.
+          </li>
+        </ul>
+
+        <h2>Portada</h2>
+        <p>
+          La portada usa la imagen del tornillo drywall 6 × 1 de
+          `Escritorio/imagenes/tornillo-drywall-6x1.jpeg`, recortada y sin fondo para
+          integrarla al panel azul. No es una ficha técnica exacta: la medida, el acabado y
+          la presentación se confirman en la cotización.
+        </p>
+        <p>
+          La prueba con `foto.webp` y la composición técnica del flange 10 × 2&quot; se
+          conservan como recursos alternativos y no están activas. La imagen ilustrativa
+          generada con inteligencia artificial tampoco se usa actualmente. Antes de publicar,
+          valida la autoría y los derechos de uso de las fotografías suministradas.
+        </p>
+
+        <h2>Nota de uso</h2>
+        <p>
+          Estas imágenes no sustituyen la ficha técnica del fabricante ni confirman la
+          geometría exacta de la referencia. Para validar cabeza, punta, rosca, acabado y
+          empaque, comparte la referencia y la cantidad en la
+          <a href="/cotizacion">solicitud de cotización</a>.
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>

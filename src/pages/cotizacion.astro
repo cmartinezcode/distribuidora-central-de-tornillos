@@ -1,0 +1,296 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Icon from "../components/Icon.astro";
+import { products } from "../data/products";
+import { site, whatsappHref } from "../data/site";
+
+const productMap = Object.fromEntries(
+  products.map((product) => [
+    product.slug,
+    {
+      name: product.name,
+      sku: product.sku,
+      unit: product.unit,
+      unitLabel: product.unitLabel,
+      measure: product.measure,
+      norm: product.norm,
+    },
+  ])
+);
+
+const quickWhatsApp = whatsappHref(
+  "Hola, quiero cotizar tornillería. Les comparto mi lista de referencias y cantidades."
+);
+---
+
+<Base
+  title="Solicitar cotización de tornillería"
+  description="Solicita cotización de tornillería al por mayor en Colombia sin carrito ni registro. Pega varias referencias, indica cantidades y recibe precio por volumen, presentación y flete."
+>
+  <section class="page-hero quote-hero">
+    <div class="container quote-hero__inner">
+      <div>
+        <span class="eyebrow">Cotización</span>
+        <h1>Pega tu lista. Nosotros hacemos el resto.</h1>
+        <p>
+          Sin carrito ni cuenta. Envíanos las referencias, medidas y cantidades; te
+          respondemos con precio por volumen, presentación y flete a tu ciudad.
+        </p>
+        <div class="quote-hero__badges">
+          <span class="badge badge--stock"><Icon name="check-circle" size={12} /> Respuesta en 24 h</span>
+          <span class="badge">Cotización en COP</span>
+          <span class="badge">IVA 19 %</span>
+          <span class="badge">Envío gratis desde {site.freeShippingLabel}</span>
+        </div>
+      </div>
+      <div class="quote-hero__aside">
+        <span class="quote-hero__kicker">Cotización B2B</span>
+        <strong>Una lista, varias referencias.</strong>
+        <p>No necesitas acumular productos en un carrito.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Cotización" }]} />
+
+    <div class="quote-layout">
+      <div class="quote-form-card">
+        <div class="quote-form-card__head">
+          <div>
+            <span class="eyebrow">Formulario</span>
+            <h2>Cuéntanos qué necesitas.</h2>
+          </div>
+          <span class="quote-form-card__step">01 / 01</span>
+        </div>
+
+        <form class="quote-form" data-quote-form data-email={site.email} novalidate>
+          <div class="form-grid">
+            <div class="field form-grid--full">
+              <label for="cotizacion-referencias">Referencias y cantidades <span>*</span></label>
+              <textarea
+                id="cotizacion-referencias"
+                name="referencias"
+                rows="6"
+                placeholder="Ejemplo:&#10;DRY-06X1 — 5 cajas&#10;FRA-07X716 — 10 cajas&#10;Necesito también tornillos flange #10 × 2"
+                required
+              ></textarea>
+              <p class="field__hint">
+                Puedes pegar un listado de Excel, una lista de compras o varias medidas.
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="cotizacion-empresa">Empresa <span>*</span></label>
+              <input id="cotizacion-empresa" name="empresa" type="text" autocomplete="organization" required />
+            </div>
+            <div class="field">
+              <label for="cotizacion-nit">NIT</label>
+              <input id="cotizacion-nit" name="nit" type="text" autocomplete="off" placeholder="Para factura electrónica" />
+            </div>
+            <div class="field">
+              <label for="cotizacion-nombre">Nombre de contacto <span>*</span></label>
+              <input id="cotizacion-nombre" name="nombre" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="cotizacion-email">Email <span>*</span></label>
+              <input id="cotizacion-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="cotizacion-telefono">Teléfono / WhatsApp <span>*</span></label>
+              <input id="cotizacion-telefono" name="telefono" type="tel" autocomplete="tel" required />
+            </div>
+            <div class="field">
+              <label for="cotizacion-ciudad">Ciudad de despacho</label>
+              <input id="cotizacion-ciudad" name="ciudad" type="text" autocomplete="address-level2" />
+            </div>
+            <div class="field">
+              <label for="cotizacion-plazo">Plazo deseado</label>
+              <select id="cotizacion-plazo" name="plazo">
+                <option value="Lo antes posible">Lo antes posible</option>
+                <option value="Esta semana">Esta semana</option>
+                <option value="Próximas 2 semanas">Próximas 2 semanas</option>
+                <option value="Sin prisa">Sin prisa</option>
+              </select>
+            </div>
+            <div class="field form-grid--full">
+              <label for="cotizacion-notas">Notas técnicas</label>
+              <textarea
+                id="cotizacion-notas"
+                name="notas"
+                rows="3"
+                placeholder="Norma requerida, certificado, medida especial, fecha de entrega…"
+              ></textarea>
+            </div>
+            <div class="form-grid--full">
+              <label class="check">
+                <input type="checkbox" name="privacidad" required />
+                <span>
+                  He leído y acepto la <a href="/legal/privacidad">política de privacidad</a>.
+                  <span>*</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn--primary btn--block" type="submit">
+            <Icon name="send" size={16} /> Enviar cotización por email
+          </button>
+
+          <a
+            class="btn btn--ghost btn--block quote-form__wa"
+            href={quickWhatsApp}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-whatsapp
+          >
+            <Icon name="whatsapp" size={16} /> Enviar por WhatsApp
+          </a>
+
+          <p class="form-note">
+            Al enviar se abrirá tu cliente de correo con la solicitud preparada. También
+            puedes escribirnos directamente a <a href={`mailto:${site.email}`}>{site.email}</a>.
+            No guardamos tu lista en el navegador.
+          </p>
+          <p class="form-note" data-form-status role="status"></p>
+        </form>
+      </div>
+
+      <aside class="quote-aside">
+        <div class="quote-aside__card quote-aside__card--dark">
+          <span class="quote-aside__kicker">Cómo funciona</span>
+          <ol class="quote-steps">
+            <li>
+              <span>01</span>
+              <div><strong>Envíanos la lista</strong><p>Referencias, medidas y cantidades, aunque sean varias.</p></div>
+            </li>
+            <li>
+              <span>02</span>
+              <div><strong>Confirmamos volumen</strong><p>Aplicamos precio por volumen, presentación y flete.</p></div>
+            </li>
+            <li>
+              <span>03</span>
+              <div><strong>Recibes la cotización</strong><p>Con IVA discriminado, plazo y condiciones de pago.</p></div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="info-card">
+          <h2>Contacto directo</h2>
+          <ul class="footer-contact" style="margin-top: 0.75rem;">
+            <li><Icon name="phone" size={16} /> <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phoneDisplay}</a></li>
+            <li><Icon name="whatsapp" size={16} /> <a href={quickWhatsApp} target="_blank" rel="noopener noreferrer">WhatsApp comercial</a></li>
+            <li><Icon name="mail" size={16} /> <a href={`mailto:${site.email}`}>{site.email}</a></li>
+            <li><Icon name="clock" size={16} /> <span>{site.hours}</span></li>
+          </ul>
+        </div>
+
+        <div class="quote-aside__note">
+          <Icon name="info" size={17} />
+          <p>
+            ¿Tienes un Excel o un PDF? Envíalo a <a href={`mailto:${site.email}`}>{site.email}</a>
+            y lo convertimos en cotización.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script type="application/json" id="quote-product-data" set:html={JSON.stringify(productMap)}></script>
+  <script>
+    // @ts-nocheck
+    const form = document.querySelector("[data-quote-form]");
+    const whatsapp = document.querySelector("[data-whatsapp]");
+    const status = document.querySelector("[data-form-status]");
+    const references = document.querySelector("#cotizacion-referencias");
+
+    const productDataNode = document.getElementById("quote-product-data");
+    let productData = {};
+    try {
+      productData = JSON.parse(productDataNode?.textContent || "{}");
+    } catch {
+      productData = {};
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const productSlug = params.get("producto");
+    const boxes = Math.max(1, Number.parseInt(params.get("cantidad") || "1", 10) || 1);
+
+    if (productSlug && productData[productSlug] && references instanceof HTMLTextAreaElement && !references.value) {
+      const product = productData[productSlug];
+      references.value = `${product.name} (${product.sku}) — ${boxes} ${product.unit}${boxes === 1 ? "" : "s"} · presentación por confirmar`;
+    }
+
+    const getData = () => {
+      if (!(form instanceof HTMLFormElement)) return null;
+      const data = new FormData(form);
+      return {
+        referencias: String(data.get("referencias") || "").trim(),
+        empresa: String(data.get("empresa") || "").trim(),
+        nit: String(data.get("nit") || "").trim(),
+        nombre: String(data.get("nombre") || "").trim(),
+        email: String(data.get("email") || "").trim(),
+        telefono: String(data.get("telefono") || "").trim(),
+        ciudad: String(data.get("ciudad") || "").trim(),
+        plazo: String(data.get("plazo") || "").trim(),
+        notas: String(data.get("notas") || "").trim(),
+      };
+    };
+
+    const buildText = () => {
+      const data = getData();
+      if (!data) return "";
+      return [
+        "Solicitud de cotización de tornillería",
+        "",
+        "Referencias y cantidades:",
+        data.referencias,
+        "",
+        "Datos de contacto:",
+        `Empresa: ${data.empresa}`,
+        data.nit && `NIT: ${data.nit}`,
+        `Contacto: ${data.nombre}`,
+        `Email: ${data.email}`,
+        `Teléfono: ${data.telefono}`,
+        data.ciudad && `Ciudad de despacho: ${data.ciudad}`,
+        data.plazo && `Plazo deseado: ${data.plazo}`,
+        data.notas && `Notas: ${data.notas}`,
+        "",
+        "Entiendo que las referencias están bajo pedido y que la cotización confirma presentación, precio, plazo y flete.",
+      ]
+        .filter(Boolean)
+        .join("\n");
+    };
+
+    const updateWhatsApp = () => {
+      if (!(whatsapp instanceof HTMLAnchorElement)) return;
+      const base = whatsapp.getAttribute("href")?.split("?")[0];
+      if (!base) return;
+      whatsapp.href = `${base}?text=${encodeURIComponent(buildText())}`;
+    };
+
+    form?.addEventListener("input", updateWhatsApp);
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!(form instanceof HTMLFormElement)) return;
+      if (!form.reportValidity()) return;
+
+      const data = getData();
+      if (!data) return;
+      const email = form.getAttribute("data-email") || "ventas@centraldetornillos.co";
+      const subject = `Solicitud de cotización — ${data.empresa || data.nombre}`;
+      const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildText())}`;
+
+      if (status) {
+        status.textContent =
+          "Abriendo tu cliente de correo con la solicitud preparada. Si no se abre, usa el botón de WhatsApp.";
+      }
+
+      window.location.href = mailto;
+    });
+
+    updateWhatsApp();
+  </script>
+</Base>

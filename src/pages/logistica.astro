@@ -1,0 +1,174 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Icon from "../components/Icon.astro";
+import { site, whatsappHref } from "../data/site";
+import { faqs } from "../data/faqs";
+import { totalReferences } from "../data/products";
+
+const quickWhatsApp = whatsappHref(
+  "Hola, quiero confirmar disponibilidad, flete y plazo de despacho para una lista de tornillería."
+);
+---
+
+<Base
+  title="Despacho, plazos y envíos"
+  description="Despacho de tornillería bajo pedido en 5–8 días hábiles, envío gratis desde $500.000 COP sin IVA, embalaje reforzado y plazos claros en Colombia."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Despacho</span>
+      <h1>Plazos claros. Sin «te llamamos».</h1>
+      <p>
+        Referencias bajo pedido, despacho a domicilio en 5–8 días hábiles en cobertura
+        principal y envío gratis desde {site.freeShippingLabel} sin IVA. Confirmamos el
+        plazo exacto en la cotización antes de servir.
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Despacho" }]} />
+
+    <section class="section section--tight">
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="feature__icon"><Icon name="package" size={20} /></span>
+          <h3>Bajo pedido</h3>
+          <p>{totalReferences} referencias activas con plazo confirmado en la cotización.</p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="truck" size={20} /></span>
+          <h3>5–8 días hábiles</h3>
+          <p>Plazo habitual para referencias bajo pedido en cobertura principal.</p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="box" size={20} /></span>
+          <h3>Envío gratis desde {site.freeShippingLabel}</h3>
+          <p>COP sin IVA en cobertura principal. Por debajo, flete según peso y destino.</p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="shield" size={20} /></span>
+          <h3>Embalaje reforzado</h3>
+          <p>Cajas completas identificadas con referencia, cantidad y lote.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Plazos</span>
+          <h2 class="section-title">Cuánto tarda tu pedido.</h2>
+          <p class="section-lead">
+            Estos son los plazos habituales. En la cotización confirmamos la fecha de
+            cada línea según presentación, volumen y ciudad de despacho.
+          </p>
+        </div>
+      </div>
+
+      <div class="info-card" style="overflow-x: auto;">
+        <table class="tier-table">
+          <caption class="visually-hidden">Plazos de despacho por tipo de pedido</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tipo de pedido</th>
+              <th scope="col">Plazo habitual</th>
+              <th scope="col">Observaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Referencia estándar bajo pedido</td><td>5–8 días hábiles</td><td>Confirmamos fecha al validar la cotización</td></tr>
+            <tr><td>Medida especial</td><td>7–10 días hábiles</td><td>Según especificación, material y cantidad</td></tr>
+            <tr><td>Bogotá y área metropolitana</td><td>1–2 días hábiles</td><td>Tránsito después del alistamiento</td></tr>
+            <tr><td>Medellín, Cali y Barranquilla</td><td>2–3 días hábiles</td><td>Tránsito desde Bogotá</td></tr>
+            <tr><td>Otros municipios</td><td>3–5 días hábiles</td><td>Flete cotizado según volumen y transportadora</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="form-note" style="margin-top: 0.75rem;">
+        El plazo total combina alistamiento y tránsito. Se cuenta en días hábiles desde la
+        confirmación del pedido y no incluye incidencias logísticas ajenas al transporte.
+      </p>
+    </section>
+
+    <section class="section section--paper" style="margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);">
+      <div class="quality-grid">
+        <div>
+          <span class="eyebrow">Embalaje y recepción</span>
+          <h2 class="section-title">Así llega el material.</h2>
+          <p class="section-lead">
+            Cada caja lleva etiqueta con referencia, cantidad y lote. La remisión detalla
+            unidades, cajas y trazabilidad para que puedas registrar la entrada sin
+            recontar a ciegas.
+          </p>
+          <ul class="checklist" style="margin-top: 1.5rem;">
+            <li><Icon name="check-circle" size={18} /> <span><strong>Caja completa</strong> con la cantidad indicada en ficha.</span></li>
+            <li><Icon name="check-circle" size={18} /> <span><strong>Etiqueta de lote</strong> y referencia en cada bulto.</span></li>
+            <li><Icon name="check-circle" size={18} /> <span><strong>Remisión detallada</strong> con unidades y cajas.</span></li>
+            <li><Icon name="check-circle" size={18} /> <span><strong>Revisión en 48 h</strong>: cualquier incidencia, se resuelve.</span></li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h2>Devoluciones</h2>
+          <p>
+            Material estándar sin abrir: dentro de los 5 días hábiles siguientes a la
+            recepción, con autorización previa y flete de retorno a cargo del cliente. No
+            admitimos devoluciones de material cortado, manipulado o fabricado a medida,
+            salvo defecto de fabricación.
+          </p>
+          <p style="margin-top: 0.75rem;">
+            Si detectas una desviación de medida, rosca o acabado, escríbenos con una foto
+            y el número de lote. Lo revisamos y, si procede, reponemos sin coste.
+          </p>
+          <a class="btn btn--dark btn--sm" style="margin-top: 1rem;" href="/contacto">
+            Comunicar incidencia
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Dudas habituales</span>
+          <h2 class="section-title">Sobre despachos y pedidos.</h2>
+        </div>
+        <a class="link-arrow" href="/faq">
+          Ver todas <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+
+      <div class="faq">
+        {faqs.slice(3, 7).map((faq) => (
+          <details>
+            <summary>{faq.question}</summary>
+            <div class="faq__body">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="cta-band">
+        <div>
+          <h2>¿Necesitas una entrega con fecha?</h2>
+          <p>
+            Indica la fecha en la cotización. Confirmamos disponibilidad y, si hace falta,
+            coordinamos la salida para tu despacho.
+          </p>
+        </div>
+        <div class="cta-band__actions">
+          <a class="btn btn--primary" href="/cotizacion">
+            <Icon name="file" size={16} /> Pedir cotización
+          </a>
+          <a class="btn btn--on-dark" href={quickWhatsApp} target="_blank" rel="noopener noreferrer">
+            <Icon name="whatsapp" size={16} /> WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

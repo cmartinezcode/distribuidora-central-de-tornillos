@@ -1,0 +1,94 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { site } from "../../data/site";
+---
+
+<Base title="Política de privacidad" description="Política de privacidad de Central de Tornillos S.A.S.: responsable, finalidades, base jurídica, conservación y derechos conforme a la Ley 1581 de 2012." noIndex>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Legal</span>
+      <h1>Política de privacidad</h1>
+      <p>Cómo tratamos los datos que nos facilitas al solicitar una cotización o contactar.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Privacidad" }]} />
+    <section class="section section--tight">
+      <div class="prose">
+        <h2>1. Responsable del tratamiento</h2>
+        <p>
+          <strong>{site.legalName}</strong>, con NIT {site.nit} y domicilio en
+          {site.address.street}, {site.address.postalCode} {site.address.city},
+          {site.address.region}, Colombia. Puedes contactar en
+          <a href={`mailto:${site.email}`}>{site.email}</a> o en el teléfono
+          {site.phoneDisplay}.
+        </p>
+
+        <h2>2. Finalidades del tratamiento</h2>
+        <ul>
+          <li>Atender consultas técnicas, solicitudes de muestra y peticiones de información.</li>
+          <li>Elaborar y enviar cotizaciones, así como realizar el seguimiento comercial.</li>
+          <li>Gestionar pedidos, despachos, facturación electrónica y garantías posteriores.</li>
+          <li>Cumplir obligaciones legales, contables y tributarias.</li>
+        </ul>
+
+        <h2>3. Base jurídica</h2>
+        <p>
+          El tratamiento se realiza conforme a la Ley 1581 de 2012, el Decreto 1377 de
+          2013 y las demás normas que los modifiquen o sustituyan. La base es la
+          autorización previa, expresa e informada del titular para las finalidades
+          comerciales y de contacto; la ejecución de la relación contractual o
+          precontractual para cotizaciones y pedidos; y el cumplimiento de obligaciones
+          legales para la facturación y conservación de documentos.
+        </p>
+
+        <h2>4. Conservación</h2>
+        <p>
+          Los datos se conservan mientras exista relación comercial y, después, durante los
+          plazos legales de prescripción y conservación contable y tributaria. Los datos de
+          consultas no convertidas se eliminan o anonimizan en un plazo máximo de 12 meses,
+          salvo que exista una obligación legal de conservarlos.
+        </p>
+
+        <h2>5. Destinatarios y encargados</h2>
+        <p>
+          No cedemos datos a terceros salvo obligación legal o cuando sea necesario para la
+          ejecución del pedido (transportadoras, gestoría, entidades bancarias y proveedor
+          de facturación electrónica). Los proveedores tecnológicos que alojan la web o
+          gestionan el correo actúan como encargados del tratamiento con obligaciones de
+          confidencialidad y seguridad.
+        </p>
+
+        <h2>6. Derechos del titular</h2>
+        <p>
+          Puedes conocer, actualizar, rectificar y suprimir tus datos, solicitar prueba de
+          la autorización, revocar el consentimiento, solicitar la limitación del
+          tratamiento y presentar quejas escribiendo a
+          <a href={`mailto:${site.email}`}>{site.email}</a>, acreditando tu identidad.
+          También puedes acudir a la Superintendencia de Industria y Comercio (SIC) en
+          <a href="https://www.sic.gov.co" target="_blank" rel="noopener noreferrer">www.sic.gov.co</a>.
+        </p>
+
+        <h2>7. Seguridad</h2>
+        <p>
+          Aplicamos medidas técnicas y organizativas razonables para proteger la
+          información: acceso restringido, conexiones cifradas y copias de seguridad. No
+          obstante, ningún sistema es infalible; si detectas un uso indebido, avísanos de
+          inmediato.
+        </p>
+
+        <h2>8. Cookies y almacenamiento local</h2>
+        <p>
+          Este sitio no utiliza cookies publicitarias ni de seguimiento. No guardamos tu
+          lista de cotización ni tus datos en el almacenamiento local del navegador: el
+          formulario prepara un correo o un mensaje de WhatsApp que tú decides enviar.
+          Puedes consultar el detalle en la <a href="/legal/cookies">política de cookies</a>.
+        </p>
+
+        <p><em>Última actualización: octubre de 2026.</em></p>
+      </div>
+    </section>
+  </div>
+</Base>

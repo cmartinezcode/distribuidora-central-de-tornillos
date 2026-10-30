@@ -1,0 +1,465 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import { site, whatsappHref } from "../data/site";
+import { categories } from "../data/categories";
+import { categoryCount, products, totalReferences } from "../data/products";
+
+const pathname = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+const quickWhatsApp = whatsappHref(
+  "Hola, quiero cotizar tornillería. Les comparto mi lista de referencias y cantidades."
+);
+
+const searchIndex = products.map((product) => ({
+  name: product.name,
+  sku: product.sku,
+  slug: product.slug,
+  category: product.category,
+  categoryName: product.categoryName,
+  measure: product.measure,
+  norm: product.norm,
+  image: product.image,
+  search: product.search,
+  compact: [
+    product.measure.replace(/[×✕]/g, "x").replace(/["#\s]/g, ""),
+    product.sku,
+    product.sku.replace(/-/g, ""),
+  ]
+    .join(" ")
+    .toLowerCase(),
+}));
+
+const searchIndexJson = JSON.stringify(searchIndex).replace(/</g, "\\u003c");
+---
+
+<div class="topbar" role="region" aria-label="Información de servicio">
+  <div class="container topbar__inner">
+    <div class="topbar__meta">
+      <span class="topbar__item">
+        <Icon name="truck" size={16} /> Envío gratis desde {site.freeShippingLabel}
+      </span>
+      <span class="topbar__item"><Icon name="package" size={16} /> Bajo pedido</span>
+      <span class="topbar__item"><Icon name="map-pin" size={16} /> Cobertura nacional</span>
+    </div>
+    <div class="topbar__links">
+      <a class="topbar__wa" href={quickWhatsApp} target="_blank" rel="noopener noreferrer">
+        <Icon name="whatsapp" size={16} /> Cotiza por WhatsApp
+      </a>
+      <a href={`tel:${site.phone.replace(/\s/g, "")}`}>
+        <Icon name="phone" size={16} /> {site.phoneDisplay}
+      </a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <Logo />
+
+      <form
+        class="search header-search"
+        role="search"
+        aria-label="Buscar en el catálogo"
+        action="/catalogo"
+        method="get"
+        data-live-search
+      >
+        <label class="search__category">
+          <span class="visually-hidden">Categoría</span>
+          <select name="category" aria-label="Filtrar búsqueda por categoría" data-live-category>
+            <option value="">Todo</option>
+            {categories.map((category) => (
+              <option value={category.slug}>{category.navLabel}</option>
+            ))}
+          </select>
+        </label>
+        <Icon name="search" size={18} class="search__icon" />
+        <input
+          class="search__input"
+          type="search"
+          name="q"
+          placeholder="Referencia, medida o norma: #8 × 1/2, drywall…"
+          aria-label="Buscar productos"
+          autocomplete="off"
+          aria-controls="header-search-results"
+          aria-expanded="false"
+          data-live-input
+        />
+        <button class="search__btn" type="submit">Buscar</button>
+
+        <div class="search-live" id="header-search-results" data-live-results hidden>
+          <p class="visually-hidden" role="status" aria-live="polite" data-live-status></p>
+          <div data-live-body></div>
+        </div>
+      </form>
+
+      <div class="header-actions">
+        <a class="header-phone" href={`tel:${site.phone.replace(/\s/g, "")}`}>
+          <span>Asesoría y pedidos</span>
+          <strong>{site.phoneDisplay}</strong>
+        </a>
+        <a class="btn btn--primary header-quote" href="/cotizacion">
+          <Icon name="file" size={17} />
+          <span>Cotizar</span>
+        </a>
+        <button
+          class="icon-btn nav-toggle"
+          type="button"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          data-menu-open
+        >
+          <Icon name="menu" size={21} />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="site-nav" aria-label="Categorías y secciones">
+    <div class="container nav-shell">
+      <details class="catalog-menu">
+        <summary>
+          <Icon name="grid" size={16} />
+          <span>Todo el catálogo</span>
+          <Icon name="chevron-down" size={14} class="catalog-menu__chevron" />
+        </summary>
+        <div class="catalog-menu__panel">
+          <div class="catalog-menu__grid">
+            {categories.map((category) => (
+              <a class="catalog-menu__item" href={`/categoria/${category.slug}`}>
+                <span class="catalog-menu__icon"><Icon name="layers" size={17} /></span>
+                <span>
+                  <strong>{category.name}</strong>
+                  <small>{category.short} · {categoryCount(category.slug)} ref.</small>
+                </span>
+              </a>
+            ))}
+          </div>
+          <div class="catalog-menu__aside">
+            <span class="catalog-menu__kicker">{totalReferences} referencias activas</span>
+            <strong>Encuentra, compara y cotiza.</strong>
+            <p>Cotización por volumen y despacho nacional desde Bogotá.</p>
+            <a class="btn btn--primary btn--sm" href="/catalogo">
+              Ver catálogo completo <Icon name="arrow-right" size={15} />
+            </a>
+            <a class="catalog-menu__link" href="/cotizacion">
+              <Icon name="file" size={15} /> Cotizar una lista
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <ul class="nav-list">
+        {categories.map((category) => (
+          <li>
+            <a
+              class="nav-link"
+              href={`/categoria/${category.slug}`}
+              aria-current={pathname === `/categoria/${category.slug}` ? "page" : undefined}
+            >
+              {category.navLabel}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a class="nav-link" href="/sectores" aria-current={isCurrent("/sectores") ? "page" : undefined}>
+            Sectores
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" href="/calidad" aria-current={isCurrent("/calidad") ? "page" : undefined}>
+            Calidad
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" href="/logistica" aria-current={isCurrent("/logistica") ? "page" : undefined}>
+            Despacho
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" href="/contacto" aria-current={isCurrent("/contacto") ? "page" : undefined}>
+            Contacto
+          </a>
+        </li>
+      </ul>
+
+      <a class="nav-wa" href={quickWhatsApp} target="_blank" rel="noopener noreferrer">
+        <Icon name="whatsapp" size={16} /> Cotiza por WhatsApp
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script type="application/json" id="header-search-data" is:inline set:html={searchIndexJson}></script>
+
+<script>
+  const liveForm = document.querySelector("[data-live-search]");
+  const liveData = document.getElementById("header-search-data");
+
+  if (liveForm instanceof HTMLFormElement && liveData) {
+    const input = liveForm.querySelector("[data-live-input]");
+    const category = liveForm.querySelector("[data-live-category]");
+    const panel = liveForm.querySelector("[data-live-results]");
+    const body = liveForm.querySelector("[data-live-body]");
+    const status = liveForm.querySelector("[data-live-status]");
+
+    if (
+      input instanceof HTMLInputElement &&
+      panel instanceof HTMLElement &&
+      body instanceof HTMLElement &&
+      status instanceof HTMLElement
+    ) {
+      const parsed = JSON.parse(liveData.textContent || "[]");
+      const items = Array.isArray(parsed) ? parsed : [];
+
+      const normalize = (value = "") =>
+        String(value)
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[×✕]/g, "x")
+          .toLowerCase();
+
+      const escapeHtml = (value = "") =>
+        String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+
+      const close = () => {
+        panel.hidden = true;
+        input.setAttribute("aria-expanded", "false");
+      };
+
+      const render = () => {
+        const raw = input.value.trim();
+
+        if (!raw) {
+          body.innerHTML = "";
+          status.textContent = "";
+          close();
+          return;
+        }
+
+        const tokens = normalize(raw).split(/\s+/).filter(Boolean);
+        const normalizedQuery = normalize(raw);
+        const compactQuery = normalizedQuery.replace(/["'#\s-]/g, "");
+        const looksLikeMeasure = /^#?\d[\d\s./-]*x[\d\s./-]*\d$/.test(normalizedQuery);
+        const selectedCategory = category instanceof HTMLSelectElement ? category.value : "";
+        const matches = items.filter((item) => {
+          if (selectedCategory && item.category !== selectedCategory) return false;
+          if (looksLikeMeasure) return String(item.compact ?? "").includes(compactQuery);
+          const haystack = `${item.search ?? ""} ${normalize(item.categoryName)}`;
+          return tokens.every((token) => haystack.includes(token));
+        });
+
+        const score = (item = { name: "", sku: "", categoryName: "" }) => {
+          const name = normalize(item.name);
+          const sku = normalize(item.sku);
+          const categoryName = normalize(item.categoryName);
+          let value = 0;
+          if (sku === normalizedQuery) value += 100;
+          if (name === normalizedQuery) value += 80;
+          if (name.includes(normalizedQuery)) value += 40;
+          if (categoryName === normalizedQuery) value += 30;
+          return value;
+        };
+
+        matches.sort((a, b) => score(b) - score(a));
+
+        const shown = matches.slice(0, 6);
+        const params = new URLSearchParams({ q: raw });
+        if (selectedCategory) params.set("category", selectedCategory);
+        const allHref = `/catalogo?${params.toString()}`;
+        const resultLabel = matches.length === 1 ? "resultado" : "resultados";
+
+        if (matches.length === 0) {
+          body.innerHTML = `
+            <div class="search-live__empty">
+              <strong>Sin coincidencias para “${escapeHtml(raw)}”</strong>
+              <p>Prueba con otra medida, SKU o norma. También podemos cotizar una referencia especial.</p>
+              <div class="search-live__empty-links">
+                <a href="/catalogo">Ver catálogo completo</a>
+                <a href="/cotizacion">Cotizar medida especial</a>
+              </div>
+            </div>
+          `;
+        } else {
+          body.innerHTML = `
+            <div class="search-live__head">
+              <span>${matches.length} ${resultLabel}</span>
+              <span>Bajo pedido · sin precio publicado</span>
+            </div>
+            <div class="search-live__list">
+              ${shown
+                .map(
+                  (item) => `
+                    <a class="search-live__item" href="/producto/${escapeHtml(item.slug)}" data-search-link>
+                      <span class="search-live__thumb" aria-hidden="true">
+                        <img src="${escapeHtml(item.image)}" alt="" loading="lazy" decoding="async" />
+                      </span>
+                      <span class="search-live__main">
+                        <span class="search-live__name">${escapeHtml(item.name)}</span>
+                        <span class="search-live__meta">${escapeHtml(item.sku)} · ${escapeHtml(item.norm)} · ${escapeHtml(item.measure)}</span>
+                      </span>
+                      <span class="search-live__cat">${escapeHtml(item.categoryName)}</span>
+                    </a>
+                  `
+                )
+                .join("")}
+            </div>
+            <a class="search-live__all" href="${escapeHtml(allHref)}">
+              <span>${matches.length > shown.length ? `Ver los ${matches.length} resultados` : "Ver resultados en el catálogo"}</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          `;
+        }
+
+        panel.hidden = false;
+        input.setAttribute("aria-expanded", "true");
+        status.textContent =
+          matches.length === 0
+            ? "Sin resultados. Prueba con otra medida, SKU o norma."
+            : `${matches.length} ${resultLabel}. Usa la flecha abajo para revisar las coincidencias.`;
+      };
+
+      const initialParams = new URLSearchParams(window.location.search);
+      const initialQuery = initialParams.get("q");
+      const initialCategory = initialParams.get("category");
+
+      if (!input.value && initialQuery) input.value = initialQuery;
+      if (category instanceof HTMLSelectElement && initialCategory) {
+        const hasCategory = Array.from(category.options).some(
+          (option) => option.value === initialCategory
+        );
+        if (hasCategory) category.value = initialCategory;
+      }
+
+      let timer = 0;
+      let skipNextFocus = false;
+
+      input.addEventListener("input", () => {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(render, 80);
+      });
+
+      input.addEventListener("focus", () => {
+        if (skipNextFocus) {
+          skipNextFocus = false;
+          return;
+        }
+        if (input.value.trim()) render();
+      });
+
+      if (category instanceof HTMLSelectElement) {
+        category.addEventListener("change", render);
+      }
+
+      input.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !panel.hidden) {
+          event.preventDefault();
+          close();
+          return;
+        }
+
+        if (event.key === "ArrowDown" && !panel.hidden) {
+          const first = panel.querySelector("[data-search-link]");
+          if (first instanceof HTMLElement) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+      });
+
+      panel.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          event.preventDefault();
+          close();
+          skipNextFocus = true;
+          input.focus();
+          return;
+        }
+
+        if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+
+        const links = Array.from(
+          panel.querySelectorAll("[data-search-link]")
+        ).filter((link) => link instanceof HTMLElement);
+        const active = document.activeElement;
+        const current = active instanceof HTMLElement ? links.indexOf(active) : -1;
+        if (current < 0) return;
+
+        const next = event.key === "ArrowDown" ? current + 1 : current - 1;
+        if (next >= 0 && next < links.length) {
+          event.preventDefault();
+          links[next].focus();
+        } else if (next < 0) {
+          event.preventDefault();
+          input.focus();
+        }
+      });
+
+      liveForm.addEventListener("submit", close);
+
+      liveForm.addEventListener("focusout", (event) => {
+        const next = event.relatedTarget;
+        if (next instanceof Node && !liveForm.contains(next)) close();
+      });
+
+      document.addEventListener("click", (event) => {
+        if (event.target instanceof Node && !liveForm.contains(event.target)) close();
+      });
+    }
+  }
+</script>
+
+<div class="drawer-backdrop" data-menu-backdrop></div>
+
+<aside class="mobile-nav" id="mobile-nav" aria-label="Menú de navegación" aria-hidden="true" inert>
+  <div class="mobile-nav__head">
+    <Logo />
+    <button class="icon-btn" type="button" aria-label="Cerrar menú" data-menu-close>
+      <Icon name="close" size={20} />
+    </button>
+  </div>
+
+  <ul class="mobile-nav__list">
+    <li><a href="/catalogo">Todo el catálogo <Icon name="arrow-right" size={16} /></a></li>
+    {categories.map((category) => (
+      <li><a href={`/categoria/${category.slug}`}>{category.name} <Icon name="arrow-right" size={16} /></a></li>
+    ))}
+    <li><a href="/sectores">Sectores <Icon name="arrow-right" size={16} /></a></li>
+    <li><a href="/calidad">Calidad y normativa <Icon name="arrow-right" size={16} /></a></li>
+    <li><a href="/logistica">Despacho y plazos <Icon name="arrow-right" size={16} /></a></li>
+    <li><a href="/nosotros">Nosotros <Icon name="arrow-right" size={16} /></a></li>
+    <li><a href="/faq">Preguntas frecuentes <Icon name="arrow-right" size={16} /></a></li>
+    <li><a href="/contacto">Contacto <Icon name="arrow-right" size={16} /></a></li>
+  </ul>
+
+  <div class="mobile-nav__cta">
+    <a class="btn btn--primary btn--block" href="/cotizacion">
+      <Icon name="file" size={16} /> Cotizar mi lista
+    </a>
+    <a
+      class="btn btn--on-dark btn--block"
+      href={quickWhatsApp}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Icon name="whatsapp" size={16} /> WhatsApp
+    </a>
+  </div>
+
+  <div class="mobile-nav__contact">
+    <span>Asesoría y pedidos</span>
+    <strong><a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phoneDisplay}</a></strong>
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+    <p>{site.hours}</p>
+  </div>
+</aside>

@@ -1,0 +1,121 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import { site, footerLinks, whatsappHref } from "../data/site";
+
+const year = new Date().getFullYear();
+const quickWhatsApp = whatsappHref(
+  "Hola, quiero cotizar tornillería. Les comparto mi lista de referencias y cantidades."
+);
+---
+
+<footer class="site-footer">
+  <div class="footer-cta">
+    <div class="container footer-cta__inner">
+      <div>
+        <span class="footer-cta__kicker">Cotización sin carrito</span>
+        <h2>Pega tu lista de referencias y te respondemos con precio y despacho.</h2>
+      </div>
+      <div class="footer-cta__actions">
+        <a class="btn btn--primary" href="/cotizacion">
+          <Icon name="file" size={16} /> Cotizar ahora
+        </a>
+        <a
+          class="btn btn--on-dark"
+          href={quickWhatsApp}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="whatsapp" size={16} /> WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <Logo />
+        <p>
+          Tornillería estructural, drywall y cubiertas al por mayor para industria,
+          construcción e instaladores. Referencias bajo pedido, cotización por volumen y
+          despacho nacional.
+        </p>
+        <div class="footer-badges">
+          <span>ASTM / ASME / SAE</span>
+          <span>Drywall</span>
+          <span>Cubiertas</span>
+          <span>Factura electrónica</span>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="footer-title">Catálogo</h2>
+        <ul class="footer-list">
+          {footerLinks.catalogo.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="footer-title">Empresa</h2>
+        <ul class="footer-list">
+          {footerLinks.empresa.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="footer-title">Contacto</h2>
+        <ul class="footer-contact">
+          <li>
+            <Icon name="phone" size={15} />
+            <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phoneDisplay}</a>
+          </li>
+          <li>
+            <Icon name="whatsapp" size={15} />
+            <a href={quickWhatsApp} target="_blank" rel="noopener noreferrer">WhatsApp comercial</a>
+          </li>
+          <li>
+            <Icon name="mail" size={15} />
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </li>
+          <li>
+            <Icon name="map-pin" size={15} />
+            <span>{site.address.street}<br />{site.address.postalCode} {site.address.city}, {site.address.region}</span>
+          </li>
+          <li>
+            <Icon name="clock" size={15} />
+            <span>{site.hours}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-meta">
+      <div>
+        <strong>{site.legalName}</strong>
+        <span>NIT {site.nit} · {site.address.city}, Colombia</span>
+      </div>
+      <div>
+        <strong>Envío gratis</strong>
+        <span>Desde {site.freeShippingLabel} (sin IVA) en cobertura principal.</span>
+      </div>
+      <div>
+        <strong>Precios</strong>
+        <span>Bajo cotización · {site.ivaLabel} añadido en factura.</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {year} {site.legalName}. Todos los derechos reservados.</p>
+      <ul>
+        {footerLinks.legal.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</footer>

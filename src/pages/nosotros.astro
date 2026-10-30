@@ -1,0 +1,158 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Icon from "../components/Icon.astro";
+import { site } from "../data/site";
+import { totalReferences } from "../data/products";
+import { categories } from "../data/categories";
+
+const years = new Date().getFullYear() - site.founded;
+---
+
+<Base
+  title="Sobre nosotros"
+  description={`Central de Tornillos: ${years} años suministrando tornillería técnica al por mayor a industria, construcción, talleres e instaladores.`}
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Nosotros</span>
+      <h1>Tornillería de almacén, no de catálogo interminable.</h1>
+      <p>
+        Desde {site.founded} suministramos tornillería técnica a profesionales que
+        necesitan la referencia correcta, en la cantidad correcta y sin perder una
+        mañana comparando fichas.
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Nosotros" }]} />
+
+    <section class="section section--tight">
+      <div class="quality-grid">
+        <div class="prose">
+          <span class="eyebrow">Nuestra forma de trabajar</span>
+          <h2 class="section-title">Menos catálogo, más criterio.</h2>
+          <p>
+            Empezamos sirviendo a talleres de la zona y aprendimos una cosa: el
+            profesional no quiere mil opciones, quiere la opción correcta con la
+            información clara. Por eso trabajamos con un surtido seleccionado, normas
+            identificadas y cotización por volumen clara.
+          </p>
+          <p>
+            Hoy servimos a industria, construcción, carpintería metálica e instaladores
+            en toda Colombia. Seguimos haciendo lo mismo: contestar rápido, confirmar
+            disponibilidad y no prometer un plazo que no podamos cumplir.
+          </p>
+          <p>
+            Si necesitas una medida especial, un certificado o una lista recurrente,
+            tenemos margen para estudiarlo. La conversación empieza por entender tu
+            montaje, no por venderte una caja.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <h2>En cifras</h2>
+          <div class="pd-facts" style="margin-top: 0.75rem; border: 0; padding: 0; background: transparent;">
+            <div class="fact">
+              <span class="fact__k">Años de experiencia</span>
+              <span class="fact__v" style="font-family: var(--font-display); font-size: 1.5rem;">{years}+</span>
+            </div>
+            <div class="fact">
+              <span class="fact__k">Referencias</span>
+              <span class="fact__v" style="font-family: var(--font-display); font-size: 1.5rem;">{totalReferences}</span>
+            </div>
+            <div class="fact">
+              <span class="fact__k">Familias</span>
+              <span class="fact__v" style="font-family: var(--font-display); font-size: 1.5rem;">{categories.length}</span>
+            </div>
+            <div class="fact">
+              <span class="fact__k">Respuesta media</span>
+              <span class="fact__v" style="font-family: var(--font-display); font-size: 1.5rem;">&lt; 24 h</span>
+            </div>
+          </div>
+          <p style="margin-top: 1rem;">
+            Todas las referencias se trabajan bajo pedido. Confirmamos presentación y
+            plazo antes de servir.
+          </p>
+          <a class="btn btn--dark btn--sm" style="margin-top: 1rem;" href="/calidad">
+            Ver calidad y normativa
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Lo que nos mueve</span>
+          <h2 class="section-title">Tres cosas que no negociamos.</h2>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="feature__icon"><Icon name="shield" size={20} /></span>
+          <h3>Decir la verdad técnica</h3>
+          <p>
+            Si una referencia no sirve para tu aplicación, lo decimos. Aunque hoy no
+            vendamos la caja.
+          </p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="truck" size={20} /></span>
+          <h3>Cumplir el plazo</h3>
+          <p>
+            Confirmamos disponibilidad y fecha antes de cerrar el pedido. Si cambia algo,
+            avisamos.
+          </p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="calculator" size={20} /></span>
+          <h3>Cotización clara</h3>
+          <p>
+            Precio por volumen y presentación sin letra pequeña. El volumen se aplica por
+            cajas completas.
+          </p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="wrench" size={20} /></span>
+          <h3>Hablar de tú a tú</h3>
+          <p>
+            Al otro lado hay alguien que conoce el producto, no un formulario que deriva
+            a otro formulario.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--dark bp-grid" style="margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);">
+      <div class="quality-grid">
+        <div>
+          <span class="eyebrow">Nuestro compromiso</span>
+          <h2 class="section-title">Que el pedido no te dé trabajo.</h2>
+          <p class="section-lead">
+            Recibir una caja no debería implicar recontar, comprobar referencias o
+            perseguir una remisión. Preparamos el pedido para que puedas entrar y montar.
+          </p>
+          <a class="btn btn--primary" style="margin-top: 1.5rem;" href="/cotizacion">
+            Trabajar con nosotros <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+        <div class="info-card">
+          <h2>Visítanos o llámanos</h2>
+          <p>{site.address.street}<br />{site.address.postalCode} {site.address.city}, {site.address.region}</p>
+          <p style="margin-top: 0.6rem;">{site.hours}</p>
+          <div class="hero__actions" style="margin-top: 1rem;">
+            <a class="btn btn--primary btn--sm" href={`tel:${site.phone.replace(/\s/g, "")}`}>
+              <Icon name="phone" size={15} /> {site.phoneDisplay}
+            </a>
+            <a class="btn btn--ghost btn--sm" href={`mailto:${site.email}`}>
+              <Icon name="mail" size={15} /> Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

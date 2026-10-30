@@ -1,0 +1,150 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import CatalogView from "../../components/CatalogView.astro";
+import Icon from "../../components/Icon.astro";
+import { categories, type Category } from "../../data/categories";
+import {
+  categoryCount,
+  getCategoryProducts,
+  type Product,
+} from "../../data/products";
+
+export function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { slug: category.slug },
+    props: { category },
+  }));
+}
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+const products: Product[] = getCategoryProducts(category.slug);
+const otherCategories = categories.filter((item) => item.slug !== category.slug);
+
+const familyMap = new Map<
+  string,
+  { id: string; name: string; norm: string; material: string; count: number }
+>();
+products.forEach((product) => {
+  const current = familyMap.get(product.familyId);
+  if (current) {
+    current.count += 1;
+  } else {
+    familyMap.set(product.familyId, {
+      id: product.familyId,
+      name: product.family,
+      norm: product.norm,
+      material: product.material,
+      count: 1,
+    });
+  }
+});
+const families = [...familyMap.values()];
+---
+
+<Base
+  title={`${category.name} al por mayor`}
+  description={`${category.description} Referencias bajo pedido con cotización por volumen y despacho nacional en Colombia.`}
+>
+  <section class="catalog-hero catalog-hero--store">
+    <div class="container catalog-hero__inner">
+      <div class="catalog-hero__copy">
+        <span class="eyebrow">Catálogo · {category.short}</span>
+        <h1>{category.name}</h1>
+        <p>{category.description}</p>
+        <div class="catalog-hero__facts">
+          <span><strong>{products.length}</strong> referencias</span>
+          <span><strong>{families.length}</strong> familias</span>
+          <span>Bajo pedido · cotización</span>
+        </div>
+        <div class="catalog-hero__actions">
+          <a class="btn btn--primary" href="/cotizacion">
+            <Icon name="file" size={16} /> Cotizar esta categoría
+          </a>
+          <a class="btn btn--on-dark" href="/catalogo">
+            Ver catálogo completo <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+      </div>
+      <div class="catalog-hero__visual" aria-hidden="true">
+        <img src={category.image} alt="" loading="eager" decoding="async" />
+        <span>{category.short}</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs
+      items={[
+        { label: "Catálogo", href: "/catalogo" },
+        { label: category.name },
+      ]}
+    />
+
+    <section class="family-section" aria-labelledby="family-title">
+      <div class="family-section__head">
+        <div>
+          <span class="eyebrow">Familias</span>
+          <h2 id="family-title">Compra por tipo de producto.</h2>
+        </div>
+        <p>Filtra por familia o combina material, medida y presentación.</p>
+      </div>
+      <div class="family-grid">
+        {families.map((family) => (
+          <a
+            class="family-card"
+            href={`/catalogo?category=${category.slug}&q=${encodeURIComponent(family.name)}`}
+          >
+            <span class="family-card__code">{family.norm}</span>
+            <h3>{family.name}</h3>
+            <p>{family.material} · {family.count} medida{family.count === 1 ? "" : "s"}</p>
+            <span>Ver referencias <Icon name="arrow-right" size={14} /></span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <CatalogView products={products} categories={categories} lockedCategory={category.slug} />
+  </div>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Seguir explorando</span>
+          <h2 class="section-title">Otras categorías.</h2>
+        </div>
+        <a class="link-arrow" href="/catalogo">
+          Ver catálogo completo <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+
+      <div class="sector-grid">
+        {otherCategories.map((item) => (
+          <a class="sector-card" href={`/categoria/${item.slug}`}>
+            <span class="sector-card__icon"><Icon name="package" size={20} /></span>
+            <div>
+              <h3>{item.name}</h3>
+              <p>{item.short} · {categoryCount(item.slug)} referencias</p>
+            </div>
+            <Icon name="arrow-up-right" size={16} class="sector-card__arrow" />
+          </a>
+        ))}
+      </div>
+
+      <div class="category-cta">
+        <div>
+          <h2>¿Necesitas varias referencias?</h2>
+          <p>Pega tu lista en el formulario y recibe precio por volumen, presentación y plazo.</p>
+        </div>
+        <a class="btn btn--primary" href="/cotizacion">
+          <Icon name="file" size={16} /> Cotizar mi lista
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

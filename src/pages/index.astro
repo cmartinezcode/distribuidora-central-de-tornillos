@@ -1,17 +1,294 @@
 ---
+import Base from "../layouts/Base.astro";
+import HeroPhoto from "../components/HeroPhoto.astro";
+import Icon from "../components/Icon.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { featuredProducts, totalReferences } from "../data/products";
+import { faqs } from "../data/faqs";
+import { site, whatsappHref } from "../data/site";
 
+const homeFaqs = faqs.slice(0, 4);
+
+const services = [
+  {
+    icon: "truck",
+    title: `Envío gratis desde ${site.freeShippingLabel}`,
+    text: "Sin IVA en cobertura principal",
+  },
+  {
+    icon: "package",
+    title: "Bajo pedido",
+    text: `${totalReferences} referencias activas`,
+  },
+  {
+    icon: "calculator",
+    title: "Cotización por volumen",
+    text: "Precio según cantidad y presentación",
+  },
+  {
+    icon: "wrench",
+    title: "Asesoría técnica",
+    text: "Te ayudamos a elegir la referencia",
+  },
+];
+
+const routes = [
+  {
+    icon: "search",
+    step: "01",
+    title: "Encuentra tu referencia",
+    text: "Busca por medida, norma o código y compara material, cabeza y presentación.",
+    href: "/catalogo",
+    cta: "Explorar catálogo",
+  },
+  {
+    icon: "file",
+    step: "02",
+    title: "Cotiza tu lista",
+    text: "Pega varias referencias y cantidades. Confirmamos precio por volumen, presentación y flete.",
+    href: "/cotizacion",
+    cta: "Solicitar cotización",
+  },
+  {
+    icon: "whatsapp",
+    step: "03",
+    title: "Resuelve por WhatsApp",
+    text: "¿Tienes una lista, un plano o una urgencia? Escríbenos y te respondemos.",
+    href: whatsappHref(
+      "Hola, quiero cotizar tornillería. Les comparto mi lista de referencias, medidas y cantidades."
+    ),
+    cta: "Abrir WhatsApp",
+  },
+];
+
+const benefits = [
+  {
+    icon: "shield",
+    title: "Norma y material visibles",
+    text: "ASTM, ASME, SAE, medida y acabado en cada ficha.",
+  },
+  {
+    icon: "box",
+    title: "Presentación por confirmar",
+    text: "La cotización confirma unidades por caja y pedido mínimo.",
+  },
+  {
+    icon: "file",
+    title: "Factura electrónica",
+    text: "Cotización con NIT, IVA discriminado y soporte documental.",
+  },
+  {
+    icon: "map-pin",
+    title: "Despacho nacional",
+    text: "Bogotá, Medellín, Cali, Barranquilla y transportadora aliada.",
+  },
+];
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  url: site.url,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${site.url}/catalogo?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+  title="Tornillería al mejor precio en Colombia"
+  description="Tornillería estructural, drywall y cubiertas para industria, construcción e instaladores en Colombia. Referencias bajo pedido, cotización por volumen y despacho nacional."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+
+  <section class="store-hero">
+    <div class="container store-hero__inner">
+      <div class="store-hero__copy">
+        <span class="store-hero__kicker">Tornillería al por mayor · Colombia</span>
+        <h1>Tornillería al <em>mejor precio.</em></h1>
+        <p class="store-hero__lead">
+          Referencias bajo pedido, cotización por volumen y despacho nacional. Encuentra
+          la referencia correcta y cotiza en minutos, sin carrito y sin registro.
+        </p>
+
+        <div class="store-hero__actions">
+          <a class="btn btn--primary" href="/catalogo">
+            Ver catálogo <Icon name="arrow-right" size={17} />
+          </a>
+          <a class="btn btn--on-dark" href="/cotizacion">
+            <Icon name="file" size={17} /> Cotizar mi lista
+          </a>
+        </div>
+
+        <ul class="store-hero__trust">
+          <li><Icon name="check-circle" size={15} /> {totalReferences} referencias</li>
+          <li><Icon name="check-circle" size={15} /> Cotización en COP</li>
+          <li><Icon name="check-circle" size={15} /> Respuesta en 24 h</li>
+          <li><Icon name="check-circle" size={15} /> Cobertura nacional</li>
+        </ul>
+      </div>
+
+      <div class="store-hero__stage">
+        <HeroPhoto />
+      </div>
+    </div>
+  </section>
+
+  <section class="service-strip" aria-label="Servicios">
+    <div class="container service-strip__inner">
+      {services.map((service) => (
+        <div class="service-item">
+          <span class="service-item__icon"><Icon name={service.icon} size={21} /></span>
+          <span>
+            <strong>{service.title}</strong>
+            <span>{service.text}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--tight featured-section">
+    <div class="container">
+      <div class="store-section-head">
+        <div>
+          <span class="eyebrow">Selección</span>
+          <h2 class="section-title">Referencias destacadas.</h2>
+          <p class="section-lead">
+            Líneas de drywall, estructurales y cubiertas. Todas bajo pedido, con
+            cotización por volumen y presentación por confirmar.
+          </p>
+        </div>
+        <a class="link-arrow" href="/catalogo">
+          Ver más referencias <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+
+      <div class="product-grid product-grid--featured">
+        {featuredProducts.map((product) => <ProductCard product={product} />)}
+      </div>
+
+      <div class="featured-note">
+        <span><Icon name="info" size={15} /> {site.priceNote}</span>
+        <a href="/cotizacion">¿Tienes varias referencias? Cotiza tu lista <Icon name="arrow-right" size={14} /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="standards-band">
+    <div class="container standards-band__inner">
+      <span class="standards-band__label">Normas que trabajamos</span>
+      <ul class="standards-list">
+        <li>ASTM C-1002</li>
+        <li>ASME B18.6.4</li>
+        <li>SAE J78</li>
+        <li>Punta aguja</li>
+        <li>Punta broca</li>
+        <li>Cabeza truss</li>
+        <li>Cabeza flange</li>
+        <li>Neopreno</li>
+      </ul>
+      <a class="standards-band__link" href="/calidad">
+        Ver calidad y trazabilidad <Icon name="arrow-right" size={15} />
+      </a>
+    </div>
+  </section>
+
+  <section class="routes-section">
+    <div class="container">
+      <div class="store-section-head store-section-head--dark">
+        <div>
+          <span class="eyebrow">Cómo comprar</span>
+          <h2 class="section-title">Tres formas de resolver tu pedido.</h2>
+          <p class="section-lead">
+            Sin carrito ni cuenta. Elige el canal que te funcione y nosotros confirmamos
+            precio, plazo y despacho.
+          </p>
+        </div>
+      </div>
+
+      <div class="route-grid">
+        {routes.map((route) => (
+          <a
+            class="route-card"
+            href={route.href}
+            target={route.href.startsWith("http") ? "_blank" : undefined}
+            rel={route.href.startsWith("http") ? "noopener noreferrer" : undefined}
+          >
+            <span class="route-card__step">{route.step}</span>
+            <span class="route-card__icon"><Icon name={route.icon} size={24} /></span>
+            <h3>{route.title}</h3>
+            <p>{route.text}</p>
+            <span class="route-card__cta">
+              {route.cta} <Icon name="arrow-right" size={15} />
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits-strip">
+    <div class="container benefits-strip__inner">
+      {benefits.map((benefit) => (
+        <article class="benefit-item">
+          <span class="benefit-item__icon"><Icon name={benefit.icon} size={20} /></span>
+          <h3>{benefit.title}</h3>
+          <p>{benefit.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section closing-section">
+    <div class="container home-closing">
+      <div class="home-faq">
+        <span class="eyebrow">Antes de pedir</span>
+        <h2 class="section-title">Dudas que resolvemos rápido.</h2>
+        <p class="section-lead">
+          Lo que más nos preguntan sobre cotización, presentaciones, plazos y envíos.
+        </p>
+        <div class="faq">
+          {homeFaqs.map((faq) => (
+            <details>
+              <summary>{faq.question}</summary>
+              <div class="faq__body">{faq.answer}</div>
+            </details>
+          ))}
+        </div>
+        <a class="link-arrow" href="/faq">
+          Ver todas las preguntas <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+
+      <aside class="quote-promo">
+        <span class="quote-promo__kicker">Cotización B2B</span>
+        <h2>Pega tu lista. Nosotros hacemos el resto.</h2>
+        <p>
+          Envíanos referencias, medidas y cantidades. Respondemos con precio por volumen,
+          presentación y flete a tu ciudad.
+        </p>
+        <ul>
+          <li><Icon name="check-circle" size={16} /> Sin registro ni carrito</li>
+          <li><Icon name="check-circle" size={16} /> Varias referencias en un solo envío</li>
+          <li><Icon name="check-circle" size={16} /> Respuesta en horario comercial</li>
+        </ul>
+        <div class="quote-promo__actions">
+          <a class="btn btn--dark" href="/cotizacion">
+            <Icon name="file" size={16} /> Cotizar ahora
+          </a>
+          <a
+            class="btn btn--ghost"
+            href={routes[2].href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="whatsapp" size={16} /> WhatsApp
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>

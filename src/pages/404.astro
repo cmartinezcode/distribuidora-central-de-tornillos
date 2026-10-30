@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import ScrewArt from "../components/ScrewArt.astro";
+import { categories } from "../data/categories";
+---
+
+<Base
+  title="Página no encontrada"
+  description="La página que buscas no está disponible. Vuelve al catálogo de tornillería o busca una referencia."
+  noIndex
+>
+  <section class="section">
+    <div class="container">
+      <div class="quality-grid">
+        <div>
+          <span class="eyebrow">Error 404</span>
+          <h1 class="section-title" style="font-size: var(--text-4xl);">
+            Esta referencia no está en el almacén.
+          </h1>
+          <p class="section-lead">
+            La página que buscas se ha movido o ya no existe. Prueba a buscar por
+            referencia, medida o norma, o vuelve al catálogo.
+          </p>
+
+          <form class="search" role="search" aria-label="Buscar referencias" action="/catalogo" method="get" style="margin-top: 1.5rem; max-width: 480px;">
+            <Icon name="search" size={18} class="search__icon" />
+            <input
+              class="search__input"
+              type="search"
+              name="q"
+              placeholder="#8 × 1/2, drywall, punta broca…"
+              aria-label="Buscar productos"
+              autocomplete="off"
+            />
+            <button class="search__btn" type="submit">Buscar</button>
+          </form>
+
+          <div class="hero__actions" style="margin-top: 1.25rem;">
+            <a class="btn btn--primary" href="/catalogo">
+              Ver catálogo <Icon name="arrow-right" size={16} />
+            </a>
+            <a class="btn btn--ghost" href="/contacto">Contactar</a>
+          </div>
+
+          <div class="pd-badges" style="margin-top: 1.5rem;">
+            {categories.map((category) => (
+              <a class="badge" href={`/categoria/${category.slug}`}>{category.navLabel}</a>
+            ))}
+          </div>
+        </div>
+
+        <div class="pd-media" style="min-height: 320px;" aria-hidden="true">
+          <ScrewArt type="machine" />
+          <span class="pd-media__note">Referencia no encontrada · 404</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

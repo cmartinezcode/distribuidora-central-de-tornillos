@@ -1,0 +1,64 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Icon from "../../components/Icon.astro";
+import { sectors } from "../../data/sectors";
+---
+
+<Base
+  title="Sectores: industria, construcción, talleres e instaladores"
+  description="Tornillería al por mayor adaptada a industria, construcción, talleres e instaladores. Referencias bajo pedido, cotización por volumen y asesoramiento técnico para cada sector."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Sectores</span>
+      <h1>No todos compran igual. No todos necesitan lo mismo.</h1>
+      <p>
+        Industria, obra, taller e instalación tienen ritmos, normas y urgencias
+        distintas. Adaptamos surtido, formato y logística a cómo trabajas.
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Sectores" }]} />
+
+    <section class="section section--tight">
+      <div class="sector-grid">
+        {sectors.map((sector) => (
+          <a class="sector-card" href={`/sectores/${sector.slug}`}>
+            <span class="sector-card__icon"><Icon name={sector.icon} size={22} /></span>
+            <div>
+              <h3>{sector.name}</h3>
+              <p>{sector.description}</p>
+              <span class="link-arrow" style="margin-top: 0.75rem;">
+                Ver soluciones <Icon name="arrow-right" size={15} />
+              </span>
+            </div>
+            <Icon name="arrow-up-right" size={17} class="sector-card__arrow" />
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="cta-band">
+        <div>
+          <h2>¿Trabajas en un sector concreto?</h2>
+          <p>
+            Cuéntanos tu caso y preparamos una lista de referencias habituales con
+            precios por volumen para tu consumo mensual.
+          </p>
+        </div>
+        <div class="cta-band__actions">
+          <a class="btn btn--primary" href="/contacto">
+            Hablar con un técnico <Icon name="arrow-right" size={16} />
+          </a>
+          <a class="btn btn--on-dark" href="/cotizacion">
+            <Icon name="file" size={16} /> Pedir cotización
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

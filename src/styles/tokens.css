@@ -1,0 +1,71 @@
+/* ============================================================
+   Central de Tornillos — design tokens
+   Paleta "acero y amarillo CAT": grafito + azul técnico + amarillo
+   ============================================================ */
+
+:root {
+  /* Marca */
+  --ink: #0f171d;
+  --ink-2: #16232b;
+  --ink-3: #203039;
+  --steel: #244a72;
+  --petrol: #0d52a0;
+  --petrol-700: #093a73;
+  --petrol-100: #e8f0fb;
+  --amber: #ffcd11;
+  --amber-600: #e6b800;
+  --amber-100: #fff7d1;
+  --amber-on-blue: #ffcd11;
+
+  /* Superficies */
+  --bone: #f6f3ec;
+  --bone-2: #efeae0;
+  --paper: #ffffff;
+  --line: #ded8ca;
+  --line-strong: #c9c1ae;
+
+  /* Texto */
+  --text: #1a252c;
+  --muted: #5b6870;
+  --muted-2: #626e76;
+  --on-dark: #f8f6f1;
+  --on-dark-muted: #c3d0e2;
+
+  /* Semánticos */
+  --green: #2a7454;
+  --green-bg: #e4f2eb;
+  --red: #b3261e;
+  --red-bg: #f9e5e3;
+
+  /* Tipografía */
+  --font-display: "Archivo Variable", "Archivo", system-ui, sans-serif;
+  --font-body: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  --text-3xl: clamp(1.9rem, 1.4rem + 2vw, 2.8rem);
+  --text-4xl: clamp(2.3rem, 1.6rem + 3vw, 3.6rem);
+  --text-5xl: clamp(2.5rem, 1.5rem + 4.6vw, 4.4rem);
+
+  /* Espaciado y forma */
+  --container: 1240px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --header-h: 76px;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 29, 0.05), 0 6px 18px -10px rgba(15, 23, 29, 0.18);
+  --shadow-md: 0 2px 4px rgba(15, 23, 29, 0.05), 0 18px 40px -20px rgba(15, 23, 29, 0.35);
+  --shadow-lg: 0 30px 70px -30px rgba(15, 23, 29, 0.45);
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --focus: 0 0 0 3px rgba(255, 205, 17, 0.55);
+}

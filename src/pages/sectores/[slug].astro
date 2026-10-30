@@ -1,0 +1,123 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Icon from "../../components/Icon.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { sectors, type Sector } from "../../data/sectors";
+import { getProduct, type Product } from "../../data/products";
+
+export function getStaticPaths() {
+  return sectors.map((sector) => ({
+    params: { slug: sector.slug },
+    props: { sector },
+  }));
+}
+
+interface Props {
+  sector: Sector;
+}
+
+const { sector } = Astro.props;
+const recommended: Product[] = sector.recommended.flatMap((slug) => {
+  const product = getProduct(slug);
+  return product ? [product] : [];
+});
+---
+
+<Base
+  title={`Tornillería para ${sector.name.toLowerCase()}`}
+  description={`${sector.description} Suministro al por mayor con cotización por volumen, presentación por confirmar y asesoramiento técnico.`}
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Sectores · {sector.short}</span>
+      <h1>{sector.name}</h1>
+      <p>{sector.description}</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs
+      items={[
+        { label: "Sectores", href: "/sectores" },
+        { label: sector.name },
+      ]}
+    />
+
+    <section class="section section--tight">
+      <div class="quality-grid">
+        <div>
+          <span class="eyebrow">Qué necesitas</span>
+          <h2 class="section-title">Soluciones para el día a día.</h2>
+          <p class="section-lead">{sector.description}</p>
+          <ul class="checklist" style="margin-top: 1.5rem;">
+            {sector.needs.map((need) => (
+              <li><Icon name="check-circle" size={18} /> <span>{need}</span></li>
+            ))}
+          </ul>
+          <div class="hero__actions" style="margin-top: 1.75rem;">
+            <a class="btn btn--primary" href="/cotizacion">
+              <Icon name="file" size={16} /> Pedir cotización
+            </a>
+            <a class="btn btn--ghost" href="/contacto">Hablar con un técnico</a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h2>Referencias habituales</h2>
+          <p>
+            Estas son las referencias que más se repiten en este sector. Podemos preparar
+            una selección fija con precios por volumen y reposición programada.
+          </p>
+          <ul class="checklist" style="margin-top: 1rem;">
+            {recommended.slice(0, 4).map((product) => (
+              <li>
+                <Icon name="check" size={16} />
+                <span>
+                  <a href={`/producto/${product.slug}`}>{product.name}</a>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Selección</span>
+          <h2 class="section-title">Productos recomendados.</h2>
+          <p class="section-lead">
+            Bajo pedido y con cotización por volumen. Ajusta las cajas en la solicitud y
+            confirmamos presentación, precio y plazo.
+          </p>
+        </div>
+        <a class="link-arrow" href="/catalogo">
+          Ver catálogo <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+
+      <div class="product-grid">
+        {recommended.map((product) => <ProductCard product={product} />)}
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="cta-band">
+        <div>
+          <h2>Preparamos tu lista habitual.</h2>
+          <p>
+            Envíanos consumos mensuales o referencias repetidas y montamos una propuesta
+            con precio estable y reposición programada.
+          </p>
+        </div>
+        <div class="cta-band__actions">
+          <a class="btn btn--primary" href="/contacto">
+            Contactar <Icon name="arrow-right" size={16} />
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,191 @@
+---
+import "@fontsource-variable/archivo/wght.css";
+import "@fontsource-variable/inter/wght.css";
+import "../styles/tokens.css";
+import "../styles/global.css";
+import "../styles/store.css";
+
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
+import { site, whatsappHref } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  noIndex?: boolean;
+  bodyClass?: string;
+}
+
+const {
+  title = `${site.name} — ${site.tagline}`,
+  description = site.description,
+  noIndex = false,
+  bodyClass = "",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+
+const localBusiness = {
+  "@context": "https://schema.org",
+  "@type": "HardwareStore",
+  "@id": `${site.url}/#organizacion`,
+  name: site.name,
+  legalName: site.legalName,
+  url: site.url,
+  telephone: site.phone,
+  email: site.email,
+  description: site.description,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  openingHours: "Mo-Fr 08:00-18:00",
+  areaServed: "CO",
+  priceRange: "$$",
+  currenciesAccepted: "COP",
+  paymentAccepted: "Transferencia bancaria, factura electrónica",
+};
+
+const quickWhatsApp = whatsappHref(
+  "Hola, quiero cotizar tornillería. Les comparto mi lista de referencias y cantidades."
+);
+---
+
+<!doctype html>
+<html lang="es-CO">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0D52A0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:image" content={`${site.url}/og.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Central de Tornillos — tornillería al mejor precio en Colombia" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={`${site.url}/og.png`} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+  </head>
+
+  <body class={bodyClass}>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <Header />
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <nav class="mobile-bar" aria-label="Acciones rápidas">
+      <a class="mobile-bar__item" href="/catalogo">
+        <Icon name="search" size={18} />
+        <span>Catálogo</span>
+      </a>
+      <a class="mobile-bar__item mobile-bar__item--primary" href="/cotizacion">
+        <Icon name="file" size={18} />
+        <span>Cotizar</span>
+      </a>
+      <a
+        class="mobile-bar__item mobile-bar__item--wa"
+        href={quickWhatsApp}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="whatsapp" size={18} />
+        <span>WhatsApp</span>
+      </a>
+    </nav>
+
+    <script>
+      // @ts-nocheck
+      const menu = document.getElementById("mobile-nav");
+      const menuBackdrop = document.querySelector("[data-menu-backdrop]");
+      const menuToggle = document.querySelector("[data-menu-open]");
+
+      const openMenu = () => {
+        if (!menu) return;
+        menu.inert = false;
+        menu.classList.add("is-open");
+        menu.setAttribute("aria-hidden", "false");
+        menuBackdrop?.classList.add("is-open");
+        document.body.classList.add("no-scroll");
+        if (menuToggle) {
+          menuToggle.setAttribute("aria-expanded", "true");
+          menuToggle.setAttribute("aria-label", "Cerrar menú");
+        }
+        const closeButton = menu.querySelector("[data-menu-close]");
+        if (closeButton instanceof HTMLElement) closeButton.focus();
+      };
+
+      const closeMenu = () => {
+        if (!menu) return;
+        menu.classList.remove("is-open");
+        menu.setAttribute("aria-hidden", "true");
+        menuBackdrop?.classList.remove("is-open");
+        document.body.classList.remove("no-scroll");
+        if (menuToggle) {
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "Abrir menú");
+          menuToggle.focus();
+        }
+        menu.inert = true;
+      };
+
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        if (target.closest("[data-menu-open]")) {
+          openMenu();
+          return;
+        }
+
+        if (
+          target.closest("[data-menu-close]") ||
+          target === menuBackdrop ||
+          target.closest("#mobile-nav a")
+        ) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        if (menu?.classList.contains("is-open")) closeMenu();
+        document.querySelectorAll(".catalog-menu[open]").forEach((item) => {
+          item.removeAttribute("open");
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        document.querySelectorAll(".catalog-menu[open]").forEach((item) => {
+          if (!item.contains(target)) item.removeAttribute("open");
+        });
+      });
+    </script>
+  </body>
+</html>

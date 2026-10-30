@@ -1,0 +1,86 @@
+---
+import Icon from "./Icon.astro";
+import { stockMeta, type Product } from "../data/products";
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+
+const stock = stockMeta[product.stock];
+const quoteHref = `/cotizacion?producto=${encodeURIComponent(product.slug)}`;
+const searchCompact = [
+  product.measure.replace(/[×✕]/g, "x").replace(/["#\s]/g, ""),
+  product.sku,
+  product.sku.replace(/-/g, ""),
+]
+  .join(" ")
+  .toLowerCase();
+---
+
+<article
+  class="product-card"
+  data-product
+  data-category={product.category}
+  data-material={product.material}
+  data-head={product.head}
+  data-norm={product.norm}
+  data-stock={product.stock}
+  data-search={product.search}
+  data-search-compact={searchCompact}
+  data-name={product.name}
+>
+  <div class="product-media">
+    <a href={`/producto/${product.slug}`} aria-label={`Ver ficha de ${product.name}`} tabindex="-1">
+      <img
+        class="product-media__img"
+        src={product.image}
+        alt={`Imagen de referencia de ${product.name}`}
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+    <div class="product-badges">
+      <span class="badge badge--norm">{product.norm}</span>
+      <span class:list={["badge", `badge--${stock.className || "stock"}`]}>
+        {stock.label}
+      </span>
+    </div>
+    <span class="product-media__sku">{product.sku}</span>
+  </div>
+
+  <div class="product-body">
+    <span class="product-cat">{product.categoryName}</span>
+    <h3 class="product-name">
+      <a href={`/producto/${product.slug}`}>{product.name}</a>
+    </h3>
+
+    <div class="product-specs">
+      <span class="spec">{product.measure}</span>
+      <span class="spec">{product.material}</span>
+      <span class="spec">{product.head}</span>
+    </div>
+
+    <div class="product-price">
+      <span class="price__label">Precio bajo cotización</span>
+      <span class="price__value">Bajo pedido</span>
+      <span class="product-price__note">
+        {product.unitLabel} · cotización por volumen
+      </span>
+    </div>
+
+    <div class="product-actions">
+      <a class="product-link" href={`/producto/${product.slug}`}>
+        Ver ficha <Icon name="arrow-right" size={14} />
+      </a>
+      <a
+        class="btn btn--primary btn--sm product-quote"
+        href={quoteHref}
+        aria-label={`Cotizar ${product.name}`}
+      >
+        Cotizar
+      </a>
+    </div>
+  </div>
+</article>

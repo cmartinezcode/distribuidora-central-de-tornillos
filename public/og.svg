@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0v40" fill="none" stroke="#2A3B45" stroke-width="1" />
+    </pattern>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0F171D" stop-opacity="0" />
+      <stop offset="1" stop-color="#0F171D" stop-opacity="0.85" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0F171D" />
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.55" />
+  <rect width="1200" height="630" fill="url(#fade)" />
+
+  <g stroke="#FFCD11" stroke-width="2">
+    <path d="M56 80h26M56 80v26" />
+    <path d="M56 550h26M56 576v-26" />
+    <path d="M1144 80h-26M1144 80v26" />
+    <path d="M1144 550h-26M1144 576v-26" />
+  </g>
+
+  <text x="80" y="118" fill="#FFCD11" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="700" letter-spacing="5">CENTRAL DE TORNILLOS</text>
+
+  <text fill="#F6F3EC" font-family="DejaVu Sans, sans-serif" font-size="76" font-weight="700">
+    <tspan x="80" y="228">Tornillería</tspan>
+    <tspan x="80" y="318">al mejor</tspan>
+    <tspan x="80" y="408">precio.</tspan>
+  </text>
+
+  <rect x="84" y="448" width="74" height="5" fill="#FFCD11" />
+
+  <text fill="#B9C4C9" font-family="DejaVu Sans, sans-serif" font-size="21">
+    <tspan x="80" y="505">Catálogo estructural, drywall y cubiertas</tspan>
+    <tspan x="80" y="537">Cotización por volumen y despacho nacional.</tspan>
+  </text>
+
+  <g transform="translate(950 315)">
+    <path d="M0 -172 149 -86v172L0 172-149 86V-86Z" fill="none" stroke="#F6F3EC" stroke-width="9" stroke-linejoin="round" />
+    <circle cx="0" cy="0" r="82" fill="none" stroke="#FFCD11" stroke-width="9" />
+    <path d="M-64 0H64" stroke="#FFCD11" stroke-width="9" stroke-linecap="round" />
+    <path d="M0 -64v128" stroke="#FFCD11" stroke-width="9" stroke-linecap="round" opacity="0.35" />
+    <path d="M-118 -68 118 68" stroke="#2E7D5B" stroke-width="4" stroke-linecap="round" opacity="0.65" />
+  </g>
+
+  <text x="950" y="595" fill="#7C878E" font-family="DejaVu Sans, sans-serif" font-size="15" text-anchor="middle" letter-spacing="3">ASTM · ASME · SAE</text>
+</svg>

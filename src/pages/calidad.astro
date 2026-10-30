@@ -1,0 +1,182 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Icon from "../components/Icon.astro";
+import ScrewArt from "../components/ScrewArt.astro";
+---
+
+<Base
+  title="Calidad y normativa de tornillería"
+  description="Normas ASTM C-1002, ASME B18.6.4 y SAE J78, materiales identificados, certificado de material y trazabilidad por lote. Así controlamos la calidad de la tornillería que suministramos en Colombia."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Calidad y normativa</span>
+      <h1>La calidad no se promete. Se declara y se comprueba.</h1>
+      <p>
+        Cada referencia indica norma, material y acabado. Podemos adjuntar certificado
+        de material y trazabilidad de lote para que respondas con seguridad ante tu
+        cliente.
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Calidad y normativa" }]} />
+
+    <section class="section section--tight">
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="feature__icon"><Icon name="ruler" size={20} /></span>
+          <h3>Norma declarada</h3>
+          <p>ASTM, ASME o SAE visibles en ficha, con medida, punta y acabado.</p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="layers" size={20} /></span>
+          <h3>Material identificado</h3>
+          <p>Acero al carbono, acabado fosfatado o cincado y arandela de neopreno.</p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="file" size={20} /></span>
+          <h3>Certificado de material</h3>
+          <p>Disponible bajo petición para acero, junto con la remisión.</p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="search" size={20} /></span>
+          <h3>Control de recepción</h3>
+          <p>Verificación de medida, rosca y acabado en las referencias críticas.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--paper" style="margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Normas</span>
+          <h2 class="section-title">Las normas que trabajamos.</h2>
+          <p class="section-lead">
+            Nomenclatura estándar para que puedas comparar y especificar sin errores.
+          </p>
+        </div>
+      </div>
+
+      <div class="info-card" style="overflow-x: auto;">
+        <table class="tier-table">
+          <caption class="visually-hidden">Normas de tornillería disponibles</caption>
+          <thead>
+            <tr>
+              <th scope="col">Familia</th>
+              <th scope="col">Norma</th>
+              <th scope="col">Uso habitual</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Tornillo drywall rosca fina</td><td>ASTM C-1002</td><td>Placas de yeso</td></tr>
+            <tr><td>Tornillo truss punta aguja</td><td>ASME B18.6.4</td><td>Drywall y perfilería delgada</td></tr>
+            <tr><td>Tornillo framing punta aguja</td><td>ASME B18.6.4</td><td>Entramados metálicos</td></tr>
+            <tr><td>Tornillo truss punta broca</td><td>ASME B18.6.4</td><td>Perfiles metálicos</td></tr>
+            <tr><td>Tornillo flange con neopreno</td><td>SAE J78</td><td>Cubiertas y fachadas</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Materiales</span>
+          <h2 class="section-title">Elegir bien el material es la mitad del trabajo.</h2>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="feature__icon"><Icon name="shield" size={20} /></span>
+          <h3>Acero al carbono</h3>
+          <p>
+            Base de nuestras referencias estructurales, drywall y cubiertas. La ficha
+            indica norma, medida y acabado para que confirmes la especificación.
+          </p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="layers" size={20} /></span>
+          <h3>Negro fosfatado</h3>
+          <p>
+            Acabado habitual en drywall, truss punta aguja y framing. Protección para
+            interiores y montajes en seco.
+          </p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="spark" size={20} /></span>
+          <h3>Cincado</h3>
+          <p>
+            Acabado de las referencias de truss punta broca y flange. Ayuda a proteger el
+            acero en cubiertas y fachadas.
+          </p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="package" size={20} /></span>
+          <h3>Arandela de neopreno</h3>
+          <p>
+            En los tornillos flange, la arandela sella la perforación y reduce el ingreso
+            de agua en cubiertas y paneles.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--dark bp-grid" style="margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);">
+      <div class="quality-grid">
+        <div>
+          <span class="eyebrow">Trazabilidad</span>
+          <h2 class="section-title">Del lote a la remisión.</h2>
+          <p class="section-lead">
+            Cada pedido se prepara con referencia, lote y cantidad. Si necesitas
+            certificado para una auditoría o para entregar a tu cliente, lo adjuntamos.
+          </p>
+          <ul class="checklist" style="margin-top: 1.5rem;">
+            <li><Icon name="check-circle" size={18} /> <span><strong>Identificación por referencia y lote</strong> en la remisión.</span></li>
+            <li><Icon name="check-circle" size={18} /> <span><strong>Certificado de material</strong> de acero bajo petición.</span></li>
+            <li><Icon name="check-circle" size={18} /> <span><strong>Verificación de punta y rosca</strong> en cada referencia.</span></li>
+            <li><Icon name="check-circle" size={18} /> <span><strong>Registro de reclamaciones</strong> y sustitución ágil si hay desviación.</span></li>
+          </ul>
+        </div>
+
+        <div class="quality-visual" aria-hidden="true">
+          <div class="tech-card__head">
+            <span>Ficha de lote</span>
+            <span>CDT-2601</span>
+          </div>
+          <div class="tech-card__art">
+            <ScrewArt type="self" />
+          </div>
+          <div class="quality-visual__rows">
+            <div class="tech-row"><span class="tech-row__k">Referencia</span><span class="tech-row__v">DRY-06X1</span></div>
+            <div class="tech-row"><span class="tech-row__k">Norma</span><span class="tech-row__v">ASTM C-1002</span></div>
+            <div class="tech-row"><span class="tech-row__k">Medida</span><span class="tech-row__v">#6 × 1"</span></div>
+            <div class="tech-row"><span class="tech-row__k">Acabado</span><span class="tech-row__v">Negro fosfatado</span></div>
+            <div class="tech-row"><span class="tech-row__k">Certificado</span><span class="tech-row__v">Bajo petición</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="cta-band">
+        <div>
+          <h2>¿Necesitas certificado o una norma concreta?</h2>
+          <p>
+            Indícalo en la cotización. Confirmamos norma, material y documentación
+            disponible antes de servir.
+          </p>
+        </div>
+        <div class="cta-band__actions">
+          <a class="btn btn--primary" href="/cotizacion">
+            <Icon name="file" size={16} /> Pedir cotización
+          </a>
+          <a class="btn btn--on-dark" href="/contacto">Consultar</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

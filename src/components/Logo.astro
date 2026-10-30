@@ -1,0 +1,32 @@
+---
+import { site } from "../data/site";
+
+interface Props {
+  href?: string;
+  class?: string;
+}
+
+const { href = "/", class: className } = Astro.props;
+---
+
+<a href={href} class:list={["logo", className]}>
+  <svg
+    class="logo__mark"
+    viewBox="0 0 48 52"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M24 3 43 14v24L24 49 5 38V14L24 3ZM24 16.5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19Z"
+      fill="currentColor"></path>
+    <rect x="15.5" y="24" width="17" height="4" rx="2" fill="#FFCD11"></rect>
+  </svg>
+  <span class="logo__text">
+    <span class="logo__name">Central <em>de Tornillos</em></span>
+    <span class="logo__tag">{site.tagline}</span>
+  </span>
+</a>

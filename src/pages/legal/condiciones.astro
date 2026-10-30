@@ -1,0 +1,112 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { site } from "../../data/site";
+---
+
+<Base title="Condiciones de venta" description="Condiciones generales de venta de Central de Tornillos S.A.S.: pedidos, precios en COP, IVA, pagos, despachos, devoluciones y garantías en Colombia." noIndex>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Legal</span>
+      <h1>Condiciones de venta</h1>
+      <p>Condiciones generales aplicables a pedidos de tornillería al por mayor en Colombia.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Condiciones de venta" }]} />
+    <section class="section section--tight">
+      <div class="prose">
+        <h2>1. Ámbito</h2>
+        <p>
+          Estas condiciones regulan la venta de productos por {site.legalName} a clientes
+          profesionales en Colombia. La solicitud de cotización no implica la aceptación
+          del pedido; este queda formalizado con la confirmación escrita de {site.name} y
+          la recepción del pago o la aceptación expresa de las condiciones de despacho.
+        </p>
+
+        <h2>2. Precios</h2>
+        <p>
+          Los precios se confirman en la cotización, se expresan en pesos colombianos (COP),
+          por unidad y sin IVA. Los tramos por volumen se aplican por cajas completas y
+          pueden variar según presentación, material y plazo. La cotización confirmada
+          prevalece sobre la información del catálogo. El IVA del 19 % se discrimina en la
+          factura electrónica.
+        </p>
+        <p>
+          El envío es gratuito desde {site.freeShippingLabel} sin IVA en cobertura
+          principal (Bogotá, Medellín, Cali y Barranquilla). Para otros destinos, el flete
+          se calcula según volumen, peso y transportadora, y se informa antes de confirmar
+          el pedido.
+        </p>
+
+        <h2>3. Pedido mínimo y formatos</h2>
+        <p>
+          El pedido mínimo es de una caja por referencia. La cantidad de unidades por caja
+          se confirma en la cotización. No se sirven unidades sueltas de referencias
+          suministradas en caja completa, salvo acuerdo expreso por escrito.
+        </p>
+
+        <h2>4. Pedidos y disponibilidad</h2>
+        <p>
+          Las referencias se trabajan bajo pedido. En la cotización informamos del plazo
+          antes de confirmar. Las fechas de despacho son estimativas y pueden verse
+          afectadas por causas ajenas a {site.name}; en tal caso se comunica la nueva
+          previsión lo antes posible.
+        </p>
+
+        <h2>5. Pago y facturación</h2>
+        <p>
+          Salvo condiciones específicas acordadas por escrito, el pago se realiza por
+          transferencia bancaria antes del despacho. Para clientes recurrentes pueden
+          acordarse condiciones de crédito. Emitimos factura electrónica con NIT y
+          discriminación del IVA conforme a la normativa colombiana vigente. Los impuestos
+          aplicables se añaden según la ley.
+        </p>
+
+        <h2>6. Despacho</h2>
+        <p>
+          El despacho se realiza a la dirección indicada por el cliente. Es
+          responsabilidad del cliente revisar el material a la recepción y comunicar
+          cualquier incidencia en un plazo máximo de 48 horas, indicando referencia y lote.
+          Los plazos habituales se detallan en la página de <a href="/logistica">despacho</a>.
+        </p>
+
+        <h2>7. Devoluciones</h2>
+        <p>
+          El material estándar sin abrir puede devolverse dentro de los 5 días hábiles
+          siguientes a la recepción, con autorización previa y flete de retorno a cargo del
+          cliente. No se admiten devoluciones de material cortado, manipulado o fabricado a
+          medida, salvo defecto de fabricación. El reembolso se realiza por el mismo medio
+          de pago, una vez verificada la devolución.
+        </p>
+
+        <h2>8. Garantía</h2>
+        <p>
+          Los productos cuentan con la garantía legal frente a defectos de fabricación
+          conforme a la Ley 1480 de 2011. La garantía no cubre un uso inadecuado, montaje
+          incorrecto, corrosión por ambiente no previsto o desgaste normal. Si detectas un
+          defecto, facilita referencia, lote, cantidad y fotografías para su análisis.
+        </p>
+
+        <h2>9. Responsabilidad</h2>
+        <p>
+          {site.name} responde de la conformidad de los productos suministrados, pero no de
+          los daños derivados de una elección de producto inadecuada para la aplicación,
+          salvo asesoramiento técnico expreso y por escrito. El cliente es responsable de
+          verificar la idoneidad de la referencia para su uso.
+        </p>
+
+        <h2>10. Legislación y fuero</h2>
+        <p>
+          Estas condiciones se rigen por la legislación colombiana. Para controversias
+          derivadas de la relación comercial, las partes se someten a los jueces y
+          tribunales de {site.address.city}, salvo pacto expreso o norma imperativa en
+          contrario.
+        </p>
+
+        <p><em>Última actualización: octubre de 2026.</em></p>
+      </div>
+    </section>
+  </div>
+</Base>

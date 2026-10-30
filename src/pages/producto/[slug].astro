@@ -1,0 +1,379 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Icon from "../../components/Icon.astro";
+import PriceTiers from "../../components/PriceTiers.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import {
+  products,
+  relatedProducts,
+  stockMeta,
+  type Product,
+} from "../../data/products";
+import { site, whatsappHref } from "../../data/site";
+
+export function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const stock = stockMeta[product.stock];
+const related = relatedProducts(product, 4);
+const categoryHref = `/categoria/${product.category}`;
+const availability =
+  product.stock === "order" ? "https://schema.org/PreOrder" : "https://schema.org/InStock";
+
+const quoteHref = `/cotizacion?producto=${encodeURIComponent(product.slug)}`;
+const baseWhatsApp = whatsappHref(
+  `Hola, quiero cotizar ${product.name} (${product.sku}). ¿Me confirman precio por volumen, presentación y disponibilidad?`
+);
+
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: product.name,
+  sku: product.sku,
+  image: `${site.url}${product.image}`,
+  description: product.description,
+  category: product.categoryName,
+  material: product.material,
+  brand: { "@type": "Brand", name: site.name },
+  additionalProperty: [
+    { "@type": "PropertyValue", name: "Norma", value: product.norm },
+    { "@type": "PropertyValue", name: "Medida", value: product.measure },
+    { "@type": "PropertyValue", name: "Acabado", value: product.finish },
+    { "@type": "PropertyValue", name: "Cabeza", value: product.head },
+    { "@type": "PropertyValue", name: "Disponibilidad", value: stock.label },
+  ],
+  offers: {
+    "@type": "Offer",
+    priceCurrency: "COP",
+    availability,
+    url: `${site.url}/producto/${product.slug}`,
+    seller: { "@type": "Organization", name: site.name },
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: site.url },
+    { "@type": "ListItem", position: 2, name: "Catálogo", item: `${site.url}/catalogo` },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: product.categoryName,
+      item: `${site.url}${categoryHref}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      name: product.name,
+      item: `${site.url}/producto/${product.slug}`,
+    },
+  ],
+};
+---
+
+<Base
+  title={product.name}
+  description={`${product.name} bajo pedido en Colombia. ${product.description.slice(0, 120)}… Cotización por volumen, presentación y despacho nacional.`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <div class="container">
+    <Breadcrumbs
+      items={[
+        { label: "Catálogo", href: "/catalogo" },
+        { label: product.categoryName, href: categoryHref },
+        { label: product.name },
+      ]}
+    />
+  </div>
+
+  <section class="product-detail">
+    <div class="container pd-grid">
+      <div class="pd-media">
+        <span class="pd-media__tag">{product.norm}</span>
+        <img
+          class="pd-image"
+          src={product.image}
+          alt={`Imagen de referencia de ${product.name}`}
+          loading="eager"
+          decoding="async"
+        />
+        <div class="pd-media__caption">
+          <span>Ref. {product.sku}</span>
+          <span>Imagen de referencia · no a escala</span>
+        </div>
+      </div>
+
+      <div class="pd-summary">
+        <div class="pd-badges">
+          <span class="badge badge--norm">{product.norm}</span>
+          <span class:list={["badge", `badge--${stock.className || "stock"}`]}>
+            {stock.label}
+          </span>
+          <span class="badge">{product.categoryName}</span>
+        </div>
+
+        <h1 class="pd-title">{product.name}</h1>
+        <p class="pd-sku">Ref. {product.sku} · {product.unitLabel}</p>
+        <p class="pd-lead">{product.description}</p>
+
+        <div class="pd-facts">
+          <div class="fact">
+            <span class="fact__k">Norma</span>
+            <span class="fact__v">{product.norm}</span>
+          </div>
+          <div class="fact">
+            <span class="fact__k">Medida</span>
+            <span class="fact__v">{product.measure}</span>
+          </div>
+          <div class="fact">
+            <span class="fact__k">Material</span>
+            <span class="fact__v">{product.material}</span>
+          </div>
+          <div class="fact">
+            <span class="fact__k">Acabado</span>
+            <span class="fact__v">{product.finish}</span>
+          </div>
+          <div class="fact">
+            <span class="fact__k">Cabeza</span>
+            <span class="fact__v">{product.head}</span>
+          </div>
+          <div class="fact">
+            <span class="fact__k">Accionamiento</span>
+            <span class="fact__v">{product.drive}</span>
+          </div>
+        </div>
+
+        <PriceTiers product={product} />
+
+        <div
+          class="qty-box"
+          data-calc
+          data-quote-base={quoteHref}
+          data-product-name={product.name}
+          data-wa-base={`https://wa.me/${site.whatsapp}`}
+        >
+          <div class="qty-box__row">
+            <div>
+              <span class="field__label">Cantidad estimada (cajas)</span>
+              <p class="form-note">
+                Confirmamos unidades por caja, presentación y precio en la cotización.
+              </p>
+            </div>
+            <div class="qty-stepper">
+              <button type="button" data-step="-1" aria-label="Quitar una caja">
+                <Icon name="minus" size={16} />
+              </button>
+              <input
+                id="qty-input"
+                type="number"
+                min="1"
+                step="1"
+                value="1"
+                inputmode="numeric"
+                aria-label="Número de cajas"
+              />
+              <button type="button" data-step="1" aria-label="Añadir una caja">
+                <Icon name="plus" size={16} />
+              </button>
+            </div>
+          </div>
+
+          <div class="qty-summary">
+            <span><strong data-qty-boxes>1</strong> caja(s) para cotizar</span>
+            <span>Precio y flete: bajo cotización</span>
+          </div>
+
+          <div class="pd-actions">
+            <a class="btn btn--primary" href={quoteHref} data-quote-link>
+              <Icon name="file" size={16} /> Cotizar esta cantidad
+            </a>
+            <a
+              class="btn btn--ghost"
+              href={baseWhatsApp}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-wa-link
+            >
+              <Icon name="whatsapp" size={16} /> WhatsApp
+            </a>
+          </div>
+
+          <p class="form-note">
+            Referencia bajo pedido. {site.priceNote} {site.ivaLabel} se añade en factura.
+          </p>
+        </div>
+
+        <ul class="pd-trust">
+          <li><Icon name="check-circle" size={15} /> {stock.label} · {product.leadTime}</li>
+          <li><Icon name="truck" size={15} /> Envío gratis desde {site.freeShippingLabel} sin IVA</li>
+          <li><Icon name="shield" size={15} /> Certificado de material bajo petición</li>
+          <li><Icon name="phone" size={15} /> ¿Dudas técnicas? <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phoneDisplay}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container pd-sections">
+      <div class="pd-block">
+        <h2>Descripción y aplicaciones</h2>
+        <div class="prose">
+          <p>{product.description}</p>
+        </div>
+        <ul class="checklist" style="margin-top: 1rem;">
+          {product.applications.map((application) => (
+            <li><Icon name="check-circle" size={17} /> <span>{application}</span></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="pd-block">
+        <h2>Especificaciones técnicas</h2>
+        <table class="tier-table">
+          <caption class="visually-hidden">Especificaciones de {product.name}</caption>
+          <tbody>
+            <tr><th scope="row">Referencia</th><td>{product.sku}</td></tr>
+            <tr><th scope="row">Norma</th><td>{product.norm}</td></tr>
+            <tr><th scope="row">Medida</th><td>{product.measure}</td></tr>
+            <tr><th scope="row">Material</th><td>{product.material}</td></tr>
+            <tr><th scope="row">Acabado</th><td>{product.finish}</td></tr>
+            <tr><th scope="row">Cabeza</th><td>{product.head}</td></tr>
+            <tr><th scope="row">Accionamiento</th><td>{product.drive}</td></tr>
+            <tr><th scope="row">Unidad de venta</th><td>{product.unitLabel}</td></tr>
+            <tr><th scope="row">Pedido mínimo</th><td>1 caja · presentación por confirmar</td></tr>
+            <tr><th scope="row">Disponibilidad</th><td>{stock.label} · {product.leadTime}</td></tr>
+            <tr><th scope="row">Precio</th><td>Bajo cotización · IVA 19 % en factura</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pd-block">
+        <h2>Despacho, certificados y devoluciones</h2>
+        <div class="accordion">
+          <details open>
+            <summary>Disponibilidad y plazo de despacho</summary>
+            <div class="accordion__body">
+              {stock.label}. {product.leadTime} en cobertura principal. Si necesitas una
+              fecha concreta, indícala en la cotización y confirmamos disponibilidad antes
+              de servir.
+            </div>
+          </details>
+          <details>
+            <summary>Certificados y trazabilidad</summary>
+            <div class="accordion__body">
+              Podemos adjuntar certificado de material y trazabilidad del lote para esta
+              referencia, sujeto a disponibilidad del fabricante. Solicítalo al enviar la
+              cotización; se prepara junto con la remisión y la factura electrónica.
+            </div>
+          </details>
+          <details>
+            <summary>Flete y embalaje</summary>
+            <div class="accordion__body">
+              Envío gratis desde {site.freeShippingLabel} sin IVA en cobertura principal.
+              El material se suministra en la presentación acordada en la cotización y con
+              embalaje reforzado. Para destinos fuera de cobertura cotizamos flete según
+              volumen y transportadora.
+            </div>
+          </details>
+          <details>
+            <summary>Devoluciones</summary>
+            <div class="accordion__body">
+              Revisa el material al recibirlo y comunica cualquier diferencia dentro de las
+              48 horas siguientes, indicando referencia y lote. Las devoluciones de material
+              sin abrir se gestionan según las <a href="/legal/condiciones">condiciones de venta</a>
+              y la normativa colombiana aplicable.
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="pd-block">
+        <h2>Características del producto</h2>
+        <div class="accordion">
+          {product.features.map((feature) => (
+            <details>
+              <summary>{feature}</summary>
+              <div class="accordion__body">
+                Característica incluida en esta referencia según especificación del fabricante
+                y control de recepción de {site.name}.
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="related-head">
+        <h2>También te puede interesar</h2>
+        <a class="link-arrow" href={categoryHref}>
+          Ver toda la familia <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+      <div class="product-grid">
+        {related.map((item) => <ProductCard product={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const calc = document.querySelector("[data-calc]");
+
+    if (calc instanceof HTMLElement) {
+      const quoteBase = calc.dataset.quoteBase || "/cotizacion";
+      const productName = calc.dataset.productName || "esta referencia";
+      const waBase = calc.dataset.waBase || "";
+      const input = calc.querySelector("#qty-input");
+      const boxesTarget = calc.querySelector("[data-qty-boxes]");
+      const quoteLink = calc.querySelector("[data-quote-link]");
+      const waLink = calc.querySelector("[data-wa-link]");
+      const number = new Intl.NumberFormat("es-CO");
+
+      const update = () => {
+        if (!(input instanceof HTMLInputElement)) return;
+        const boxes = Math.max(1, Number.parseInt(input.value, 10) || 1);
+        input.value = String(boxes);
+
+        if (boxesTarget) boxesTarget.textContent = number.format(boxes);
+
+        if (quoteLink instanceof HTMLAnchorElement) {
+          const separator = quoteBase.includes("?") ? "&" : "?";
+          quoteLink.href = `${quoteBase}${separator}cantidad=${boxes}`;
+        }
+
+        if (waLink instanceof HTMLAnchorElement) {
+          const message = `Hola, quiero cotizar ${boxes} caja${boxes === 1 ? "" : "s"} de ${productName}. ¿Me confirman precio por volumen, presentación, disponibilidad y flete?`;
+          waLink.href = `${waBase}?text=${encodeURIComponent(message)}`;
+        }
+      };
+
+      calc.querySelectorAll("[data-step]").forEach((button) => {
+        button.addEventListener("click", () => {
+          if (!(input instanceof HTMLInputElement)) return;
+          const step = Number.parseInt(button.getAttribute("data-step") || "0", 10);
+          const current = Number.parseInt(input.value, 10) || 1;
+          input.value = String(Math.max(1, current + step));
+          update();
+        });
+      });
+
+      input?.addEventListener("input", update);
+      input?.addEventListener("change", update);
+      update();
+    }
+  </script>
+</Base>

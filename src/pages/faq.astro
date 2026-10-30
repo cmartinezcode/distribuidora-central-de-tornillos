@@ -1,0 +1,73 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Icon from "../components/Icon.astro";
+import { faqs } from "../data/faqs";
+import { site } from "../data/site";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Base
+  title="Preguntas frecuentes"
+  description="Pedido mínimo, precios bajo cotización, IVA, muestras, plazos de despacho, certificados, medidas especiales, pagos y devoluciones en Colombia."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h1>Lo que preguntan antes de pedir.</h1>
+      <p>
+        Respuestas directas sobre pedido mínimo, cotización bajo pedido, IVA, plazos de
+        despacho, certificados y devoluciones. Si falta algo, escríbenos y lo añadimos.
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Preguntas frecuentes" }]} />
+
+    <section class="section section--tight">
+      <div class="faq">
+        {faqs.map((faq) => (
+          <details>
+            <summary>{faq.question}</summary>
+            <div class="faq__body">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="cta-band">
+        <div>
+          <h2>¿No está tu duda?</h2>
+          <p>
+            Llámanos al {site.phoneDisplay} o escríbenos a {site.email}. Contestamos en
+            horario comercial, normalmente en menos de 24 horas hábiles.
+          </p>
+        </div>
+        <div class="cta-band__actions">
+          <a class="btn btn--primary" href="/contacto">
+            Contactar <Icon name="arrow-right" size={16} />
+          </a>
+          <a class="btn btn--on-dark" href={`tel:${site.phone.replace(/\s/g, "")}`}>
+            <Icon name="phone" size={16} /> Llamar
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

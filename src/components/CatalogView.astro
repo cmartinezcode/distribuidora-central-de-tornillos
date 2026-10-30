@@ -1,0 +1,424 @@
+---
+import ProductCard from "./ProductCard.astro";
+import Icon from "./Icon.astro";
+import type { Product } from "../data/products";
+import type { Category } from "../data/categories";
+
+interface Props {
+  products: Product[];
+  categories: Category[];
+  lockedCategory?: string;
+}
+
+const { products, categories, lockedCategory } = Astro.props;
+
+const materials = [...new Set(products.map((product) => product.material))].sort((a, b) =>
+  a.localeCompare(b, "es")
+);
+const heads = [...new Set(products.map((product) => product.head))]
+  .filter((head) => head !== "—")
+  .sort((a, b) => a.localeCompare(b, "es"));
+
+const showCategories = !lockedCategory;
+---
+
+<div class="catalog-layout">
+  <div class="filters-backdrop" data-filters-backdrop></div>
+
+  <aside class="filters" id="catalog-filters" aria-label="Filtros de catálogo">
+    <div class="filters__head">
+      <span class="filters__title">
+        <Icon name="sliders" size={16} /> Filtros
+      </span>
+      <span>
+        <button class="filters__reset" type="button" data-filters-reset>Limpiar</button>
+        <button class="icon-btn filters__close" type="button" aria-label="Cerrar filtros" data-filters-close>
+          <Icon name="close" size={18} />
+        </button>
+      </span>
+    </div>
+
+    <div class="filter-group">
+      <label class="field">
+        <span class="filter-title">Buscar</span>
+        <input
+          type="search"
+          placeholder="Referencia, medida, norma…"
+          data-filter-search
+          autocomplete="off"
+        />
+      </label>
+    </div>
+
+    {showCategories && (
+      <div class="filter-group">
+        <span class="filter-title">Categoría</span>
+        <div class="filter-list">
+          {categories.map((category) => (
+            <label class="check">
+              <input type="checkbox" value={category.slug} data-facet="category" />
+              <span>{category.name}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="filter-group">
+      <span class="filter-title">Material</span>
+      <div class="filter-list">
+        {materials.map((material) => (
+          <label class="check">
+            <input type="checkbox" value={material} data-facet="material" />
+            <span>{material}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-title">Cabeza</span>
+      <div class="filter-list">
+        {heads.map((head) => (
+          <label class="check">
+            <input type="checkbox" value={head} data-facet="head" />
+            <span>{head}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <p class="form-note">
+        ¿No encuentras una medida? <a href="/contacto">Consúltanos</a>: trabajamos
+        referencias bajo pedido y medidas especiales.
+      </p>
+    </div>
+  </aside>
+
+  <div class="catalog-main">
+    <div class="catalog-toolbar">
+      <button
+        class="btn btn--ghost btn--sm filters-toggle"
+        type="button"
+        data-filters-open
+        aria-expanded="false"
+        aria-controls="catalog-filters"
+      >
+        <Icon name="filter" size={15} /> Filtros
+        <span class="filter-count" data-filter-count hidden>0</span>
+      </button>
+
+      <p class="catalog-count" aria-live="polite">
+        <strong data-results-count>{products.length}</strong> referencias
+      </p>
+
+      <div class="catalog-toolbar__actions">
+        <a class="catalog-quote-link" href="/cotizacion">
+          <Icon name="file" size={14} /> Cotizar mi lista
+        </a>
+        <label class="sort">
+          Ordenar
+          <select data-sort>
+            <option value="relevance">Relevancia</option>
+            <option value="name-asc">Nombre A–Z</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="active-filters" data-active-filters></div>
+
+    <p class="catalog-note">
+      <Icon name="info" size={15} />
+      Referencias bajo pedido. La cotización confirma presentación, precio por volumen,
+      plazo y flete; el IVA se discrimina en factura.
+    </p>
+
+    <h2 class="visually-hidden">Resultados del catálogo</h2>
+    <div class="catalog-grid" data-catalog-grid>
+      {products.map((product) => <ProductCard product={product} />)}
+    </div>
+
+    <div class="empty-state catalog-empty" data-catalog-empty hidden>
+      <Icon name="search" size={34} />
+      <h2>No hay referencias con esos filtros</h2>
+      <p>
+        Prueba a quitar algún filtro o escríbenos: trabajamos medidas especiales y
+        referencias bajo pedido.
+      </p>
+      <div>
+        <button class="btn btn--dark btn--sm" type="button" data-filters-reset-visible>
+          Quitar filtros
+        </button>
+        <a class="btn btn--ghost btn--sm" href="/contacto">Consultar medida</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  const normalize = (value) =>
+    String(value ?? "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[×✕]/g, "x")
+      .toLowerCase();
+
+  const grid = document.querySelector("[data-catalog-grid]");
+  const cards = grid ? Array.from(grid.querySelectorAll("[data-product]")) : [];
+  const searchInput = document.querySelector("[data-filter-search]");
+  const sortSelect = document.querySelector("[data-sort]");
+  const resultsCounter = document.querySelector("[data-results-count]");
+  const emptyState = document.querySelector("[data-catalog-empty]");
+  const activeContainer = document.querySelector("[data-active-filters]");
+  const filterCount = document.querySelector("[data-filter-count]");
+  const filters = document.getElementById("catalog-filters");
+  const filtersBackdrop = document.querySelector("[data-filters-backdrop]");
+  const mobileFilters = window.matchMedia("(max-width: 960px)");
+
+  const syncFiltersState = () => {
+    if (!filters) return;
+    filters.inert = mobileFilters.matches && !filters.classList.contains("is-open");
+  };
+  syncFiltersState();
+  mobileFilters.addEventListener("change", syncFiltersState);
+
+  if (cards.length > 0) {
+    const facetInputs = Array.from(
+      document.querySelectorAll("[data-facet]")
+    );
+
+    const params = new URLSearchParams(window.location.search);
+
+    const readFacet = (facet) => {
+      const raw = params.get(facet);
+      return raw ? raw.split(",").filter(Boolean) : [];
+    };
+
+    const initialQuery = params.get("q") ?? "";
+    if (searchInput instanceof HTMLInputElement) searchInput.value = initialQuery;
+
+    facetInputs.forEach((input) => {
+      if (!(input instanceof HTMLInputElement)) return;
+      const facet = input.getAttribute("data-facet");
+      const selected = facet ? readFacet(facet) : [];
+      if (selected.includes(input.value)) input.checked = true;
+    });
+
+    if (sortSelect instanceof HTMLSelectElement) {
+      const sortParam = params.get("sort");
+      if (sortParam) sortSelect.value = sortParam;
+    }
+
+    const getChecked = (facet) =>
+      facetInputs
+        .filter(
+          (input) =>
+            input instanceof HTMLInputElement &&
+            input.checked &&
+            input.getAttribute("data-facet") === facet
+        )
+        .map((input) => input.value);
+
+    const getQuery = () =>
+      searchInput instanceof HTMLInputElement ? searchInput.value.trim() : "";
+
+    const matches = (card) => {
+      const query = normalize(getQuery());
+      const search = card.getAttribute("data-search") ?? "";
+      if (query) {
+        const compactQuery = query.replace(/["'#\s-]/g, "");
+        const looksLikeMeasure = /^#?\d[\d\s./-]*x[\d\s./-]*\d$/.test(query);
+        const compactSearch = card.getAttribute("data-search-compact") ?? "";
+
+        if (looksLikeMeasure) {
+          if (!compactSearch.includes(compactQuery)) return false;
+        } else if (!query.split(/\s+/).every((token) => search.includes(token))) {
+          return false;
+        }
+      }
+
+      const category = getChecked("category");
+      if (category.length && !category.includes(card.getAttribute("data-category"))) {
+        return false;
+      }
+
+      const material = getChecked("material");
+      if (material.length && !material.includes(card.getAttribute("data-material"))) {
+        return false;
+      }
+
+      const head = getChecked("head");
+      if (head.length && !head.includes(card.getAttribute("data-head"))) {
+        return false;
+      }
+
+      return true;
+    };
+
+    const updateChips = () => {
+      if (!activeContainer) return;
+      const chips = [];
+
+      const query = getQuery();
+      if (query) {
+        chips.push(
+          `<span class="chip">«${query.replace(/</g, "&lt;")}» <button type="button" data-chip-clear aria-label="Quitar búsqueda">×</button></span>`
+        );
+      }
+
+      facetInputs.forEach((input) => {
+        if (!(input instanceof HTMLInputElement) || !input.checked) return;
+        const label = input.parentElement?.textContent?.trim() ?? input.value;
+        const facet = input.getAttribute("data-facet") ?? "";
+        chips.push(
+          `<span class="chip">${label} <button type="button" data-chip-facet="${facet}" data-chip-value="${input.value.replace(/"/g, "&quot;")}" aria-label="Quitar filtro ${label}">×</button></span>`
+        );
+      });
+
+      activeContainer.innerHTML = chips.join("");
+      if (filterCount) {
+        filterCount.textContent = String(chips.length);
+        filterCount.hidden = chips.length === 0;
+      }
+    };
+
+    const syncUrl = () => {
+      const next = new URLSearchParams();
+      const query = getQuery();
+      if (query) next.set("q", query);
+
+      ["category", "material", "head"].forEach((facet) => {
+        const values = getChecked(facet);
+        if (values.length) next.set(facet, values.join(","));
+      });
+
+      if (sortSelect instanceof HTMLSelectElement && sortSelect.value !== "relevance") {
+        next.set("sort", sortSelect.value);
+      }
+
+      const search = next.toString();
+      const url = `${window.location.pathname}${search ? `?${search}` : ""}`;
+      window.history.replaceState({}, "", url);
+    };
+
+    const applySort = () => {
+      if (!grid || !(sortSelect instanceof HTMLSelectElement)) return;
+      const value = sortSelect.value;
+      const sorted = [...cards];
+
+      if (value === "name-asc") {
+        sorted.sort((a, b) =>
+          (a.getAttribute("data-name") ?? "").localeCompare(b.getAttribute("data-name") ?? "", "es")
+        );
+      }
+
+      sorted.forEach((card) => grid.appendChild(card));
+    };
+
+    const apply = () => {
+      let visible = 0;
+      cards.forEach((card) => {
+        const show = matches(card);
+        card.hidden = !show;
+        if (show) visible += 1;
+      });
+
+      if (resultsCounter) resultsCounter.textContent = String(visible);
+      if (emptyState) emptyState.hidden = visible !== 0;
+      applySort();
+      updateChips();
+      syncUrl();
+    };
+
+    const setFiltersExpanded = (expanded) => {
+      document.querySelectorAll("[data-filters-open]").forEach((button) => {
+        button.setAttribute("aria-expanded", String(expanded));
+      });
+    };
+
+    const openFilters = () => {
+      filters?.classList.add("is-open");
+      filtersBackdrop?.classList.add("is-open");
+      document.body.classList.add("no-scroll");
+      syncFiltersState();
+      setFiltersExpanded(true);
+      const close = filters?.querySelector("[data-filters-close]");
+      if (close instanceof HTMLElement) close.focus();
+    };
+
+    const closeFilters = () => {
+      filters?.classList.remove("is-open");
+      filtersBackdrop?.classList.remove("is-open");
+      document.body.classList.remove("no-scroll");
+      syncFiltersState();
+      setFiltersExpanded(false);
+    };
+
+    const resetAll = () => {
+      facetInputs.forEach((input) => {
+        if (input instanceof HTMLInputElement) input.checked = false;
+      });
+      if (searchInput instanceof HTMLInputElement) searchInput.value = "";
+      if (sortSelect instanceof HTMLSelectElement) sortSelect.value = "relevance";
+      apply();
+    };
+
+    facetInputs.forEach((input) => input.addEventListener("change", apply));
+    sortSelect?.addEventListener("change", apply);
+
+    let searchTimer;
+    searchInput?.addEventListener("input", () => {
+      window.clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(apply, 140);
+    });
+
+    document.querySelectorAll("[data-filters-reset]").forEach((button) =>
+      button.addEventListener("click", resetAll)
+    );
+    document.querySelector("[data-filters-reset-visible]")?.addEventListener("click", resetAll);
+    document.querySelectorAll("[data-filters-open]").forEach((button) =>
+      button.addEventListener("click", openFilters)
+    );
+    document.querySelectorAll("[data-filters-close]").forEach((button) =>
+      button.addEventListener("click", closeFilters)
+    );
+    filtersBackdrop?.addEventListener("click", closeFilters);
+
+    activeContainer?.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const clearButton = target.closest("[data-chip-clear]");
+      if (clearButton) {
+        if (searchInput instanceof HTMLInputElement) searchInput.value = "";
+        apply();
+        return;
+      }
+
+      const chipButton = target.closest("[data-chip-facet]");
+      if (chipButton instanceof HTMLElement) {
+        const facet = chipButton.getAttribute("data-chip-facet");
+        const value = chipButton.getAttribute("data-chip-value");
+        facetInputs.forEach((input) => {
+          if (
+            input instanceof HTMLInputElement &&
+            input.getAttribute("data-facet") === facet &&
+            input.value === value
+          ) {
+            input.checked = false;
+          }
+        });
+        apply();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeFilters();
+    });
+
+    apply();
+  }
+</script>

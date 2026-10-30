@@ -1,0 +1,90 @@
+---
+import type { ArtType } from "../data/categories";
+
+interface Props {
+  type: ArtType;
+  class?: string;
+}
+
+const { type, class: className } = Astro.props;
+
+const art: Record<ArtType, string> = {
+  wood: `
+    <path class="fill" d="M57 16h46l9 12v12H48V28l9-12Z"/>
+    <path class="soft" d="M62 24h36"/>
+    <path class="fill" d="M58 40h44v58l-22 40-22-40V40Z"/>
+    <path class="soft" d="M58 54l44 8M58 68l44 8M58 82l44 8M58 96l44 8M62 110l36 7M68 122l24 5"/>
+    <path class="accent" d="M70 124l10 19 10-19"/>
+  `,
+  machine: `
+    <path class="fill" d="M57 16h46l9 12v12H48V28l9-12Z"/>
+    <path class="soft" d="M62 24h36"/>
+    <path class="fill" d="M62 40h36v92H62z"/>
+    <path class="soft" d="M62 52l36 7M62 64l36 7M62 76l36 7M62 88l36 7M62 100l36 7M62 112l36 7M62 124l36 7"/>
+    <path d="M62 132h36"/>
+    <path class="accent" d="M62 46h36"/>
+  `,
+  self: `
+    <path class="fill" d="M52 16h56l8 10v10H44V26l8-10Z"/>
+    <path class="soft" d="M63 23h34"/>
+    <ellipse class="fill" cx="80" cy="39" rx="27" ry="5"/>
+    <path class="fill" d="M66 40h28v70l-14 30-14-30V40Z"/>
+    <path class="soft" d="M66 52l28 6M66 64l28 6M66 76l28 6M66 88l28 6M66 100l28 6M68 112l24 5"/>
+    <path class="accent" d="M72 121l8 19 8-19"/>
+  `,
+  nut: `
+    <path class="fill" d="M80 18l52 30v64l-52 30-52-30V48l52-30Z"/>
+    <circle class="fill" cx="80" cy="80" r="27"/>
+    <path d="M80 53a27 27 0 0 1 23 13M103 80a27 27 0 0 1-14 24M57 80a27 27 0 0 1 9-20"/>
+    <path class="accent" d="M31 49l21-12"/>
+    <circle class="soft" cx="80" cy="80" r="33"/>
+  `,
+  washer: `
+    <ellipse class="fill" cx="80" cy="72" rx="56" ry="34"/>
+    <path class="fill" d="M24 72v12a56 34 0 0 0 112 0V72a56 34 0 0 1-112 0Z"/>
+    <ellipse cx="80" cy="72" rx="24" ry="13"/>
+    <ellipse class="soft" cx="80" cy="72" rx="34" ry="20"/>
+    <path class="accent" d="M24 84a56 34 0 0 0 112 0"/>
+  `,
+  anchor: `
+    <path class="fill" d="M62 16h36l6 8v9H56v-9l6-8Z"/>
+    <path class="soft" d="M65 22h30"/>
+    <path d="M68 33h24v15H68z"/>
+    <path class="fill" d="M56 48h48l-5 80H61l-5-80Z"/>
+    <path class="soft" d="M66 58l-2 58M74 58v58M86 58v58M94 58l2 58"/>
+    <path d="M56 48h48M64 128l5 8h22l5-8"/>
+    <path class="accent" d="M80 138v10"/>
+  `,
+  chemical: `
+    <path class="fill" d="M46 42h68v88a8 8 0 0 1-8 8H54a8 8 0 0 1-8-8V42Z"/>
+    <path d="M46 52h68M46 112h68"/>
+    <path class="fill" d="M70 42V28h20v14"/>
+    <path d="M75 28V16h10v12"/>
+    <path class="soft" d="M58 64h16M58 72h28M58 80h20"/>
+    <path class="accent" d="M46 122h68"/>
+    <path class="soft" d="M54 138h52"/>
+  `,
+  rod: `
+    <path class="fill" d="M70 12h20v136H70z"/>
+    <path class="soft" d="M70 20l20 7M70 32l20 7M70 44l20 7M70 56l20 7M70 68l20 7M70 80l20 7M70 92l20 7M70 104l20 7M70 116l20 7M70 128l20 7M70 140l20 7"/>
+    <path d="M70 12h20M70 148h20"/>
+    <path class="accent" d="M64 12h32"/>
+  `,
+};
+
+const svg = art[type] ?? art.machine;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 160 160"
+  class:list={["screw-art", className]}
+  fill="none"
+  stroke="currentColor"
+  stroke-width="3.4"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  set:html={svg}
+/>

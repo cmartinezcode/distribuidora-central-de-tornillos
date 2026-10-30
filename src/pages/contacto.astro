@@ -1,0 +1,242 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Icon from "../components/Icon.astro";
+import { site, whatsappHref } from "../data/site";
+
+const mapQuery = encodeURIComponent(
+  `${site.address.street}, ${site.address.city}, ${site.address.region}, Colombia`
+);
+const quickWhatsApp = whatsappHref(
+  "Hola, quiero cotizar tornillería. Les comparto mi lista de referencias y cantidades."
+);
+---
+
+<Base
+  title="Contacto"
+  description="Contacta con Central de Tornillos en Colombia: teléfono, WhatsApp, email y dirección. Consultas técnicas, muestras, medidas especiales y cotizaciones de tornillería al por mayor."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Contacto</span>
+      <h1>Hablemos de tu montaje.</h1>
+      <p>
+        Consultas técnicas, muestras, medidas especiales o una lista de referencias.
+        Respondemos en horario comercial, normalmente en menos de 24 horas hábiles.
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Contacto" }]} />
+
+    <div class="contact-layout">
+      <div>
+        <form class="budget-form" data-contact-form data-email={site.email} novalidate>
+          <h2>Escríbenos</h2>
+          <p>Cuéntanos qué necesitas y te contestamos con una propuesta concreta.</p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="contacto-nombre">Nombre <span>*</span></label>
+              <input id="contacto-nombre" name="nombre" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="contacto-empresa">Empresa</label>
+              <input id="contacto-empresa" name="empresa" type="text" autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="contacto-email">Email <span>*</span></label>
+              <input id="contacto-email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="contacto-telefono">Teléfono / WhatsApp</label>
+              <input id="contacto-telefono" name="telefono" type="tel" autocomplete="tel" />
+            </div>
+            <div class="field">
+              <label for="contacto-ciudad">Ciudad</label>
+              <input id="contacto-ciudad" name="ciudad" type="text" autocomplete="address-level2" />
+            </div>
+            <div class="field">
+              <label for="contacto-nit">NIT</label>
+              <input id="contacto-nit" name="nit" type="text" placeholder="Para factura electrónica" />
+            </div>
+            <div class="field form-grid--full">
+              <label for="contacto-asunto">Asunto</label>
+              <select id="contacto-asunto" name="asunto">
+                <option>Cotización de tornillería</option>
+                <option>Muestra de producto</option>
+                <option>Medida especial o corte</option>
+                <option>Certificados y normativa</option>
+                <option>Pedido en curso</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="field form-grid--full">
+              <label for="contacto-mensaje">Mensaje <span>*</span></label>
+              <textarea
+                id="contacto-mensaje"
+                name="mensaje"
+                placeholder="Referencia, medida, cantidad, ciudad de despacho, uso previsto, plazo…"
+                required
+              ></textarea>
+            </div>
+            <div class="form-grid--full">
+              <label class="check">
+                <input type="checkbox" name="privacidad" required />
+                <span>
+                  He leído y acepto la <a href="/legal/privacidad">política de privacidad</a>.
+                  <span>*</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn btn--primary btn--block" type="submit">
+            <Icon name="send" size={16} /> Enviar consulta
+          </button>
+
+          <a
+            class="btn btn--ghost btn--block"
+            style="margin-top: 0.5rem;"
+            href={quickWhatsApp}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-contact-whatsapp
+          >
+            <Icon name="whatsapp" size={16} /> WhatsApp
+          </a>
+
+          <p class="form-note" style="margin-top: 0.75rem;">
+            Al enviar se abrirá tu cliente de correo con el mensaje preparado. También
+            puedes escribirnos directamente a <a href={`mailto:${site.email}`}>{site.email}</a>.
+            No almacenamos tus datos en el navegador.
+          </p>
+          <p class="form-note" data-contact-status role="status"></p>
+        </form>
+      </div>
+
+      <aside class="budget-aside">
+        <div class="info-card">
+          <h2>Contacto directo</h2>
+          <ul class="footer-contact" style="margin-top: 0.75rem; color: var(--muted);">
+            <li><Icon name="phone" size={16} /> <a href={`tel:${site.phone.replace(/\s/g, "")}`} style="color: var(--ink); font-weight: 600;">{site.phoneDisplay}</a></li>
+            <li><Icon name="whatsapp" size={16} /> <a href={quickWhatsApp} target="_blank" rel="noopener noreferrer" style="color: var(--ink);">WhatsApp comercial</a></li>
+            <li><Icon name="mail" size={16} /> <a href={`mailto:${site.email}`} style="color: var(--ink);">{site.email}</a></li>
+            <li><Icon name="map-pin" size={16} /> <span>{site.address.street}<br />{site.address.postalCode} {site.address.city}, {site.address.region}</span></li>
+            <li><Icon name="clock" size={16} /> <span>{site.hours}</span></li>
+          </ul>
+          <a
+            class="btn btn--ghost btn--sm"
+            style="margin-top: 1rem;"
+            href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="map-pin" size={15} /> Ver en el mapa
+          </a>
+        </div>
+
+        <div class="info-card">
+          <h2>¿Ya sabes lo que necesitas?</h2>
+          <p>
+            Si tienes referencias y cantidades, el camino más rápido es la cotización.
+            Pega varias referencias en el formulario y te respondemos con precio por
+            volumen, presentación y flete.
+          </p>
+          <a class="btn btn--primary btn--sm" style="margin-top: 1rem;" href="/cotizacion">
+            <Icon name="file" size={15} /> Ir a cotización
+          </a>
+        </div>
+
+        <div class="info-card">
+          <h2>Datos de empresa</h2>
+          <p>
+            {site.legalName}<br />
+            NIT: {site.nit}<br />
+            {site.address.street}<br />
+            {site.address.postalCode} {site.address.city}, {site.address.region}<br />
+            Colombia
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const form = document.querySelector("[data-contact-form]");
+    const whatsapp = document.querySelector("[data-contact-whatsapp]");
+    const status = document.querySelector("[data-contact-status]");
+    const message = document.querySelector("#contacto-mensaje");
+
+    const params = new URLSearchParams(window.location.search);
+    const productRef = params.get("producto");
+    if (productRef && message instanceof HTMLTextAreaElement && !message.value) {
+      message.value = `Hola, me interesa la referencia ${productRef}. ¿Me pueden enviar información, disponibilidad y precio por volumen?`;
+    }
+
+    const getData = () => {
+      if (!(form instanceof HTMLFormElement)) return null;
+      const data = new FormData(form);
+      return {
+        nombre: String(data.get("nombre") || "").trim(),
+        empresa: String(data.get("empresa") || "").trim(),
+        email: String(data.get("email") || "").trim(),
+        telefono: String(data.get("telefono") || "").trim(),
+        ciudad: String(data.get("ciudad") || "").trim(),
+        nit: String(data.get("nit") || "").trim(),
+        asunto: String(data.get("asunto") || "").trim(),
+        mensaje: String(data.get("mensaje") || "").trim(),
+      };
+    };
+
+    const buildText = () => {
+      const data = getData();
+      if (!data) return "";
+      return [
+        `Asunto: ${data.asunto}`,
+        "",
+        `Nombre: ${data.nombre}`,
+        data.empresa && `Empresa: ${data.empresa}`,
+        data.nit && `NIT: ${data.nit}`,
+        `Email: ${data.email}`,
+        data.telefono && `Teléfono: ${data.telefono}`,
+        data.ciudad && `Ciudad: ${data.ciudad}`,
+        "",
+        data.mensaje,
+      ]
+        .filter(Boolean)
+        .join("\n");
+    };
+
+    const updateWhatsapp = () => {
+      if (!(whatsapp instanceof HTMLAnchorElement)) return;
+      const base = whatsapp.getAttribute("href")?.split("?")[0];
+      if (!base) return;
+      whatsapp.href = `${base}?text=${encodeURIComponent(buildText())}`;
+    };
+
+    form?.addEventListener("input", updateWhatsapp);
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!(form instanceof HTMLFormElement)) return;
+      if (!form.reportValidity()) return;
+
+      const data = getData();
+      if (!data) return;
+      const email = form.getAttribute("data-email") || "ventas@centraldetornillos.co";
+      const subject = `${data.asunto} — ${data.empresa || data.nombre}`;
+      const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildText())}`;
+
+      if (status) {
+        status.textContent =
+          "Abriendo tu cliente de correo con el mensaje preparado. Si no se abre, usa el botón de WhatsApp.";
+      }
+
+      window.location.href = mailto;
+    });
+
+    updateWhatsapp();
+  </script>
+</Base>

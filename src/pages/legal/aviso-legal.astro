@@ -1,0 +1,95 @@
+---
+import Base from "../../layouts/Base.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { site } from "../../data/site";
+---
+
+<Base title="Aviso legal" description="Aviso legal de Central de Tornillos S.A.S.: datos del titular, condiciones de uso, propiedad intelectual y responsabilidad en Colombia." noIndex>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Legal</span>
+      <h1>Aviso legal</h1>
+      <p>Información sobre el titular de este sitio web y las condiciones de uso.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Aviso legal" }]} />
+    <section class="section section--tight">
+      <div class="prose">
+        <h2>1. Datos del titular</h2>
+        <p>
+          Este sitio web es titularidad de <strong>{site.legalName}</strong>, sociedad
+          constituida en Colombia, con NIT {site.nit} y domicilio en
+          {site.address.street}, {site.address.postalCode} {site.address.city},
+          {site.address.region}, Colombia. Correo electrónico:
+          <a href={`mailto:${site.email}`}>{site.email}</a>. Teléfono: {site.phoneDisplay}.
+        </p>
+        <p>
+          Los datos registrales definitivos y el NIT real se completarán antes de la
+          publicación del sitio.
+        </p>
+
+        <h2>2. Objeto</h2>
+        <p>
+          Este sitio web tiene como finalidad informar sobre los productos y servicios de
+          tornillería técnica al por mayor de {site.name}, permitir la consulta del
+          catálogo y facilitar la solicitud de cotizaciones. El acceso al sitio es
+          gratuito y no exige registro ni carrito de compra.
+        </p>
+
+        <h2>3. Condiciones de uso</h2>
+        <p>
+          El usuario se compromete a utilizar el sitio de forma lícita, diligente y
+          respetuosa, sin realizar actividades que puedan dañar la web, impedir su
+          funcionamiento o vulnerar derechos de terceros. La información publicada tiene
+          carácter informativo y no constituye una oferta contractual vinculante hasta la
+          confirmación expresa de una cotización o pedido.
+        </p>
+
+        <h2>4. Precios e información del catálogo</h2>
+        <p>
+          Las referencias se ofrecen bajo cotización. Los precios se expresan en pesos
+          colombianos (COP), sin IVA, y pueden variar según volumen, presentación,
+          disponibilidad, material y ciudad de despacho. La cotización confirmada prevalece
+          sobre la información del catálogo. El IVA del 19 % se discrimina en la factura
+          electrónica cuando corresponda.
+        </p>
+
+        <h2>5. Propiedad intelectual e industrial</h2>
+        <p>
+          Los contenidos, textos, ilustraciones técnicas, diseño, logotipos y código de
+          este sitio son titularidad de {site.legalName} o se utilizan con autorización.
+          Queda prohibida su reproducción, distribución o transformación sin autorización
+          escrita, salvo uso personal y no comercial.
+        </p>
+
+        <h2>6. Responsabilidad</h2>
+        <p>
+          {site.name} adopta medidas razonables para mantener la información actualizada y
+          libre de errores, pero no garantiza la ausencia de interrupciones o
+          inexactitudes. Las especificaciones técnicas publicadas son orientativas; la
+          ficha del fabricante y la cotización confirmada prevalecen en caso de
+          discrepancia.
+        </p>
+
+        <h2>7. Enlaces externos</h2>
+        <p>
+          El sitio puede incluir enlaces a webs de terceros. {site.name} no se responsabiliza
+          de sus contenidos, políticas de privacidad o disponibilidad.
+        </p>
+
+        <h2>8. Legislación aplicable</h2>
+        <p>
+          Las presentes condiciones se rigen por la legislación colombiana, en particular
+          por la Ley 527 de 1999 sobre comercio electrónico y la Ley 1480 de 2011 sobre
+          protección al consumidor, en lo que resulte aplicable. Para cualquier
+          controversia, las partes se someten a los jueces y tribunales de
+          {site.address.city}, salvo norma imperativa en contrario.
+        </p>
+
+        <p><em>Última actualización: octubre de 2026.</em></p>
+      </div>
+    </section>
+  </div>
+</Base>
