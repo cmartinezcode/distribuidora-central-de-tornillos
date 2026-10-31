@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import Icon from "../components/Icon.astro";
-import { site, whatsappHref } from "../data/site";
+import { whatsappHref } from "../data/site";
 import { faqs } from "../data/faqs";
 import { totalReferences } from "../data/products";
 
@@ -13,16 +13,16 @@ const quickWhatsApp = whatsappHref(
 
 <Base
   title="Despacho, plazos y envíos"
-  description="Despacho de tornillería bajo pedido en 5–8 días hábiles, envío gratis desde $500.000 COP sin IVA, embalaje reforzado y plazos claros en Colombia."
+  description="Despacho de tornillería bajo pedido en 5–8 días hábiles, flete cotizado según destino, embalaje reforzado y plazos claros en Colombia."
 >
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Despacho</span>
       <h1>Plazos claros. Sin «te llamamos».</h1>
       <p>
-        Referencias bajo pedido, despacho a domicilio en 5–8 días hábiles en cobertura
-        principal y envío gratis desde {site.freeShippingLabel} sin IVA. Confirmamos el
-        plazo exacto en la cotización antes de servir.
+        Referencias bajo pedido, despacho a domicilio en 5–8 días hábiles. El flete se
+        cotiza según destino, volumen y transportadora. Confirmamos el plazo exacto en la
+        cotización antes de servir.
       </p>
     </div>
   </section>
@@ -44,8 +44,8 @@ const quickWhatsApp = whatsappHref(
         </article>
         <article class="feature">
           <span class="feature__icon"><Icon name="box" size={20} /></span>
-          <h3>Envío gratis desde {site.freeShippingLabel}</h3>
-          <p>COP sin IVA en cobertura principal. Por debajo, flete según peso y destino.</p>
+          <h3>Flete cotizado</h3>
+          <p>Según peso, volumen y destino. Confirmamos el valor en la cotización.</p>
         </article>
         <article class="feature">
           <span class="feature__icon"><Icon name="shield" size={20} /></span>
@@ -80,8 +80,8 @@ const quickWhatsApp = whatsappHref(
           <tbody>
             <tr><td>Referencia estándar bajo pedido</td><td>5–8 días hábiles</td><td>Confirmamos fecha al validar la cotización</td></tr>
             <tr><td>Medida especial</td><td>7–10 días hábiles</td><td>Según especificación, material y cantidad</td></tr>
-            <tr><td>Bogotá y área metropolitana</td><td>1–2 días hábiles</td><td>Tránsito después del alistamiento</td></tr>
-            <tr><td>Medellín, Cali y Barranquilla</td><td>2–3 días hábiles</td><td>Tránsito desde Bogotá</td></tr>
+            <tr><td>La Dorada y municipios cercanos</td><td>1–2 días hábiles</td><td>Tránsito después del alistamiento</td></tr>
+            <tr><td>Bogotá, Medellín, Cali y Barranquilla</td><td>2–4 días hábiles</td><td>Tránsito desde La Dorada, Caldas</td></tr>
             <tr><td>Otros municipios</td><td>3–5 días hábiles</td><td>Flete cotizado según volumen y transportadora</td></tr>
           </tbody>
         </table>

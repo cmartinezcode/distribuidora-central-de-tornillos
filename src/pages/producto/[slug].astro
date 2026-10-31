@@ -213,13 +213,13 @@ const breadcrumbSchema = {
           </div>
 
           <p class="form-note">
-            Referencia bajo pedido. {site.priceNote} {site.ivaLabel} se añade en factura.
+            Referencia bajo pedido. {site.priceNote}
           </p>
         </div>
 
         <ul class="pd-trust">
           <li><Icon name="check-circle" size={15} /> {stock.label} · {product.leadTime}</li>
-          <li><Icon name="truck" size={15} /> Envío gratis desde {site.freeShippingLabel} sin IVA</li>
+          <li><Icon name="truck" size={15} /> Despacho nacional · flete bajo cotización</li>
           <li><Icon name="shield" size={15} /> Certificado de material bajo petición</li>
           <li><Icon name="phone" size={15} /> ¿Dudas técnicas? <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phoneDisplay}</a></li>
         </ul>
@@ -254,7 +254,7 @@ const breadcrumbSchema = {
             <tr><th scope="row">Unidad de venta</th><td>{product.unitLabel}</td></tr>
             <tr><th scope="row">Pedido mínimo</th><td>1 caja · presentación por confirmar</td></tr>
             <tr><th scope="row">Disponibilidad</th><td>{stock.label} · {product.leadTime}</td></tr>
-            <tr><th scope="row">Precio</th><td>Bajo cotización · IVA 19 % en factura</td></tr>
+            <tr><th scope="row">Precio</th><td>Bajo cotización</td></tr>
           </tbody>
         </table>
       </div>
@@ -281,10 +281,9 @@ const breadcrumbSchema = {
           <details>
             <summary>Flete y embalaje</summary>
             <div class="accordion__body">
-              Envío gratis desde {site.freeShippingLabel} sin IVA en cobertura principal.
-              El material se suministra en la presentación acordada en la cotización y con
-              embalaje reforzado. Para destinos fuera de cobertura cotizamos flete según
-              volumen y transportadora.
+              El flete se cotiza según volumen, destino y transportadora. El material se
+              suministra en la presentación acordada en la cotización y con embalaje
+              reforzado. Confirmamos el valor del despacho antes de servir.
             </div>
           </details>
           <details>

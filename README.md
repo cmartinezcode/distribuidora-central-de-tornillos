@@ -21,30 +21,31 @@ Si el binario no está en el `PATH`, usa `./node_modules/.bin/astro`.
 
 ## Antes de publicar
 
-El proyecto funciona, pero los datos de negocio siguen siendo marcadores. Hay que
-sustituirlos por los reales:
+El proyecto funciona, pero aún hay datos de negocio por confirmar antes de publicar:
 
-1. **Contacto y empresa** — `src/data/site.ts`: teléfono, WhatsApp, email, dirección,
-   horario, NIT, año de fundación y URL. Los valores actuales (`601 000 0000`,
-   `573000000000`, `ventas@centraldetornillos.co`, `901.000.000-1`, Calle 80) son
-   marcadores.
+1. **Contacto y empresa** — `src/data/site.ts`: horario, año de fundación y datos
+   registrales definitivos. El teléfono, WhatsApp, email, dirección y dominio ya están
+   cargados (`314 771 3179`, `573147713179`, Carrera 15 # 56, La Dorada, Caldas,
+   `ventas@distribuidoracentraldetornillos.com` y
+   `distribuidoracentraldetornillos.com`); el horario, el año de fundación y los datos
+   registrales siguen pendientes de confirmar.
 2. **Catálogo y presentaciones** — `src/data/products.ts` y `src/data/categories.ts`.
    El catálogo tiene 8 referencias en 3 categorías (estructural, drywall y cubiertas),
    todas bajo pedido y sin precio publicado. La unidad de venta figura como
    «presentación por confirmar»: completa precio por caja, unidades y plazo cuando
    estén disponibles. Ajusta los tramos de volumen en `volumeTiers` si cambia la
    política comercial.
-3. **Política de envío** — `freeShippingFrom` y `freeShippingLabel` en
-   `src/data/site.ts` utilizan el umbral provisional de `$500.000 COP` sin IVA.
-   Confirma la política real antes de publicar.
+3. **Política de despacho** — el flete se cotiza según volumen, destino y
+   transportadora. Confirma las tarifas y los plazos reales antes de publicar.
 4. **Sectores, FAQ y textos** — `src/data/sectors.ts`, `src/data/faqs.ts` y las páginas
    de `src/pages/`. Revisa las afirmaciones de plazos y certificados.
-5. **Legal** — `src/pages/legal/*.astro`: completa datos registrales y NIT reales y
+5. **Legal** — `src/pages/legal/*.astro`: completa los datos registrales definitivos y
    revisa los textos con asesoría legal colombiana (Ley 1581 de 2012, Decreto 1377 de
    2013, Ley 1480 de 2011). Las páginas legales están fuera del sitemap, llevan
    `noindex` y están bloqueadas en `public/robots.txt`.
-6. **SEO** — cambia `site` en `astro.config.mjs` y la URL de `public/robots.txt` si el
-   dominio final no es `centraldetornillos.co`. El sitemap se genera en el build.
+6. **SEO** — la URL configurada es `https://distribuidoracentraldetornillos.com`;
+   actualiza `site` en `astro.config.mjs` y la URL de `public/robots.txt` si cambia el
+   dominio. El sitemap se genera en el build.
 7. **Imagen social** — `public/og.svg` es la fuente editable. Regenera `public/og.png`
    (1200 × 630) después de cambiar marca o claim con:
    `rsvg-convert -w 1200 -h 630 public/og.svg -o public/og.png`.
@@ -76,19 +77,18 @@ public/               Favicon, icono Apple, marca, OG, robots y sitemap generado
 - Cada ficha permite indicar un número de cajas y abre `/cotizacion?producto=…&cantidad=…`
   con la referencia precargada.
 - `/cotizacion` acepta varias referencias en un campo de texto libre (también pegado
-  desde Excel), datos de empresa, NIT, ciudad de despacho y plazo deseado.
+  desde Excel), datos de empresa, ciudad de despacho y plazo deseado.
 - El formulario prepara un correo mediante `mailto:` y, como alternativa, un mensaje de
   WhatsApp. No se envía nada hasta que el usuario decide enviarlo.
 - No hay backend, cuentas ni pasarela de pago. Para producción se recomienda conectar
   el formulario a un endpoint propio o a un CRM, y mantener `mailto`/WhatsApp como
   respaldo. Valida también el consentimiento de privacidad en servidor.
 
-## Precios e IVA
+## Precios
 
 - Las 8 referencias del catálogo se trabajan **bajo pedido** y no publican precio.
 - La cotización confirma precio por volumen, presentación, flete y plazo. Los precios
-  se expresan en pesos colombianos (COP), por unidad y **sin IVA**.
-- El IVA del 19 % se discrimina en la factura electrónica.
+  se expresan en pesos colombianos (COP), por unidad.
 - Los tramos por volumen se aplican por cajas completas. La ficha muestra los rangos,
   pero el valor se confirma en la cotización.
 - `formatCop` usa `Intl.NumberFormat("es-CO", { currency: "COP" })`, sin decimales.
@@ -105,8 +105,10 @@ La dirección visual se llama **acero y amarillo CAT**:
 - La retícula, las cotas, las etiquetas monoespaciadas y las imágenes de producto
   recortadas sobre fondo transparente funcionan como lenguaje propio. El hero usa la
   imagen del tornillo drywall 6 × 1 de `Escritorio/imagenes/tornillo-drywall-6x1.jpeg`,
-  recortada y sin fondo en `public/images/products/drywall-6x1.png`. La fotografía
-  `foto.webp` y la composición técnica del flange 10 × 2&quot; quedan como alternativas.
+  recortada y sin fondo en `public/images/products/drywall-6x1.png`, sobre la misma
+  retícula hueso/azul del detalle de producto. `HeroDrywall.astro` añade las
+  anotaciones de cabeza, rosca, punta y longitud. La fotografía `foto.webp` y la
+  composición técnica del flange 10 × 2&quot; quedan como alternativas.
 - El logotipo combina un hexágono sólido con una cabeza de tornillo calada y una ranura
   amarilla. El símbolo es azul sobre fondos claros y ámbar sobre azul/oscuro; no se usa en
   blanco. El archivo base azul está en `public/brand/logo-mark.svg` y la versión ámbar en
@@ -138,7 +140,7 @@ derechos de uso de cada archivo original.
 - **Hero** — usa la imagen del tornillo drywall 6 × 1 de
   `Escritorio/imagenes/tornillo-drywall-6x1.jpeg`, recortada y sin fondo en
   `public/images/products/drywall-6x1.png` y renderizada por
-  `src/components/HeroPhoto.astro`. La prueba con `foto.webp`
+  `src/components/HeroDrywall.astro`. La prueba con `foto.webp`
   (`public/images/hero-foto.webp` y `public/images/hero-foto-cutout.png`) y la composición
   técnica del flange 10 × 2&quot; (`src/components/HeroSpec.astro`) quedan como
   alternativas. La imagen generada con IA (`src/assets/hero-flange-10x2.jpg`) y

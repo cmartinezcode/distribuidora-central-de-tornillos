@@ -1,39 +1,34 @@
 /**
  * Datos generales del sitio.
- * Los datos de contacto, NIT y dirección son marcadores de Colombia:
- * sustitúyelos por los reales antes de publicar.
+ * El horario, el año de fundación y los datos registrales definitivos siguen
+ * siendo marcadores: confírmalos antes de publicar.
  */
 export const site = {
   name: "Central de Tornillos",
-  legalName: "Central de Tornillos S.A.S.",
-  nit: "901.000.000-1",
-  tagline: "Tornillería al mejor precio",
+  legalName: "Central de Tornillos",
+  tagline: "Tornillería estructural al mejor precio",
   description:
     "Suministro al por mayor de tornillería estructural, drywall y cubiertas en Colombia. Referencias bajo pedido, cotización por volumen y despacho nacional.",
-  url: "https://www.centraldetornillos.co",
-  phone: "+57 601 000 0000",
-  phoneDisplay: "601 000 0000",
-  whatsapp: "573000000000",
-  email: "ventas@centraldetornillos.co",
+  url: "https://distribuidoracentraldetornillos.com",
+  phone: "+57 314 771 3179",
+  phoneDisplay: "314 771 3179",
+  whatsapp: "573147713179",
+  email: "ventas@distribuidoracentraldetornillos.com",
   address: {
-    street: "Calle 80 # 68-45, Zona Industrial",
-    city: "Bogotá D.C.",
-    region: "Cundinamarca",
-    postalCode: "110111",
+    street: "Carrera 15 # 56, Centro",
+    city: "La Dorada",
+    region: "Caldas",
+    postalCode: "175031",
     country: "CO",
   },
   hours: "Lunes a viernes, 8:00–18:00 · Sábados, 8:00–12:00",
-  iva: 0.19,
-  ivaLabel: "IVA 19 %",
-  freeShippingFrom: 500000,
-  freeShippingLabel: "$500.000 COP",
   copPerEur: 4300,
   priceNote:
     "Precios bajo cotización: confirmamos presentación, volumen, disponibilidad y flete.",
   minOrderNote:
-    "Pedido mínimo: 1 caja. Envío gratis desde $500.000 COP (sin IVA) en cobertura principal.",
+    "Pedido mínimo: 1 caja. El flete se cotiza según volumen, destino y transportadora.",
   coverage:
-    "Bogotá, Medellín, Cali, Barranquilla y cobertura nacional con transportadora aliada.",
+    "La Dorada, Caldas y cobertura nacional con transportadora aliada.",
   founded: 2004,
 } as const;
 

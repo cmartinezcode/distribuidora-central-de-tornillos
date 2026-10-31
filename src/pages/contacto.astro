@@ -58,10 +58,6 @@ const quickWhatsApp = whatsappHref(
               <input id="contacto-ciudad" name="ciudad" type="text" autocomplete="address-level2" />
             </div>
             <div class="field">
-              <label for="contacto-nit">NIT</label>
-              <input id="contacto-nit" name="nit" type="text" placeholder="Para factura electrónica" />
-            </div>
-            <div class="field form-grid--full">
               <label for="contacto-asunto">Asunto</label>
               <select id="contacto-asunto" name="asunto">
                 <option>Cotización de tornillería</option>
@@ -153,7 +149,6 @@ const quickWhatsApp = whatsappHref(
           <h2>Datos de empresa</h2>
           <p>
             {site.legalName}<br />
-            NIT: {site.nit}<br />
             {site.address.street}<br />
             {site.address.postalCode} {site.address.city}, {site.address.region}<br />
             Colombia
@@ -184,7 +179,6 @@ const quickWhatsApp = whatsappHref(
         email: String(data.get("email") || "").trim(),
         telefono: String(data.get("telefono") || "").trim(),
         ciudad: String(data.get("ciudad") || "").trim(),
-        nit: String(data.get("nit") || "").trim(),
         asunto: String(data.get("asunto") || "").trim(),
         mensaje: String(data.get("mensaje") || "").trim(),
       };
@@ -198,7 +192,6 @@ const quickWhatsApp = whatsappHref(
         "",
         `Nombre: ${data.nombre}`,
         data.empresa && `Empresa: ${data.empresa}`,
-        data.nit && `NIT: ${data.nit}`,
         `Email: ${data.email}`,
         data.telefono && `Teléfono: ${data.telefono}`,
         data.ciudad && `Ciudad: ${data.ciudad}`,
@@ -225,7 +218,7 @@ const quickWhatsApp = whatsappHref(
 
       const data = getData();
       if (!data) return;
-      const email = form.getAttribute("data-email") || "ventas@centraldetornillos.co";
+      const email = form.getAttribute("data-email") || "ventas@distribuidoracentraldetornillos.com";
       const subject = `${data.asunto} — ${data.empresa || data.nombre}`;
       const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildText())}`;
 

@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import HeroPhoto from "../components/HeroPhoto.astro";
+import HeroDrywall from "../components/HeroDrywall.astro";
 import Icon from "../components/Icon.astro";
 import ProductCard from "../components/ProductCard.astro";
 import { featuredProducts, totalReferences } from "../data/products";
@@ -12,8 +12,8 @@ const homeFaqs = faqs.slice(0, 4);
 const services = [
   {
     icon: "truck",
-    title: `Envío gratis desde ${site.freeShippingLabel}`,
-    text: "Sin IVA en cobertura principal",
+    title: "Despacho nacional",
+    text: "Flete cotizado según destino y volumen",
   },
   {
     icon: "package",
@@ -75,12 +75,12 @@ const benefits = [
   {
     icon: "file",
     title: "Factura electrónica",
-    text: "Cotización con NIT, IVA discriminado y soporte documental.",
+    text: "Cotización con soporte documental y factura electrónica.",
   },
   {
     icon: "map-pin",
     title: "Despacho nacional",
-    text: "Bogotá, Medellín, Cali, Barranquilla y transportadora aliada.",
+    text: "La Dorada, Caldas y cobertura nacional con transportadora aliada.",
   },
 ];
 
@@ -98,7 +98,7 @@ const websiteSchema = {
 ---
 
 <Base
-  title="Tornillería al mejor precio en Colombia"
+  title="Tornillería estructural al mejor precio en Colombia"
   description="Tornillería estructural, drywall y cubiertas para industria, construcción e instaladores en Colombia. Referencias bajo pedido, cotización por volumen y despacho nacional."
 >
   <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
@@ -107,7 +107,7 @@ const websiteSchema = {
     <div class="container store-hero__inner">
       <div class="store-hero__copy">
         <span class="store-hero__kicker">Tornillería al por mayor · Colombia</span>
-        <h1>Tornillería al <em>mejor precio.</em></h1>
+        <h1>Tornillería estructural al <em>mejor precio.</em></h1>
         <p class="store-hero__lead">
           Referencias bajo pedido, cotización por volumen y despacho nacional. Encuentra
           la referencia correcta y cotiza en minutos, sin carrito y sin registro.
@@ -131,7 +131,7 @@ const websiteSchema = {
       </div>
 
       <div class="store-hero__stage">
-        <HeroPhoto />
+        <HeroDrywall />
       </div>
     </div>
   </section>

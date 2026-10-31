@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /legal/
 
-Sitemap: https://www.centraldetornillos.co/sitemap-index.xml
+Sitemap: https://distribuidoracentraldetornillos.com/sitemap-index.xml

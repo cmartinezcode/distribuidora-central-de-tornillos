@@ -4,7 +4,7 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { site } from "../../data/site";
 ---
 
-<Base title="Aviso legal" description="Aviso legal de Central de Tornillos S.A.S.: datos del titular, condiciones de uso, propiedad intelectual y responsabilidad en Colombia." noIndex>
+<Base title="Aviso legal" description="Aviso legal de Central de Tornillos: datos del titular, condiciones de uso, propiedad intelectual y responsabilidad en Colombia." noIndex>
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Legal</span>
@@ -19,15 +19,13 @@ import { site } from "../../data/site";
       <div class="prose">
         <h2>1. Datos del titular</h2>
         <p>
-          Este sitio web es titularidad de <strong>{site.legalName}</strong>, sociedad
-          constituida en Colombia, con NIT {site.nit} y domicilio en
-          {site.address.street}, {site.address.postalCode} {site.address.city},
-          {site.address.region}, Colombia. Correo electrónico:
+          Este sitio web es titularidad de <strong>{site.legalName}</strong>, con domicilio
+          en {site.address.street}, {site.address.postalCode} {site.address.city}, {site.address.region}, Colombia. Correo electrónico:
           <a href={`mailto:${site.email}`}>{site.email}</a>. Teléfono: {site.phoneDisplay}.
         </p>
         <p>
-          Los datos registrales definitivos y el NIT real se completarán antes de la
-          publicación del sitio.
+          Los datos registrales definitivos se completarán antes de la publicación del
+          sitio.
         </p>
 
         <h2>2. Objeto</h2>
@@ -50,10 +48,9 @@ import { site } from "../../data/site";
         <h2>4. Precios e información del catálogo</h2>
         <p>
           Las referencias se ofrecen bajo cotización. Los precios se expresan en pesos
-          colombianos (COP), sin IVA, y pueden variar según volumen, presentación,
-          disponibilidad, material y ciudad de despacho. La cotización confirmada prevalece
-          sobre la información del catálogo. El IVA del 19 % se discrimina en la factura
-          electrónica cuando corresponda.
+          colombianos (COP) y pueden variar según volumen, presentación, disponibilidad,
+          material y ciudad de despacho. La cotización confirmada prevalece sobre la
+          información del catálogo.
         </p>
 
         <h2>5. Propiedad intelectual e industrial</h2>

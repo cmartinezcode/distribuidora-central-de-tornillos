@@ -1,6 +1,5 @@
 ---
 import { volumeTiers, type Product } from "../data/products";
-import { site } from "../data/site";
 
 interface Props {
   product: Product;
@@ -21,6 +20,6 @@ const { product } = Astro.props;
   <p class="price-box__note">
     <strong>Precio por volumen:</strong>{" "}
     {volumeTiers.map((tier) => tier.label).join(" · ")}. La cotización confirma
-    presentación, cantidad, precio y flete. {site.ivaLabel} se añade en factura.
+    presentación, cantidad, precio y flete.
   </p>
 </div>

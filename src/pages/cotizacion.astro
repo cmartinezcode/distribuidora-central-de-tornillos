@@ -40,8 +40,7 @@ const quickWhatsApp = whatsappHref(
         <div class="quote-hero__badges">
           <span class="badge badge--stock"><Icon name="check-circle" size={12} /> Respuesta en 24 h</span>
           <span class="badge">Cotización en COP</span>
-          <span class="badge">IVA 19 %</span>
-          <span class="badge">Envío gratis desde {site.freeShippingLabel}</span>
+          <span class="badge">Despacho nacional</span>
         </div>
       </div>
       <div class="quote-hero__aside">
@@ -84,10 +83,6 @@ const quickWhatsApp = whatsappHref(
             <div class="field">
               <label for="cotizacion-empresa">Empresa <span>*</span></label>
               <input id="cotizacion-empresa" name="empresa" type="text" autocomplete="organization" required />
-            </div>
-            <div class="field">
-              <label for="cotizacion-nit">NIT</label>
-              <input id="cotizacion-nit" name="nit" type="text" autocomplete="off" placeholder="Para factura electrónica" />
             </div>
             <div class="field">
               <label for="cotizacion-nombre">Nombre de contacto <span>*</span></label>
@@ -171,7 +166,7 @@ const quickWhatsApp = whatsappHref(
             </li>
             <li>
               <span>03</span>
-              <div><strong>Recibes la cotización</strong><p>Con IVA discriminado, plazo y condiciones de pago.</p></div>
+              <div><strong>Recibes la cotización</strong><p>Con precio por volumen, plazo y condiciones de pago.</p></div>
             </li>
           </ol>
         </div>
@@ -228,7 +223,6 @@ const quickWhatsApp = whatsappHref(
       return {
         referencias: String(data.get("referencias") || "").trim(),
         empresa: String(data.get("empresa") || "").trim(),
-        nit: String(data.get("nit") || "").trim(),
         nombre: String(data.get("nombre") || "").trim(),
         email: String(data.get("email") || "").trim(),
         telefono: String(data.get("telefono") || "").trim(),
@@ -249,7 +243,6 @@ const quickWhatsApp = whatsappHref(
         "",
         "Datos de contacto:",
         `Empresa: ${data.empresa}`,
-        data.nit && `NIT: ${data.nit}`,
         `Contacto: ${data.nombre}`,
         `Email: ${data.email}`,
         `Teléfono: ${data.telefono}`,
@@ -279,7 +272,7 @@ const quickWhatsApp = whatsappHref(
 
       const data = getData();
       if (!data) return;
-      const email = form.getAttribute("data-email") || "ventas@centraldetornillos.co";
+      const email = form.getAttribute("data-email") || "ventas@distribuidoracentraldetornillos.com";
       const subject = `Solicitud de cotización — ${data.empresa || data.nombre}`;
       const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildText())}`;
 

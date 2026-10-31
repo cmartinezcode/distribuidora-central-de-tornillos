@@ -12,7 +12,7 @@ export const faqs: Faq[] = [
   {
     question: "¿Dónde veo los precios?",
     answer:
-      "Las referencias del catálogo se trabajan bajo pedido y no tienen precio publicado. Envíanos la lista con medidas y cantidades: la cotización confirma el precio por volumen, la presentación, el flete y el plazo antes de facturar. El IVA del 19 % se discrimina en la factura electrónica.",
+      "Las referencias del catálogo se trabajan bajo pedido y no tienen precio publicado. Envíanos la lista con medidas y cantidades: la cotización confirma el precio por volumen, la presentación, el flete y el plazo antes de facturar.",
   },
   {
     question: "¿Puedo pedir una muestra antes de comprar?",
@@ -37,7 +37,7 @@ export const faqs: Faq[] = [
   {
     question: "¿Cómo se paga y cómo se despacha?",
     answer:
-      "Para clientes empresariales trabajamos con transferencia bancaria y factura electrónica con NIT. El envío es gratis desde $500.000 COP sin IVA en cobertura principal (Bogotá, Medellín, Cali y Barranquilla). Para otros destinos cotizamos el flete según volumen y transportadora.",
+      "Para clientes empresariales trabajamos con transferencia bancaria y factura electrónica. El flete se cotiza según volumen, destino y transportadora; lo confirmamos junto con el plazo antes de facturar.",
   },
   {
     question: "¿Puedo devolver material?",

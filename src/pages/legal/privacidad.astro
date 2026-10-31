@@ -4,7 +4,7 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { site } from "../../data/site";
 ---
 
-<Base title="Política de privacidad" description="Política de privacidad de Central de Tornillos S.A.S.: responsable, finalidades, base jurídica, conservación y derechos conforme a la Ley 1581 de 2012." noIndex>
+<Base title="Política de privacidad" description="Política de privacidad de Central de Tornillos: responsable, finalidades, base jurídica, conservación y derechos conforme a la Ley 1581 de 2012." noIndex>
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Legal</span>
@@ -19,9 +19,8 @@ import { site } from "../../data/site";
       <div class="prose">
         <h2>1. Responsable del tratamiento</h2>
         <p>
-          <strong>{site.legalName}</strong>, con NIT {site.nit} y domicilio en
-          {site.address.street}, {site.address.postalCode} {site.address.city},
-          {site.address.region}, Colombia. Puedes contactar en
+          <strong>{site.legalName}</strong>, con domicilio en
+          {site.address.street}, {site.address.postalCode} {site.address.city}, {site.address.region}, Colombia. Puedes contactar en
           <a href={`mailto:${site.email}`}>{site.email}</a> o en el teléfono
           {site.phoneDisplay}.
         </p>

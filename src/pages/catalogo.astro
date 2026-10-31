@@ -5,7 +5,6 @@ import CatalogView from "../components/CatalogView.astro";
 import Icon from "../components/Icon.astro";
 import { categories } from "../data/categories";
 import { products, totalReferences } from "../data/products";
-import { site } from "../data/site";
 ---
 
 <Base
@@ -38,7 +37,7 @@ import { site } from "../data/site";
       <div class="catalog-hero__stats" aria-label="Datos del catálogo">
         <div><strong>{totalReferences}</strong><span>Referencias</span></div>
         <div><strong>{categories.length}</strong><span>Categorías</span></div>
-        <div><strong>{site.ivaLabel}</strong><span>Discriminado en factura</span></div>
+        <div><strong>COP</strong><span>Pesos colombianos</span></div>
       </div>
     </div>
   </section>
