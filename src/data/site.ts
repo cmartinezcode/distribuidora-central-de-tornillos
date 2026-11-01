@@ -8,7 +8,7 @@ export const site = {
   legalName: "Central de Tornillos",
   tagline: "Tornillería estructural al mejor precio",
   description:
-    "Suministro al por mayor de tornillería estructural, drywall y cubiertas en Colombia. Referencias bajo pedido, cotización por volumen y despacho nacional.",
+    "Suministro al por mayor de tornillería estructural, drywall y cubiertas desde La Dorada, Caldas, para Colombia. Referencias bajo pedido, cotización por volumen y despacho nacional.",
   url: "https://distribuidoracentraldetornillos.com",
   phone: "+57 314 771 3179",
   phoneDisplay: "314 771 3179",
@@ -21,14 +21,40 @@ export const site = {
     postalCode: "175031",
     country: "CO",
   },
+  geo: {
+    latitude: 5.45384,
+    longitude: -74.664675,
+  },
+  serviceAreas: [
+    "La Dorada",
+    "Puerto Salgar",
+    "Honda",
+    "Mariquita",
+    "Guaduas",
+    "Fresno",
+    "Victoria",
+    "Norcasia",
+    "Puerto Boyacá",
+  ],
   hours: "Lunes a viernes, 8:00–18:00 · Sábados, 8:00–12:00",
+  shipping: {
+    local:
+      "La Dorada: entrega el mismo día para pedidos confirmados y referencias disponibles.",
+    localShort: "La Dorada: mismo día",
+    national:
+      "Fuera de La Dorada, la disponibilidad de entrega y el plazo dependen de la transportadora y el destino: promedio de 2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios.",
+    cost:
+      "El costo del flete lo determina la transportadora según destino, peso y volumen; lo confirmamos en la cotización.",
+    note:
+      "El plazo total suma alistamiento y tránsito. Si la referencia está bajo pedido, el alistamiento se confirma antes de despachar.",
+  },
   copPerEur: 4300,
   priceNote:
     "Precios bajo cotización: confirmamos presentación, volumen, disponibilidad y flete.",
   minOrderNote:
-    "Pedido mínimo: 1 caja. El flete se cotiza según volumen, destino y transportadora.",
+    "Pedido mínimo: 1 caja. En La Dorada, entrega el mismo día para pedidos confirmados y referencias disponibles. Fuera de La Dorada, la disponibilidad y el plazo dependen de la transportadora y el destino; el costo también depende del peso y el volumen.",
   coverage:
-    "La Dorada, Caldas y cobertura nacional con transportadora aliada.",
+    "La Dorada, Caldas y municipios del Magdalena Medio; cobertura nacional con transportadora aliada.",
   founded: 2004,
 } as const;
 
@@ -63,6 +89,7 @@ export const footerLinks = {
   ],
   empresa: [
     { label: "Sobre nosotros", href: "/nosotros" },
+    { label: "Tornillería en La Dorada", href: "/tornillos-la-dorada" },
     { label: "Calidad y normativa", href: "/calidad" },
     { label: "Despacho y plazos", href: "/logistica" },
     { label: "Sectores", href: "/sectores" },

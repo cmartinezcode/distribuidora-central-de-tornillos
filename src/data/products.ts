@@ -81,12 +81,12 @@ export const stockMeta: Record<
   StockState,
   { label: string; className: string; leadTime: string }
 > = {
-  "in-stock": { label: "En stock", className: "", leadTime: "Despacho 24–72 h" },
-  low: { label: "Últimas unidades", className: "low", leadTime: "Despacho 24–72 h" },
+  "in-stock": { label: "En stock", className: "", leadTime: "Alistamiento 24–72 h" },
+  low: { label: "Últimas unidades", className: "low", leadTime: "Alistamiento 24–72 h" },
   order: {
     label: "Bajo pedido",
     className: "order",
-    leadTime: "Despacho 5–8 días hábiles",
+    leadTime: "Alistamiento 5–8 días hábiles",
   },
 };
 

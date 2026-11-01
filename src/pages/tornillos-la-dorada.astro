@@ -1,0 +1,298 @@
+---
+import Base from "../layouts/Base.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Icon from "../components/Icon.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { featuredProducts, totalReferences } from "../data/products";
+import { site, whatsappHref } from "../data/site";
+
+const pageUrl = `${site.url}/tornillos-la-dorada`;
+const localAreas = site.serviceAreas.map((name) => ({ "@type": "City", name }));
+
+const quickWhatsApp = whatsappHref(
+  "Hola, necesito tornillería en La Dorada, Caldas. Les comparto mi lista de referencias y la ciudad de entrega."
+);
+
+const localFaqs = [
+  {
+    question: "¿Dónde comprar tornillos en La Dorada, Caldas?",
+    answer:
+      "En Central de Tornillos, Carrera 15 # 56, Centro, La Dorada, Caldas. Atendemos con cita o pedido confirmado en horario comercial: lunes a viernes de 8:00 a 18:00 y sábados de 8:00 a 12:00. Puedes revisar el catálogo, enviar tu lista por WhatsApp o solicitar una cotización con varias referencias.",
+  },
+  {
+    question: "¿Hacen entregas el mismo día en La Dorada?",
+    answer:
+      "Sí, para pedidos confirmados y referencias disponibles. Si la referencia está bajo pedido, primero confirmamos el alistamiento. La entrega local se coordina según la dirección y la hora de confirmación del pedido.",
+  },
+  {
+    question: "¿Envían a Puerto Salgar, Honda, Mariquita, Guaduas y Fresno?",
+    answer:
+      "Sí. Despachamos a Puerto Salgar, Honda, Mariquita, Guaduas, Fresno, Victoria, Norcasia, Puerto Boyacá y otros municipios del Magdalena Medio. La disponibilidad de entrega, el plazo y el costo dependen de la transportadora, el destino, el peso y el volumen; los confirmamos antes de despachar.",
+  },
+  {
+    question: "¿Cuánto cuesta el envío fuera de La Dorada?",
+    answer:
+      "La disponibilidad de entrega y el plazo dependen de la transportadora y del destino; el flete también depende del peso y el volumen. Como referencia del sector, los envíos a ciudades principales tardan 2–5 días hábiles y los de otros municipios, 3–8 días hábiles. En la cotización confirmamos el valor y la fecha estimada.",
+  },
+  {
+    question: "¿Puedo retirar el pedido en La Dorada?",
+    answer:
+      "Sí. Coordina el retiro en Carrera 15 # 56, Centro, La Dorada, dentro del horario comercial. Confirma antes la disponibilidad y el alistamiento para que el pedido esté listo cuando llegues.",
+  },
+];
+
+const localPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${pageUrl}#webpage`,
+  url: pageUrl,
+  name: "Tornillería en La Dorada, Caldas",
+  description:
+    "Tornillería estructural, drywall y cubiertas en La Dorada, Caldas. Entrega el mismo día para pedidos confirmados y referencias disponibles; despacho a municipios cercanos y toda Colombia.",
+  inLanguage: "es-CO",
+  isPartOf: {
+    "@type": "WebSite",
+    name: site.name,
+    url: site.url,
+  },
+  about: {
+    "@id": `${site.url}/#organizacion`,
+  },
+  areaServed: localAreas,
+  primaryImageOfPage: {
+    "@type": "ImageObject",
+    url: `${site.url}/og.png`,
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: site.url,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Tornillería en La Dorada",
+      item: pageUrl,
+    },
+  ],
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: localFaqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+---
+
+<Base
+  title="Tornillería en La Dorada, Caldas"
+  description="Tornillería estructural, drywall y cubiertas en La Dorada, Caldas. Entrega el mismo día para pedidos confirmados y referencias disponibles; despacho a Puerto Salgar, Honda, Mariquita, Guaduas, Fresno y toda Colombia."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(localPageSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">La Dorada, Caldas</span>
+      <h1>Tornillería en La Dorada, Caldas.</h1>
+      <p>
+        Tornillería estructural, drywall y cubiertas para obra, industria e instaladores.
+        Entrega el mismo día en La Dorada para pedidos confirmados y referencias
+        disponibles; despacho a municipios cercanos y toda Colombia.
+      </p>
+      <div class="hero__actions" style="margin-top: 1.5rem;">
+        <a class="btn btn--primary" href="/cotizacion">
+          <Icon name="file" size={16} /> Cotizar mi lista
+        </a>
+        <a
+          class="btn btn--on-dark"
+          href={quickWhatsApp}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="whatsapp" size={16} /> WhatsApp local
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <Breadcrumbs items={[{ label: "Tornillería en La Dorada" }]} />
+
+    <section class="section section--tight">
+      <div class="quality-grid">
+        <div class="prose">
+          <span class="eyebrow">Suministro local</span>
+          <h2 class="section-title">La referencia correcta, cerca de tu obra.</h2>
+          <p>
+            Central de Tornillos suministra tornillería técnica al por mayor desde La
+            Dorada, Caldas. Trabajamos con referencias estructurales, drywall y cubiertas
+            bajo pedido, con norma, medida, material y presentación identificadas.
+          </p>
+          <p>
+            Atendemos constructoras, talleres, instaladores de drywall, carpintería
+            metálica, mantenimiento industrial y ferreterías de La Dorada y el Magdalena
+            Medio. Puedes enviar varias referencias en una sola cotización y confirmar
+            disponibilidad, precio por volumen y flete.
+          </p>
+          <p>
+            En La Dorada entregamos el mismo día para pedidos confirmados y referencias
+            disponibles. Fuera de La Dorada, la disponibilidad de entrega y el plazo de
+            tránsito dependen de la transportadora y el destino: como referencia del sector,
+            2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios.
+          </p>
+          <ul class="checklist" style="margin-top: 1.5rem;">
+            <li><Icon name="check-circle" size={18} /> <span><strong>Entrega local</strong> el mismo día para pedidos confirmados y referencias disponibles.</span></li>
+            <li><Icon name="check-circle" size={18} /> <span><strong>Retiro coordinado</strong> en el centro de La Dorada.</span></li>
+            <li><Icon name="check-circle" size={18} /> <span><strong>Cobertura regional</strong> en Caldas, Cundinamarca, Tolima y Boyacá.</span></li>
+            <li><Icon name="check-circle" size={18} /> <span><strong>Asesoría técnica</strong> para elegir cabeza, punta y medida.</span></li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h2>Datos de entrega</h2>
+          <ul class="footer-contact" style="margin-top: 0.75rem;">
+            <li><Icon name="map-pin" size={16} /> <span>{site.address.street}<br />{site.address.postalCode} {site.address.city}, {site.address.region}</span></li>
+            <li><Icon name="clock" size={16} /> <span>{site.hours}</span></li>
+            <li><Icon name="phone" size={16} /> <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phoneDisplay}</a></li>
+            <li><Icon name="whatsapp" size={16} /> <a href={quickWhatsApp} target="_blank" rel="noopener noreferrer">WhatsApp local</a></li>
+            <li><Icon name="mail" size={16} /> <a href={`mailto:${site.email}`}>{site.email}</a></li>
+          </ul>
+          <p style="margin-top: 1rem;">
+            Confirma disponibilidad y horario antes de desplazarte. La entrega local se
+            coordina con la dirección y la hora de confirmación del pedido.
+          </p>
+          <a class="btn btn--dark btn--sm" style="margin-top: 1rem;" href="/logistica">
+            Ver plazos y fletes <Icon name="arrow-right" size={15} />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="feature__icon"><Icon name="truck" size={20} /></span>
+          <h3>Mismo día en La Dorada</h3>
+          <p>Para pedidos confirmados y referencias disponibles, sin esperar al siguiente despacho.</p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="map-pin" size={20} /></span>
+          <h3>Magdalena Medio</h3>
+          <p>Despacho a Puerto Salgar, Honda, Mariquita, Guaduas, Fresno y municipios cercanos.</p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="package" size={20} /></span>
+          <h3>Cajas completas</h3>
+          <p>Pedido mínimo de una caja por referencia. La presentación se confirma en la cotización.</p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="headset" size={20} /></span>
+          <h3>Asesoría técnica</h3>
+          <p>Te ayudamos a elegir la referencia según el soporte, el ambiente y el tipo de fijación.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="store-section-head">
+        <div>
+          <span class="eyebrow">Referencias habituales</span>
+          <h2 class="section-title">Las más pedidas en La Dorada.</h2>
+          <p class="section-lead">
+            {totalReferences} referencias bajo pedido para drywall, estructura metálica y
+            cubiertas. Ajusta las cajas y solicita precio por volumen.
+          </p>
+        </div>
+        <a class="link-arrow" href="/catalogo">
+          Ver catálogo completo <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+
+      <div class="product-grid product-grid--featured">
+        {featuredProducts.map((product) => <ProductCard product={product} />)}
+      </div>
+    </section>
+
+    <section class="section section--paper" style="margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Cobertura</span>
+          <h2 class="section-title">La Dorada y los municipios de la zona.</h2>
+          <p class="section-lead">
+            Coordinamos entregas locales y despachos regionales según disponibilidad y
+            transportadora. Consulta el plazo para tu municipio antes de confirmar.
+          </p>
+        </div>
+      </div>
+
+      <ul class="local-areas local-areas--wide" aria-label="Municipios con cobertura desde La Dorada">
+        {site.serviceAreas.map((area) => <li>{area}</li>)}
+        <li>Caldas</li>
+        <li>Magdalena Medio</li>
+      </ul>
+
+      <p class="form-note" style="margin-top: 1rem;">
+        Fuera de La Dorada, la disponibilidad y el plazo dependen de la transportadora y
+        el destino; el costo también depende del peso y el volumen. Los confirmamos en la
+        cotización antes de despachar.
+      </p>
+    </section>
+
+    <section class="section section--tight">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Preguntas locales</span>
+          <h2 class="section-title">Comprar en La Dorada, sin vueltas.</h2>
+        </div>
+        <a class="link-arrow" href="/faq">
+          Ver todas las preguntas <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+
+      <div class="faq">
+        {localFaqs.map((faq) => (
+          <details>
+            <summary>{faq.question}</summary>
+            <div class="faq__body">{faq.answer}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="cta-band">
+        <div>
+          <h2>¿Cotizamos tu lista para La Dorada?</h2>
+          <p>
+            Envíanos referencias, cantidades y dirección de entrega. Confirmamos
+            disponibilidad, precio por volumen, flete y fecha.
+          </p>
+        </div>
+        <div class="cta-band__actions">
+          <a class="btn btn--primary" href="/cotizacion">
+            <Icon name="file" size={16} /> Pedir cotización
+          </a>
+          <a class="btn btn--on-dark" href={quickWhatsApp} target="_blank" rel="noopener noreferrer">
+            <Icon name="whatsapp" size={16} /> WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

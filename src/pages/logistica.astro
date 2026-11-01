@@ -2,27 +2,29 @@
 import Base from "../layouts/Base.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import Icon from "../components/Icon.astro";
-import { whatsappHref } from "../data/site";
+import { site, whatsappHref } from "../data/site";
 import { faqs } from "../data/faqs";
 import { totalReferences } from "../data/products";
 
 const quickWhatsApp = whatsappHref(
-  "Hola, quiero confirmar disponibilidad, flete y plazo de despacho para una lista de tornillería."
+  "Hola, quiero confirmar disponibilidad, entrega en La Dorada y plazo de despacho para una lista de tornillería."
 );
 ---
 
 <Base
-  title="Despacho, plazos y envíos"
-  description="Despacho de tornillería bajo pedido en 5–8 días hábiles, flete cotizado según destino, embalaje reforzado y plazos claros en Colombia."
+  title="Despacho en La Dorada y envíos nacionales"
+  description="Entrega el mismo día en La Dorada para pedidos confirmados y referencias disponibles. Fuera de La Dorada, la disponibilidad y el plazo dependen de la transportadora y el destino; el costo también depende del peso y el volumen. Referencia del sector: 2–5 días hábiles en ciudades principales y 3–8 en otros municipios."
 >
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Despacho</span>
-      <h1>Plazos claros. Sin «te llamamos».</h1>
+      <h1>De La Dorada a donde está tu obra.</h1>
       <p>
-        Referencias bajo pedido, despacho a domicilio en 5–8 días hábiles. El flete se
-        cotiza según destino, volumen y transportadora. Confirmamos el plazo exacto en la
-        cotización antes de servir.
+        En La Dorada entregamos el mismo día para pedidos confirmados y referencias
+        disponibles. Fuera de La Dorada, la disponibilidad de entrega y el plazo de tránsito
+        dependen de la transportadora y el destino; el costo también depende del peso y el
+        volumen. Como referencia del sector, 2–5 días hábiles en ciudades principales y 3–8
+        días hábiles en otros municipios.
       </p>
     </div>
   </section>
@@ -33,24 +35,24 @@ const quickWhatsApp = whatsappHref(
     <section class="section section--tight">
       <div class="feature-grid">
         <article class="feature">
-          <span class="feature__icon"><Icon name="package" size={20} /></span>
-          <h3>Bajo pedido</h3>
-          <p>{totalReferences} referencias activas con plazo confirmado en la cotización.</p>
+          <span class="feature__icon"><Icon name="truck" size={20} /></span>
+          <h3>Mismo día en La Dorada</h3>
+          <p>Pedidos confirmados y referencias disponibles. Coordinamos la entrega local.</p>
         </article>
         <article class="feature">
-          <span class="feature__icon"><Icon name="truck" size={20} /></span>
-          <h3>5–8 días hábiles</h3>
-          <p>Plazo habitual para referencias bajo pedido en cobertura principal.</p>
+          <span class="feature__icon"><Icon name="package" size={20} /></span>
+          <h3>Bajo pedido</h3>
+          <p>{totalReferences} referencias activas con alistamiento habitual de 5–8 días hábiles.</p>
+        </article>
+        <article class="feature">
+          <span class="feature__icon"><Icon name="map-pin" size={20} /></span>
+          <h3>Cobertura nacional</h3>
+          <p>Promedio de 2–5 días hábiles en ciudades principales y 3–8 en otros municipios.</p>
         </article>
         <article class="feature">
           <span class="feature__icon"><Icon name="box" size={20} /></span>
-          <h3>Flete cotizado</h3>
-          <p>Según peso, volumen y destino. Confirmamos el valor en la cotización.</p>
-        </article>
-        <article class="feature">
-          <span class="feature__icon"><Icon name="shield" size={20} /></span>
-          <h3>Embalaje reforzado</h3>
-          <p>Cajas completas identificadas con referencia, cantidad y lote.</p>
+          <h3>Flete según transportadora</h3>
+          <p>El costo depende de destino, peso y volumen. Lo confirmamos en la cotización.</p>
         </article>
       </div>
     </section>
@@ -61,36 +63,71 @@ const quickWhatsApp = whatsappHref(
           <span class="eyebrow">Plazos</span>
           <h2 class="section-title">Cuánto tarda tu pedido.</h2>
           <p class="section-lead">
-            Estos son los plazos habituales. En la cotización confirmamos la fecha de
-            cada línea según presentación, volumen y ciudad de despacho.
+            El plazo total combina alistamiento y tránsito. En la cotización confirmamos
+            la fecha de cada línea según presentación, volumen, transportadora y ciudad
+            de despacho.
           </p>
         </div>
       </div>
 
       <div class="info-card" style="overflow-x: auto;">
         <table class="tier-table">
-          <caption class="visually-hidden">Plazos de despacho por tipo de pedido</caption>
+          <caption class="visually-hidden">Plazos de alistamiento y despacho por destino</caption>
           <thead>
             <tr>
-              <th scope="col">Tipo de pedido</th>
+              <th scope="col">Destino o tipo de pedido</th>
               <th scope="col">Plazo habitual</th>
               <th scope="col">Observaciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Referencia estándar bajo pedido</td><td>5–8 días hábiles</td><td>Confirmamos fecha al validar la cotización</td></tr>
-            <tr><td>Medida especial</td><td>7–10 días hábiles</td><td>Según especificación, material y cantidad</td></tr>
-            <tr><td>La Dorada y municipios cercanos</td><td>1–2 días hábiles</td><td>Tránsito después del alistamiento</td></tr>
-            <tr><td>Bogotá, Medellín, Cali y Barranquilla</td><td>2–4 días hábiles</td><td>Tránsito desde La Dorada, Caldas</td></tr>
-            <tr><td>Otros municipios</td><td>3–5 días hábiles</td><td>Flete cotizado según volumen y transportadora</td></tr>
+            <tr><td>La Dorada</td><td>Mismo día</td><td>Pedido confirmado y referencia disponible; si está bajo pedido, aplica alistamiento</td></tr>
+            <tr><td>Ciudades principales</td><td>2–5 días hábiles</td><td>Promedio del sector, según transportadora</td></tr>
+            <tr><td>Otros municipios</td><td>3–8 días hábiles</td><td>Promedio del sector, según transportadora</td></tr>
+            <tr><td>Zonas apartadas</td><td>Según transportadora</td><td>Puede superar 8 días hábiles</td></tr>
+            <tr><td>Referencia estándar bajo pedido</td><td>5–8 días hábiles de alistamiento</td><td>Se suma al tránsito; confirmamos fecha en la cotización</td></tr>
+            <tr><td>Medida especial</td><td>7–10 días hábiles de alistamiento</td><td>Según especificación, material y cantidad</td></tr>
           </tbody>
         </table>
       </div>
 
       <p class="form-note" style="margin-top: 0.75rem;">
-        El plazo total combina alistamiento y tránsito. Se cuenta en días hábiles desde la
-        confirmación del pedido y no incluye incidencias logísticas ajenas al transporte.
+        La entrega del mismo día en La Dorada aplica para pedidos confirmados y
+        referencias disponibles dentro del horario de atención. Fuera de La Dorada, la
+        disponibilidad y el plazo dependen de la transportadora y el destino; el costo
+        también depende del peso y el volumen. No incluimos incidencias logísticas ajenas
+        al transporte.
       </p>
+    </section>
+
+    <section class="section section--tight">
+      <div class="section-head">
+        <div class="section-head__copy">
+          <span class="eyebrow">Cobertura local</span>
+          <h2 class="section-title">La Dorada y el Magdalena Medio.</h2>
+          <p class="section-lead">
+            Despachamos a los municipios cercanos y a toda Colombia. Consulta el plazo
+            para tu destino antes de confirmar el pedido.
+          </p>
+        </div>
+        <a class="link-arrow" href="/tornillos-la-dorada">
+          Ver tornillería en La Dorada <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+
+      <ul class="local-areas local-areas--wide" aria-label="Municipios con cobertura desde La Dorada">
+        {site.serviceAreas.map((area) => <li>{area}</li>)}
+        <li>Caldas</li>
+        <li>Magdalena Medio</li>
+      </ul>
+
+      <div class="local-shipping-note">
+        <Icon name="info" size={18} />
+        <p>
+          <strong>La Dorada:</strong> {site.shipping.local} <strong>Fuera de La Dorada:</strong>
+          {site.shipping.national} {site.shipping.cost}
+        </p>
+      </div>
     </section>
 
     <section class="section section--paper" style="margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);">
@@ -142,7 +179,7 @@ const quickWhatsApp = whatsappHref(
       </div>
 
       <div class="faq">
-        {faqs.slice(3, 7).map((faq) => (
+        {faqs.slice(3, 9).map((faq) => (
           <details>
             <summary>{faq.question}</summary>
             <div class="faq__body">{faq.answer}</div>
@@ -156,8 +193,8 @@ const quickWhatsApp = whatsappHref(
         <div>
           <h2>¿Necesitas una entrega con fecha?</h2>
           <p>
-            Indica la fecha en la cotización. Confirmamos disponibilidad y, si hace falta,
-            coordinamos la salida para tu despacho.
+            Indica la ciudad y la fecha en la cotización. Confirmamos disponibilidad,
+            transportadora y, si es en La Dorada, coordinamos la entrega local.
           </p>
         </div>
         <div class="cta-band__actions">

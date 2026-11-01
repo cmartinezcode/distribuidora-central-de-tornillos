@@ -17,12 +17,22 @@ export const faqs: Faq[] = [
   {
     question: "¿Puedo pedir una muestra antes de comprar?",
     answer:
-      "Sí. Para referencias estándar enviamos muestras de 5 a 10 unidades sin coste, con el flete a cargo del cliente. Indícalo en el formulario de cotización o escríbenos por WhatsApp con la referencia y el uso previsto.",
+      "Sí. Para referencias estándar enviamos muestras de 5 a 10 unidades sin coste, con el flete cotizado según transportadora y destino. Indícalo en el formulario de cotización o escríbenos por WhatsApp con la referencia y el uso previsto.",
   },
   {
     question: "¿Qué plazo de despacho tienen?",
     answer:
-      "Las referencias se trabajan bajo pedido y suelen estar disponibles en 5–8 días hábiles. En la cotización confirmamos el plazo exacto de cada línea según presentación, cantidad y ciudad de despacho, junto con la transportadora.",
+      "En La Dorada entregamos el mismo día para pedidos confirmados y referencias disponibles. Fuera de La Dorada, la disponibilidad de entrega y el plazo de tránsito dependen de la transportadora y el destino: como referencia del sector, 2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios. Si la referencia está bajo pedido, el alistamiento habitual es de 5–8 días hábiles y se suma al tránsito. En la cotización confirmamos disponibilidad, transportadora, costo y fecha.",
+  },
+  {
+    question: "¿Hacen entregas el mismo día en La Dorada?",
+    answer:
+      "Sí. Para pedidos confirmados y referencias disponibles, entregamos el mismo día en La Dorada, Caldas. Si la referencia está bajo pedido, primero confirmamos el alistamiento. Para Puerto Salgar, Honda, Mariquita, Guaduas, Fresno, Victoria, Norcasia, Puerto Boyacá y otros municipios cercanos, coordinamos con transportadora y confirmamos el plazo antes de despachar.",
+  },
+  {
+    question: "¿Cuánto tarda y cuánto cuesta un envío fuera de La Dorada?",
+    answer:
+      "La disponibilidad de entrega y el plazo dependen de la transportadora y del destino; el flete también depende del peso y el volumen. Como referencia del sector, los envíos a ciudades principales tardan 2–5 días hábiles y los de otros municipios, 3–8 días hábiles; las zonas apartadas pueden tardar más. Lo informamos antes de confirmar el pedido.",
   },
   {
     question: "¿Los productos tienen certificado de material?",
@@ -37,7 +47,7 @@ export const faqs: Faq[] = [
   {
     question: "¿Cómo se paga y cómo se despacha?",
     answer:
-      "Para clientes empresariales trabajamos con transferencia bancaria y factura electrónica. El flete se cotiza según volumen, destino y transportadora; lo confirmamos junto con el plazo antes de facturar.",
+      "Para clientes empresariales trabajamos con transferencia bancaria y factura electrónica. En La Dorada, la entrega es el mismo día para pedidos confirmados y referencias disponibles; fuera de La Dorada, la disponibilidad, el plazo y el flete dependen de la transportadora, el destino, el peso y el volumen. Lo confirmamos antes de facturar.",
   },
   {
     question: "¿Puedo devolver material?",

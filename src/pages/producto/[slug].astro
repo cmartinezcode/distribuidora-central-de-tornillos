@@ -85,7 +85,7 @@ const breadcrumbSchema = {
 
 <Base
   title={product.name}
-  description={`${product.name} bajo pedido en Colombia. ${product.description.slice(0, 120)}… Cotización por volumen, presentación y despacho nacional.`}
+  description={`${product.name} bajo pedido en La Dorada y Colombia. ${product.description.slice(0, 120)}… Cotización por volumen, presentación y despacho nacional desde La Dorada, Caldas.`}
 >
   <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
@@ -219,7 +219,7 @@ const breadcrumbSchema = {
 
         <ul class="pd-trust">
           <li><Icon name="check-circle" size={15} /> {stock.label} · {product.leadTime}</li>
-          <li><Icon name="truck" size={15} /> Despacho nacional · flete bajo cotización</li>
+          <li><Icon name="truck" size={15} /> La Dorada: mismo día si hay disponibilidad · nacional: transportadora</li>
           <li><Icon name="shield" size={15} /> Certificado de material bajo petición</li>
           <li><Icon name="phone" size={15} /> ¿Dudas técnicas? <a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phoneDisplay}</a></li>
         </ul>
@@ -265,9 +265,12 @@ const breadcrumbSchema = {
           <details open>
             <summary>Disponibilidad y plazo de despacho</summary>
             <div class="accordion__body">
-              {stock.label}. {product.leadTime} en cobertura principal. Si necesitas una
-              fecha concreta, indícala en la cotización y confirmamos disponibilidad antes
-              de servir.
+              {stock.label}. {product.leadTime}. En La Dorada, entrega
+              el mismo día si la referencia está disponible y el pedido se confirma; fuera
+              de La Dorada, la disponibilidad de entrega y el tránsito dependen de la
+              transportadora y el destino (promedio de 2–5 días hábiles en ciudades
+              principales y 3–8 en otros municipios). Si necesitas una fecha concreta,
+              indícala en la cotización y confirmamos disponibilidad antes de servir.
             </div>
           </details>
           <details>
@@ -281,9 +284,10 @@ const breadcrumbSchema = {
           <details>
             <summary>Flete y embalaje</summary>
             <div class="accordion__body">
-              El flete se cotiza según volumen, destino y transportadora. El material se
-              suministra en la presentación acordada en la cotización y con embalaje
-              reforzado. Confirmamos el valor del despacho antes de servir.
+              {site.shipping.cost} El material se suministra en la presentación acordada
+              en la cotización y con embalaje reforzado. En La Dorada coordinamos entrega
+              local; fuera de La Dorada, la disponibilidad y el plazo dependen de la
+              transportadora y el destino, y el costo también depende del peso y el volumen.
             </div>
           </details>
           <details>

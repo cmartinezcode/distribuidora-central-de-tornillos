@@ -35,17 +35,25 @@ El proyecto funciona, pero aún hay datos de negocio por confirmar antes de publ
    «presentación por confirmar»: completa precio por caja, unidades y plazo cuando
    estén disponibles. Ajusta los tramos de volumen en `volumeTiers` si cambia la
    política comercial.
-3. **Política de despacho** — el flete se cotiza según volumen, destino y
-   transportadora. Confirma las tarifas y los plazos reales antes de publicar.
+3. **Política de despacho** — en La Dorada la entrega es el mismo día para pedidos
+   confirmados y referencias disponibles. Fuera de La Dorada, la disponibilidad y el
+   plazo dependen de la transportadora y el destino; el flete también depende del peso
+   y el volumen. La referencia del sector usada en el sitio es de 2–5 días hábiles para
+   ciudades principales y 3–8 para otros municipios. Confirma tarifas y plazos reales
+   con tus transportadoras antes de publicar.
 4. **Sectores, FAQ y textos** — `src/data/sectors.ts`, `src/data/faqs.ts` y las páginas
    de `src/pages/`. Revisa las afirmaciones de plazos y certificados.
 5. **Legal** — `src/pages/legal/*.astro`: completa los datos registrales definitivos y
    revisa los textos con asesoría legal colombiana (Ley 1581 de 2012, Decreto 1377 de
    2013, Ley 1480 de 2011). Las páginas legales están fuera del sitemap, llevan
    `noindex` y están bloqueadas en `public/robots.txt`.
-6. **SEO** — la URL configurada es `https://distribuidoracentraldetornillos.com`;
-   actualiza `site` en `astro.config.mjs` y la URL de `public/robots.txt` si cambia el
-   dominio. El sitemap se genera en el build.
+6. **SEO local** — la URL configurada es
+   `https://distribuidoracentraldetornillos.com`; actualiza `site` en
+   `astro.config.mjs` y la URL de `public/robots.txt` si cambia el dominio. La página
+   `/tornillos-la-dorada` concentra la cobertura de La Dorada, Caldas y municipios
+   cercanos; el `HardwareStore` de `Base.astro` incluye dirección, geolocalización,
+   horarios y `areaServed`. Ajusta `site.geo` y `site.serviceAreas` si cambia la sede o
+   la cobertura. El sitemap se genera en el build.
 7. **Imagen social** — `public/og.svg` es la fuente editable. Regenera `public/og.png`
    (1200 × 630) después de cambiar marca o claim con:
    `rsvg-convert -w 1200 -h 630 public/og.svg -o public/og.png`.

@@ -13,7 +13,7 @@ const services = [
   {
     icon: "truck",
     title: "Despacho nacional",
-    text: "Flete cotizado según destino y volumen",
+    text: "La Dorada: mismo día · fuera, según transportadora",
   },
   {
     icon: "package",
@@ -26,9 +26,9 @@ const services = [
     text: "Precio según cantidad y presentación",
   },
   {
-    icon: "wrench",
+    icon: "headset",
     title: "Asesoría técnica",
-    text: "Te ayudamos a elegir la referencia",
+    text: "Elige la referencia con ayuda de un técnico",
   },
 ];
 
@@ -80,7 +80,7 @@ const benefits = [
   {
     icon: "map-pin",
     title: "Despacho nacional",
-    text: "La Dorada, Caldas y cobertura nacional con transportadora aliada.",
+    text: "La Dorada: mismo día. Fuera, disponibilidad y plazo según transportadora; flete según peso y volumen.",
   },
 ];
 
@@ -98,19 +98,21 @@ const websiteSchema = {
 ---
 
 <Base
-  title="Tornillería estructural al mejor precio en Colombia"
-  description="Tornillería estructural, drywall y cubiertas para industria, construcción e instaladores en Colombia. Referencias bajo pedido, cotización por volumen y despacho nacional."
+  title="Tornillería estructural al mejor precio en La Dorada y Colombia"
+  description="Tornillería estructural, drywall y cubiertas para industria, construcción e instaladores en La Dorada, Caldas y Colombia. Referencias bajo pedido, cotización por volumen y despacho nacional."
 >
   <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 
   <section class="store-hero">
     <div class="container store-hero__inner">
       <div class="store-hero__copy">
-        <span class="store-hero__kicker">Tornillería al por mayor · Colombia</span>
+        <span class="store-hero__kicker">Tornillería al por mayor · La Dorada, Caldas</span>
         <h1>Tornillería estructural al <em>mejor precio.</em></h1>
         <p class="store-hero__lead">
-          Referencias bajo pedido, cotización por volumen y despacho nacional. Encuentra
-          la referencia correcta y cotiza en minutos, sin carrito y sin registro.
+          Referencias bajo pedido, cotización por volumen y despacho nacional desde La
+          Dorada. En La Dorada, entrega el mismo día para pedidos confirmados y referencias
+          disponibles; fuera, la disponibilidad y el plazo dependen de la transportadora y
+          el destino.
         </p>
 
         <div class="store-hero__actions">
@@ -126,6 +128,7 @@ const websiteSchema = {
           <li><Icon name="check-circle" size={15} /> {totalReferences} referencias</li>
           <li><Icon name="check-circle" size={15} /> Cotización en COP</li>
           <li><Icon name="check-circle" size={15} /> Respuesta en 24 h</li>
+          <li><Icon name="check-circle" size={15} /> La Dorada: mismo día</li>
           <li><Icon name="check-circle" size={15} /> Cobertura nacional</li>
         </ul>
       </div>
@@ -140,7 +143,7 @@ const websiteSchema = {
     <div class="container service-strip__inner">
       {services.map((service) => (
         <div class="service-item">
-          <span class="service-item__icon"><Icon name={service.icon} size={21} /></span>
+          <span class="service-item__icon"><Icon name={service.icon} size={24} /></span>
           <span>
             <strong>{service.title}</strong>
             <span>{service.text}</span>
@@ -239,6 +242,44 @@ const websiteSchema = {
           <p>{benefit.text}</p>
         </article>
       ))}
+    </div>
+  </section>
+
+  <section class="section local-section" aria-labelledby="local-title">
+    <div class="container local-section__inner">
+      <div class="local-section__copy">
+        <span class="eyebrow">La Dorada y alrededores</span>
+        <h2 class="section-title" id="local-title">
+          Tornillería cerca de tu obra en el Magdalena Medio.
+        </h2>
+        <p class="section-lead">
+          Entregamos el mismo día en La Dorada para pedidos confirmados y referencias
+          disponibles. Desde nuestra sede en el centro despachamos a Puerto Salgar, Honda,
+          Mariquita, Guaduas, Fresno y municipios cercanos, con cobertura nacional.
+        </p>
+        <ul class="local-areas" aria-label="Municipios con cobertura local">
+          {site.serviceAreas.map((area) => <li>{area}</li>)}
+        </ul>
+        <a class="link-arrow" href="/tornillos-la-dorada">
+          Ver tornillería en La Dorada <Icon name="arrow-right" size={16} />
+        </a>
+      </div>
+
+      <aside class="local-section__card">
+        <span class="local-section__kicker">Entrega local</span>
+        <h3>La Dorada: mismo día</h3>
+        <p>
+          Pedidos confirmados y referencias disponibles. Fuera de La Dorada, la
+          disponibilidad y el plazo dependen de la transportadora y el destino; el costo
+          también depende del peso y el volumen.
+        </p>
+        <a class="btn btn--primary" href="/cotizacion">
+          <Icon name="file" size={16} /> Cotizar entrega
+        </a>
+        <a class="local-section__link" href="/logistica">
+          Ver plazos y fletes <Icon name="arrow-right" size={15} />
+        </a>
+      </aside>
     </div>
   </section>
 
