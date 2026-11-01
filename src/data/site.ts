@@ -39,10 +39,10 @@ export const site = {
   hours: "Lunes a viernes, 8:00–18:00 · Sábados, 8:00–12:00",
   shipping: {
     local:
-      "La Dorada: entrega el mismo día para pedidos confirmados y referencias disponibles.",
-    localShort: "La Dorada: mismo día",
+      "Entrega a domicilio el mismo día para pedidos confirmados y referencias disponibles.",
+    localShort: "La Dorada: entrega a domicilio el mismo día",
     national:
-      "Fuera de La Dorada, la disponibilidad de entrega y el plazo dependen de la transportadora y el destino: promedio de 2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios.",
+      "La disponibilidad de entrega a domicilio y el plazo dependen de la transportadora y el destino: promedio de 2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios.",
     cost:
       "El costo del flete lo determina la transportadora según destino, peso y volumen; lo confirmamos en la cotización.",
     note:
@@ -52,7 +52,7 @@ export const site = {
   priceNote:
     "Precios bajo cotización: confirmamos presentación, volumen, disponibilidad y flete.",
   minOrderNote:
-    "Pedido mínimo: 1 caja. En La Dorada, entrega el mismo día para pedidos confirmados y referencias disponibles. Fuera de La Dorada, la disponibilidad y el plazo dependen de la transportadora y el destino; el costo también depende del peso y el volumen.",
+    "Pedido mínimo: 1 caja. En La Dorada, entrega a domicilio el mismo día para pedidos confirmados y referencias disponibles. Fuera de La Dorada, la disponibilidad y el plazo dependen de la transportadora y el destino; el costo también depende del peso y el volumen.",
   coverage:
     "La Dorada, Caldas y municipios del Magdalena Medio; cobertura nacional con transportadora aliada.",
   founded: 2004,

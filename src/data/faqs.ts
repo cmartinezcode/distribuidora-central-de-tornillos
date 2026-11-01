@@ -22,17 +22,17 @@ export const faqs: Faq[] = [
   {
     question: "¿Qué plazo de despacho tienen?",
     answer:
-      "En La Dorada entregamos el mismo día para pedidos confirmados y referencias disponibles. Fuera de La Dorada, la disponibilidad de entrega y el plazo de tránsito dependen de la transportadora y el destino: como referencia del sector, 2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios. Si la referencia está bajo pedido, el alistamiento habitual es de 5–8 días hábiles y se suma al tránsito. En la cotización confirmamos disponibilidad, transportadora, costo y fecha.",
+      "En La Dorada entregamos a domicilio el mismo día para pedidos confirmados y referencias disponibles. Fuera de La Dorada, la disponibilidad de entrega a domicilio y el plazo de tránsito dependen de la transportadora y el destino: como referencia del sector, 2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios. Si la referencia está bajo pedido, el alistamiento habitual es de 5–8 días hábiles y se suma al tránsito. En la cotización confirmamos disponibilidad, transportadora, costo y fecha.",
   },
   {
     question: "¿Hacen entregas el mismo día en La Dorada?",
     answer:
-      "Sí. Para pedidos confirmados y referencias disponibles, entregamos el mismo día en La Dorada, Caldas. Si la referencia está bajo pedido, primero confirmamos el alistamiento. Para Puerto Salgar, Honda, Mariquita, Guaduas, Fresno, Victoria, Norcasia, Puerto Boyacá y otros municipios cercanos, coordinamos con transportadora y confirmamos el plazo antes de despachar.",
+      "Sí. Para pedidos confirmados y referencias disponibles, entregamos a domicilio el mismo día en La Dorada, Caldas. Si la referencia está bajo pedido, primero confirmamos el alistamiento. Para Puerto Salgar, Honda, Mariquita, Guaduas, Fresno, Victoria, Norcasia, Puerto Boyacá y otros municipios cercanos, coordinamos con transportadora y confirmamos el plazo antes de despachar.",
   },
   {
-    question: "¿Cuánto tarda y cuánto cuesta un envío fuera de La Dorada?",
+    question: "¿Cuánto tarda y cuánto cuesta un despacho fuera de La Dorada?",
     answer:
-      "La disponibilidad de entrega y el plazo dependen de la transportadora y del destino; el flete también depende del peso y el volumen. Como referencia del sector, los envíos a ciudades principales tardan 2–5 días hábiles y los de otros municipios, 3–8 días hábiles; las zonas apartadas pueden tardar más. Lo informamos antes de confirmar el pedido.",
+      "La disponibilidad de entrega a domicilio y el plazo dependen de la transportadora y del destino; el flete también depende del peso y el volumen. Como referencia del sector, los despachos a ciudades principales tardan 2–5 días hábiles y los de otros municipios, 3–8 días hábiles; las zonas apartadas pueden tardar más. Lo informamos antes de confirmar el pedido.",
   },
   {
     question: "¿Los productos tienen certificado de material?",
@@ -47,7 +47,7 @@ export const faqs: Faq[] = [
   {
     question: "¿Cómo se paga y cómo se despacha?",
     answer:
-      "Para clientes empresariales trabajamos con transferencia bancaria y factura electrónica. En La Dorada, la entrega es el mismo día para pedidos confirmados y referencias disponibles; fuera de La Dorada, la disponibilidad, el plazo y el flete dependen de la transportadora, el destino, el peso y el volumen. Lo confirmamos antes de facturar.",
+      "Para clientes empresariales trabajamos con transferencia bancaria y factura electrónica. En La Dorada, la entrega a domicilio es el mismo día para pedidos confirmados y referencias disponibles; fuera de La Dorada, la disponibilidad, el plazo y el flete dependen de la transportadora, el destino, el peso y el volumen. Lo confirmamos antes de facturar.",
   },
   {
     question: "¿Puedo devolver material?",
