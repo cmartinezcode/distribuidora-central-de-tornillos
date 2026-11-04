@@ -75,7 +75,7 @@ export const sectors: Sector[] = [
     icon: "layers",
     needs: [
       "Tornillos flange con arandela de neopreno",
-      "Suministro por cajas completas",
+      "Presentaciones de 100, 1.000 o caja cerrada",
       "Reposición programada en obra",
     ],
     recommended: [

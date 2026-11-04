@@ -1,6 +1,6 @@
 ---
 import Icon from "./Icon.astro";
-import { stockMeta, type Product } from "../data/products";
+import { formatWeight, stockMeta, type Product } from "../data/products";
 
 interface Props {
   product: Product;
@@ -9,7 +9,7 @@ interface Props {
 const { product } = Astro.props;
 
 const stock = stockMeta[product.stock];
-const quoteHref = `/cotizacion?producto=${encodeURIComponent(product.slug)}`;
+const quoteHref = `/cotizacion?producto=${encodeURIComponent(product.slug)}&presentacion=100&cantidad=1`;
 const searchCompact = [
   product.measure.replace(/[×✕]/g, "x").replace(/["#\s]/g, ""),
   product.sku,
@@ -66,7 +66,7 @@ const searchCompact = [
       <span class="price__label">Precio bajo cotización</span>
       <span class="price__value">Bajo pedido</span>
       <span class="product-price__note">
-        {product.unitLabel} · cotización por volumen
+        {product.unitLabel} · peso aprox. {formatWeight(product.weightPerThousand)}/millar
       </span>
     </div>
 

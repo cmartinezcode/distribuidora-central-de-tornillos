@@ -5,6 +5,8 @@ import Icon from "../../components/Icon.astro";
 import PriceTiers from "../../components/PriceTiers.astro";
 import ProductCard from "../../components/ProductCard.astro";
 import {
+  formatWeight,
+  presentations,
   products,
   relatedProducts,
   stockMeta,
@@ -30,10 +32,11 @@ const categoryHref = `/categoria/${product.category}`;
 const availability =
   product.stock === "order" ? "https://schema.org/PreOrder" : "https://schema.org/InStock";
 
-const quoteHref = `/cotizacion?producto=${encodeURIComponent(product.slug)}`;
+const quoteHref = `/cotizacion?producto=${encodeURIComponent(product.slug)}&presentacion=100&cantidad=1`;
 const baseWhatsApp = whatsappHref(
   `Hola, quiero cotizar ${product.name} (${product.sku}). ¿Me confirman precio por volumen, presentación y disponibilidad?`
 );
+const weightPerHundred = product.weightPerThousand / 10;
 
 const productSchema = {
   "@context": "https://schema.org",
@@ -51,6 +54,17 @@ const productSchema = {
     { "@type": "PropertyValue", name: "Acabado", value: product.finish },
     { "@type": "PropertyValue", name: "Cabeza", value: product.head },
     { "@type": "PropertyValue", name: "Disponibilidad", value: stock.label },
+    {
+      "@type": "PropertyValue",
+      name: "Presentaciones",
+      value:
+        "100 unidades, 1.000 unidades o caja cerrada; la cantidad de la caja cerrada se confirma por WhatsApp",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Peso aproximado por millar",
+      value: `${formatWeight(product.weightPerThousand)} (cálculo referencial)`,
+    },
   ],
   offers: {
     "@type": "Offer",
@@ -85,7 +99,7 @@ const breadcrumbSchema = {
 
 <Base
   title={product.name}
-  description={`${product.name} bajo pedido en La Dorada y Colombia. ${product.description.slice(0, 120)}… Cotización por volumen, presentación y despacho nacional desde La Dorada, Caldas.`}
+  description={`${product.name} bajo pedido en La Dorada y Colombia. ${product.description.slice(0, 110)}… Presentaciones de 100 und., 1.000 und. o caja cerrada; peso aprox. ${formatWeight(product.weightPerThousand)}/millar. Cotización y despacho nacional desde La Dorada, Caldas.`}
 >
   <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
@@ -155,6 +169,10 @@ const breadcrumbSchema = {
             <span class="fact__k">Accionamiento</span>
             <span class="fact__v">{product.drive}</span>
           </div>
+          <div class="fact">
+            <span class="fact__k">Peso aprox.</span>
+            <span class="fact__v">{formatWeight(product.weightPerThousand)}/millar</span>
+          </div>
         </div>
 
         <PriceTiers product={product} />
@@ -165,16 +183,29 @@ const breadcrumbSchema = {
           data-quote-base={quoteHref}
           data-product-name={product.name}
           data-wa-base={`https://wa.me/${site.whatsapp}`}
+          data-weight-per-thousand={product.weightPerThousand}
         >
           <div class="qty-box__row">
             <div>
-              <span class="field__label">Cantidad estimada (cajas)</span>
-              <p class="form-note">
-                Confirmamos unidades por caja, presentación y precio en la cotización.
+              <span class="field__label">Presentación</span>
+              <p class="form-note">Elige 100 unidades, 1.000 unidades o caja cerrada.</p>
+            </div>
+            <select class="qty-select" data-presentation aria-label="Presentación">
+              {presentations.map((item) => (
+                <option value={item.value}>{item.label}</option>
+              ))}
+            </select>
+          </div>
+
+          <div class="qty-box__row">
+            <div>
+              <span class="field__label">Cantidad de presentaciones</span>
+              <p class="form-note" data-presentation-note>
+                Peso aprox. {formatWeight(product.weightPerThousand)}/millar · cálculo referencial.
               </p>
             </div>
             <div class="qty-stepper">
-              <button type="button" data-step="-1" aria-label="Quitar una caja">
+              <button type="button" data-step="-1" aria-label="Quitar una presentación">
                 <Icon name="minus" size={16} />
               </button>
               <input
@@ -184,16 +215,19 @@ const breadcrumbSchema = {
                 step="1"
                 value="1"
                 inputmode="numeric"
-                aria-label="Número de cajas"
+                aria-label="Número de presentaciones"
               />
-              <button type="button" data-step="1" aria-label="Añadir una caja">
+              <button type="button" data-step="1" aria-label="Añadir una presentación">
                 <Icon name="plus" size={16} />
               </button>
             </div>
           </div>
 
           <div class="qty-summary">
-            <span><strong data-qty-boxes>1</strong> caja(s) para cotizar</span>
+            <span>
+              <strong data-qty-count>1</strong>
+              <span data-presentation-summary>presentación de 100 unidades</span>
+            </span>
             <span>Precio y flete: bajo cotización</span>
           </div>
 
@@ -251,8 +285,21 @@ const breadcrumbSchema = {
             <tr><th scope="row">Acabado</th><td>{product.finish}</td></tr>
             <tr><th scope="row">Cabeza</th><td>{product.head}</td></tr>
             <tr><th scope="row">Accionamiento</th><td>{product.drive}</td></tr>
-            <tr><th scope="row">Unidad de venta</th><td>{product.unitLabel}</td></tr>
-            <tr><th scope="row">Pedido mínimo</th><td>1 caja · presentación por confirmar</td></tr>
+            <tr>
+              <th scope="row">Presentaciones</th>
+              <td>
+                100 unidades, 1.000 unidades o caja cerrada. La cantidad de unidades de la
+                caja cerrada se confirma por WhatsApp.
+              </td>
+            </tr>
+            <tr><th scope="row">Pedido mínimo</th><td>100 unidades</td></tr>
+            <tr>
+              <th scope="row">Peso aprox. por millar</th>
+              <td>
+                {formatWeight(product.weightPerThousand)} ·{" "}
+                {formatWeight(weightPerHundred)} por 100 und. · cálculo referencial
+              </td>
+            </tr>
             <tr><th scope="row">Disponibilidad</th><td>{stock.label} · {product.leadTime}</td></tr>
             <tr><th scope="row">Precio</th><td>Bajo cotización</td></tr>
           </tbody>
@@ -302,20 +349,6 @@ const breadcrumbSchema = {
         </div>
       </div>
 
-      <div class="pd-block">
-        <h2>Características del producto</h2>
-        <div class="accordion">
-          {product.features.map((feature) => (
-            <details>
-              <summary>{feature}</summary>
-              <div class="accordion__body">
-                Característica incluida en esta referencia según especificación del fabricante
-                y control de recepción de {site.name}.
-              </div>
-            </details>
-          ))}
-        </div>
-      </div>
     </div>
   </section>
 
@@ -340,26 +373,61 @@ const breadcrumbSchema = {
       const quoteBase = calc.dataset.quoteBase || "/cotizacion";
       const productName = calc.dataset.productName || "esta referencia";
       const waBase = calc.dataset.waBase || "";
+      const weightPerThousand = Number.parseFloat(calc.dataset.weightPerThousand || "0");
       const input = calc.querySelector("#qty-input");
-      const boxesTarget = calc.querySelector("[data-qty-boxes]");
+      const presentation = calc.querySelector("[data-presentation]");
+      const quantityTarget = calc.querySelector("[data-qty-count]");
+      const presentationTarget = calc.querySelector("[data-presentation-summary]");
+      const presentationNote = calc.querySelector("[data-presentation-note]");
       const quoteLink = calc.querySelector("[data-quote-link]");
       const waLink = calc.querySelector("[data-wa-link]");
       const number = new Intl.NumberFormat("es-CO");
+      const weight = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 2 });
+
+      const selectedPresentation = () =>
+        presentation instanceof HTMLSelectElement ? presentation.value : "100";
+
+      const selectedLabel = () =>
+        presentation instanceof HTMLSelectElement
+          ? presentation.selectedOptions[0]?.textContent?.trim() || "100 unidades"
+          : "100 unidades";
 
       const update = () => {
         if (!(input instanceof HTMLInputElement)) return;
-        const boxes = Math.max(1, Number.parseInt(input.value, 10) || 1);
-        input.value = String(boxes);
+        const quantity = Math.max(1, Number.parseInt(input.value, 10) || 1);
+        input.value = String(quantity);
 
-        if (boxesTarget) boxesTarget.textContent = number.format(boxes);
+        const current = selectedPresentation();
+        const label = selectedLabel();
+
+        if (quantityTarget) quantityTarget.textContent = number.format(quantity);
+
+        if (presentationTarget) {
+          presentationTarget.textContent =
+            current === "caja"
+              ? `caja${quantity === 1 ? "" : "s"} cerrada${quantity === 1 ? "" : "s"} · cantidad por WhatsApp`
+              : `${quantity === 1 ? "presentación" : "presentaciones"} de ${label}`;
+        }
+
+        if (presentationNote) {
+          presentationNote.textContent =
+            current === "caja"
+              ? "La cantidad de unidades de la caja cerrada se confirma por WhatsApp."
+              : `Peso aprox. ${weight.format(weightPerThousand)} kg/millar · cálculo referencial.`;
+        }
 
         if (quoteLink instanceof HTMLAnchorElement) {
-          const separator = quoteBase.includes("?") ? "&" : "?";
-          quoteLink.href = `${quoteBase}${separator}cantidad=${boxes}`;
+          const url = new URL(quoteBase, window.location.origin);
+          url.searchParams.set("presentacion", current);
+          url.searchParams.set("cantidad", String(quantity));
+          quoteLink.href = `${url.pathname}${url.search}`;
         }
 
         if (waLink instanceof HTMLAnchorElement) {
-          const message = `Hola, quiero cotizar ${boxes} caja${boxes === 1 ? "" : "s"} de ${productName}. ¿Me confirman precio por volumen, presentación, disponibilidad y flete?`;
+          const message =
+            current === "caja"
+              ? `Hola, quiero cotizar ${quantity} caja${quantity === 1 ? "" : "s"} cerrada${quantity === 1 ? "" : "s"} de ${productName}. ¿Me confirman cuántas unidades trae la caja cerrada, precio, disponibilidad y flete?`
+              : `Hola, quiero cotizar ${quantity} ${quantity === 1 ? "presentación" : "presentaciones"} de ${label} de ${productName}. ¿Me confirman precio, disponibilidad y flete?`;
           waLink.href = `${waBase}?text=${encodeURIComponent(message)}`;
         }
       };
@@ -376,6 +444,7 @@ const breadcrumbSchema = {
 
       input?.addEventListener("input", update);
       input?.addEventListener("change", update);
+      presentation?.addEventListener("change", update);
       update();
     }
   </script>

@@ -15,6 +15,7 @@ const productMap = Object.fromEntries(
       unitLabel: product.unitLabel,
       measure: product.measure,
       norm: product.norm,
+      weightPerThousand: product.weightPerThousand,
     },
   ])
 );
@@ -76,7 +77,7 @@ const quickWhatsApp = whatsappHref(
                 id="cotizacion-referencias"
                 name="referencias"
                 rows="6"
-                placeholder="Ejemplo:&#10;DRY-06X1 — 5 cajas&#10;FRA-07X716 — 10 cajas&#10;Necesito también tornillos flange #10 × 2"
+                placeholder="Ejemplo:&#10;DRY-06X1 — 2 presentaciones de 100 unidades&#10;FRA-07X716 — 1 presentación de 1.000 unidades&#10;FLA-10X1 — 1 caja cerrada (confirmar unidades)&#10;Necesito también tornillos lenteja #8 × 1/2"
                 required
               ></textarea>
               <p class="field__hint">
@@ -214,11 +215,25 @@ const quickWhatsApp = whatsappHref(
 
     const params = new URLSearchParams(window.location.search);
     const productSlug = params.get("producto");
-    const boxes = Math.max(1, Number.parseInt(params.get("cantidad") || "1", 10) || 1);
+    const quantity = Math.max(1, Number.parseInt(params.get("cantidad") || "1", 10) || 1);
+    const presentation = params.get("presentacion") || "100";
+    const presentationLabels = {
+      "100": "100 unidades",
+      "1000": "1.000 unidades",
+      caja: "caja cerrada (confirmar cantidad de unidades)",
+    };
 
     if (productSlug && productData[productSlug] && references instanceof HTMLTextAreaElement && !references.value) {
       const product = productData[productSlug];
-      references.value = `${product.name} (${product.sku}) — ${boxes} ${product.unit}${boxes === 1 ? "" : "s"} · presentación por confirmar`;
+      const label = presentationLabels[presentation] || presentationLabels["100"];
+      const weight = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 2 }).format(
+        product.weightPerThousand || 0
+      );
+      const presentationText =
+        presentation === "caja"
+          ? `${quantity} ${quantity === 1 ? "caja cerrada" : "cajas cerradas"} (confirmar unidades)`
+          : `${quantity} ${quantity === 1 ? "presentación" : "presentaciones"} de ${label}`;
+      references.value = `${product.name} (${product.sku}) — ${presentationText} · peso aprox. ${weight} kg/millar`;
     }
 
     const getData = () => {

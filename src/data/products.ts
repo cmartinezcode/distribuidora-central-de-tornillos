@@ -31,6 +31,7 @@ interface Family {
   pack: number;
   unit: string;
   unitLabel: string;
+  washerMass?: number;
   description: string;
   applications: string[];
   features: string[];
@@ -56,6 +57,7 @@ export interface Product {
   pack: number;
   unit: string;
   unitLabel: string;
+  weightPerThousand: number;
   diameter: number;
   length: number;
   price: number;
@@ -71,10 +73,16 @@ export interface Product {
 }
 
 export const volumeTiers = [
-  { minBoxes: 1, factor: 1, label: "1–4 cajas" },
-  { minBoxes: 5, factor: 0.92, label: "5–19 cajas" },
-  { minBoxes: 20, factor: 0.86, label: "20–49 cajas" },
-  { minBoxes: 50, factor: 0.79, label: "50+ cajas" },
+  { minUnits: 100, factor: 1, label: "100–999 und." },
+  { minUnits: 1000, factor: 0.92, label: "1.000–4.999 und." },
+  { minUnits: 5000, factor: 0.86, label: "5.000–19.999 und." },
+  { minUnits: 20000, factor: 0.79, label: "20.000+ und." },
+] as const;
+
+export const presentations = [
+  { value: "100", label: "100 unidades", units: 100 },
+  { value: "1000", label: "1.000 unidades", units: 1000 },
+  { value: "caja", label: "Caja cerrada", units: null },
 ] as const;
 
 export const stockMeta: Record<
@@ -90,8 +98,9 @@ export const stockMeta: Record<
   },
 };
 
-// Presentaciones por confirmar: el cliente cotiza y se valida la unidad de venta.
-const pendingPackLabel = "caja · presentación por confirmar";
+// Todos los tornillos se venden en estas presentaciones. La caja cerrada se
+// cotiza preguntando por WhatsApp cuántas unidades contiene.
+const presentationLabel = "100 / 1.000 und. · caja cerrada";
 
 const families: Family[] = [
   {
@@ -107,8 +116,8 @@ const families: Family[] = [
     art: "self",
     image: "/images/products/drywall-6x1.png",
     pack: 1,
-    unit: "caja",
-    unitLabel: pendingPackLabel,
+    unit: "presentación",
+    unitLabel: presentationLabel,
     description:
       "Tornillo drywall con rosca fina, punta aguja y cabeza bugle. Fija placas de yeso a perfiles metálicos y madera; la rosca fina agarra la lámina sin romper el cartón.",
     applications: [
@@ -149,8 +158,8 @@ const families: Family[] = [
     art: "self",
     image: "/images/products/truss-aguja.png",
     pack: 1,
-    unit: "caja",
-    unitLabel: pendingPackLabel,
+    unit: "presentación",
+    unitLabel: presentationLabel,
     description:
       "Tornillo de cabeza truss y punta aguja para fijar placas de drywall a perfiles metálicos delgados. La cabeza ancha distribuye la presión y reduce el riesgo de rasgar el cartón.",
     applications: [
@@ -191,8 +200,8 @@ const families: Family[] = [
     art: "self",
     image: "/images/products/framing-aguja.png",
     pack: 1,
-    unit: "caja",
-    unitLabel: pendingPackLabel,
+    unit: "presentación",
+    unitLabel: presentationLabel,
     description:
       "Tornillo framing con punta aguja para unir perfiles metálicos de calibre delgado en entramados y cerramientos. La cabeza bugle permite un acabado a ras y la rosca fina controla el avance.",
     applications: [
@@ -221,6 +230,48 @@ const families: Family[] = [
     ],
   },
   {
+    id: "lenteja-aguja",
+    code: "LEN",
+    name: "Tornillo estructural cabeza lenteja punta aguda",
+    category: "tornillos-estructural",
+    norm: "ASME B18.6.4",
+    material: "Acero al carbono",
+    finish: "Cincado",
+    head: "Lenteja (truss)",
+    drive: "Phillips PH2",
+    art: "self",
+    image: "/images/products/truss-aguja.png",
+    pack: 1,
+    unit: "presentación",
+    unitLabel: presentationLabel,
+    description:
+      "Tornillo de cabeza lenteja y punta aguda para fijar láminas, paneles delgados y perfilería liviana. La cabeza ancha reparte la presión y la punta aguda arranca sin pretaladro en materiales de baja densidad.",
+    applications: [
+      "Fijación de láminas y paneles delgados",
+      "Uniones sobre perfilería liviana",
+      "Cerramientos, remates y montajes de taller",
+      "Fijaciones que requieren bajo perfil y apoyo amplio",
+    ],
+    features: [
+      "Cabeza lenteja de apoyo amplio",
+      "Punta aguda para arranque directo",
+      "Rosca fina para metal y lámina delgada",
+      "Acabado cincado",
+    ],
+    variants: [
+      {
+        measure: '#8 × 1/2"',
+        d: 4.2,
+        l: 12.7,
+        code: "08X12",
+        slug: "lenteja-aguja-8-x-1-2",
+        stock: "order",
+        featured: false,
+        image: "/images/products/truss-aguja.png",
+      },
+    ],
+  },
+  {
     id: "truss-broca",
     code: "TRB",
     name: "Tornillo truss ASME B18.6.4 punta broca",
@@ -233,8 +284,8 @@ const families: Family[] = [
     art: "self",
     image: "/images/products/truss-broca.png",
     pack: 1,
-    unit: "caja",
-    unitLabel: pendingPackLabel,
+    unit: "presentación",
+    unitLabel: presentationLabel,
     description:
       "Tornillo truss con punta broca que perfora y rosca en un solo paso sobre perfiles metálicos. La cabeza ancha deja una fijación de bajo perfil en entramados y cerramientos.",
     applications: [
@@ -275,8 +326,9 @@ const families: Family[] = [
     art: "self",
     image: "/images/products/flange-10x1.png",
     pack: 1,
-    unit: "caja",
-    unitLabel: pendingPackLabel,
+    unit: "presentación",
+    unitLabel: presentationLabel,
+    washerMass: 0.22,
     description:
       "Tornillo flange autoperforante con arandela de neopreno para fijar cubiertas, fachadas y paneles. La arandela sella la perforación y la cabeza flange reparte la carga.",
     applications: [
@@ -362,6 +414,22 @@ const makeSku = (family: Family, variant: Variant): string => {
   return `${family.code}-${diameter}-${length}`;
 };
 
+// Peso referencial de un millar. Calcula el volumen de un cilindro con el
+// diámetro y la longitud nominales, aplica la densidad del acero (7,85 g/cm³)
+// y un factor de 1,10 para cabeza, rosca y tolerancias. En los tornillos flange
+// suma la arandela de neopreno. El peso real varía según fabricante y lote.
+const estimateWeightPerThousand = (
+  diameter: number,
+  length: number,
+  washerMass = 0
+): number => {
+  const volumeCm3 = (Math.PI * (diameter / 2) ** 2 * length) / 1000;
+  return round(volumeCm3 * 7.85 * 1.1 + washerMass, 2);
+};
+
+export const formatWeight = (kg: number) =>
+  `${new Intl.NumberFormat("es-CO", { maximumFractionDigits: 2 }).format(kg)} kg`;
+
 export const products: Product[] = families.flatMap((family) => {
   const category = categoryBySlug(family.category);
   return family.variants.map((variant) => {
@@ -370,6 +438,11 @@ export const products: Product[] = families.flatMap((family) => {
     const unitLabel = variant.unitLabel ?? family.unitLabel;
     const sku = makeSku(family, variant);
     const price = variant.price ?? 0;
+    const weightPerThousand = estimateWeightPerThousand(
+      variant.d,
+      variant.l,
+      family.washerMass ?? 0
+    );
     const measureCompact = variant.measure
       .replace(/[×✕]/g, "x")
       .replace(/["#\s]/g, "");
@@ -395,6 +468,7 @@ export const products: Product[] = families.flatMap((family) => {
       pack: family.pack,
       unit: family.unit,
       unitLabel,
+      weightPerThousand,
       diameter: variant.d,
       length: variant.l,
       price,
@@ -425,9 +499,16 @@ export const products: Product[] = families.flatMap((family) => {
           family.code,
           "bajo pedido",
           "cotizacion",
+          "100 unidades",
+          "1000 unidades",
+          "caja cerrada",
+          "presentacion",
           category?.name ?? "",
           category?.navLabel ?? "",
           category?.short ?? "",
+          ...family.features,
+          "peso",
+          `${formatWeight(weightPerThousand)} por millar`,
           ...(category?.keywords ?? []),
         ].join(" ")
       ),
@@ -480,26 +561,26 @@ export const formatNumber = (value: number) =>
 
 /* ---------- Precios por volumen ---------- */
 
-export function tierForBoxes(boxes: number) {
-  const safeBoxes = Math.max(1, Math.floor(boxes));
+export function tierForUnits(units: number) {
+  const safeUnits = Math.max(100, Math.floor(units));
   return (
-    [...volumeTiers].reverse().find((tier) => safeBoxes >= tier.minBoxes) ??
+    [...volumeTiers].reverse().find((tier) => safeUnits >= tier.minUnits) ??
     volumeTiers[0]
   );
 }
 
-export function unitPriceForBoxes(product: Product, boxes: number): number {
+export function unitPriceForUnits(product: Product, units: number): number {
   if (product.price <= 0) return 0;
-  const tier = tierForBoxes(boxes);
+  const tier = tierForUnits(units);
   return round(product.price * tier.factor, 4);
 }
 
-export function lineTotal(product: Product, boxes: number): number {
-  return round(unitPriceForBoxes(product, boxes) * product.pack * Math.max(1, boxes), 2);
+export function lineTotal(product: Product, units: number): number {
+  return round(unitPriceForUnits(product, units) * Math.max(100, units), 2);
 }
 
-export function savingPercent(product: Product, boxes: number): number {
+export function savingPercent(product: Product, units: number): number {
   if (product.price <= 0) return 0;
-  const unit = unitPriceForBoxes(product, boxes);
+  const unit = unitPriceForUnits(product, units);
   return Math.round((1 - unit / product.price) * 100);
 }

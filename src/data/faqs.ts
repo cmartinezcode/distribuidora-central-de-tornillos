@@ -5,9 +5,9 @@ export interface Faq {
 
 export const faqs: Faq[] = [
   {
-    question: "¿Cuál es el pedido mínimo?",
+    question: "¿Cuál es el pedido mínimo y en qué presentaciones venden?",
     answer:
-      "El pedido mínimo es de una caja por referencia. La cantidad de unidades por caja se confirma en la cotización, porque la presentación puede variar según la referencia y el volumen. Puedes combinar varias referencias en una sola solicitud, pero no se sirven unidades sueltas de referencias suministradas en caja completa.",
+      "Todos los tornillos se venden en presentaciones de 100 unidades, 1.000 unidades o caja cerrada. El pedido mínimo es de 100 unidades por referencia. La cantidad de unidades de la caja cerrada se confirma por WhatsApp antes de cotizar. Puedes combinar varias referencias en una sola solicitud; no se sirven unidades sueltas fuera de estas presentaciones.",
   },
   {
     question: "¿Dónde veo los precios?",
