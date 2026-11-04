@@ -39,10 +39,10 @@ export const site = {
   hours: "Lunes a viernes, 8:00–18:00 · Sábados, 8:00–12:00",
   shipping: {
     local:
-      "Entrega a domicilio el mismo día para pedidos confirmados y referencias disponibles.",
+      "entrega a domicilio el mismo día para pedidos confirmados y referencias disponibles.",
     localShort: "La Dorada: entrega a domicilio el mismo día",
     national:
-      "La disponibilidad de entrega a domicilio y el plazo dependen de la transportadora y el destino: promedio de 2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios.",
+      "la disponibilidad de entrega a domicilio y el plazo dependen de la transportadora y el destino: promedio de 2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios.",
     cost:
       "El costo del flete lo determina la transportadora según destino, peso y volumen; lo confirmamos en la cotización.",
     note:

@@ -22,12 +22,12 @@ const localFaqs = [
   {
     question: "¿Hacen entregas el mismo día en La Dorada?",
     answer:
-      "Sí, para pedidos confirmados y referencias disponibles. Si la referencia está bajo pedido, primero confirmamos el alistamiento. La entrega local se coordina según la dirección y la hora de confirmación del pedido.",
+      "Sí, para pedidos confirmados y referencias disponibles. Si la referencia está bajo pedido, primero confirmamos el alistamiento. La entrega a domicilio se coordina según la dirección y la hora de confirmación del pedido.",
   },
   {
-    question: "¿Envían a Puerto Salgar, Honda, Mariquita, Guaduas y Fresno?",
+    question: "¿Despachan a Puerto Salgar, Honda, Mariquita, Guaduas y Fresno?",
     answer:
-      "Sí. Despachamos a Puerto Salgar, Honda, Mariquita, Guaduas, Fresno, Victoria, Norcasia, Puerto Boyacá y otros municipios del Magdalena Medio. La disponibilidad de entrega, el plazo y el costo dependen de la transportadora, el destino, el peso y el volumen; los confirmamos antes de despachar.",
+      "Sí. Despachamos a Puerto Salgar, Honda, Mariquita, Guaduas, Fresno, Victoria, Norcasia, Puerto Boyacá y otros municipios del Magdalena Medio. La disponibilidad de entrega a domicilio, el plazo y el costo dependen de la transportadora, el destino, el peso y el volumen; los confirmamos antes de despachar.",
   },
   {
     question: "¿Cuánto cuesta el despacho fuera de La Dorada?",
@@ -48,7 +48,7 @@ const localPageSchema = {
   url: pageUrl,
   name: "Tornillería en La Dorada, Caldas",
   description:
-    "Tornillería estructural, drywall y cubiertas en La Dorada, Caldas. Entrega el mismo día para pedidos confirmados y referencias disponibles; despacho a municipios cercanos y toda Colombia.",
+    "Tornillería estructural, drywall y cubiertas en La Dorada, Caldas. Entrega a domicilio el mismo día para pedidos confirmados y referencias disponibles; despacho a municipios cercanos y toda Colombia.",
   inLanguage: "es-CO",
   isPartOf: {
     "@type": "WebSite",
@@ -100,7 +100,7 @@ const faqSchema = {
 
 <Base
   title="Tornillería en La Dorada, Caldas"
-  description="Tornillería estructural, drywall y cubiertas en La Dorada, Caldas. Entrega el mismo día para pedidos confirmados y referencias disponibles; despacho a Puerto Salgar, Honda, Mariquita, Guaduas, Fresno y toda Colombia."
+  description="Tornillería estructural, drywall y cubiertas en La Dorada, Caldas. Entrega a domicilio el mismo día para pedidos confirmados y referencias disponibles; despacho a Puerto Salgar, Honda, Mariquita, Guaduas, Fresno y toda Colombia."
 >
   <script type="application/ld+json" set:html={JSON.stringify(localPageSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
@@ -112,8 +112,8 @@ const faqSchema = {
       <h1>Tornillería en La Dorada, Caldas.</h1>
       <p>
         Tornillería estructural, drywall y cubiertas para obra, industria e instaladores.
-        Entrega el mismo día en La Dorada para pedidos confirmados y referencias
-        disponibles; despacho a municipios cercanos y toda Colombia.
+        Entrega a domicilio el mismo día en La Dorada para pedidos confirmados y
+        referencias disponibles; despacho a municipios cercanos y toda Colombia.
       </p>
       <div class="hero__actions" style="margin-top: 1.5rem;">
         <a class="btn btn--primary" href="/cotizacion">
@@ -151,13 +151,14 @@ const faqSchema = {
             disponibilidad, precio por volumen y flete.
           </p>
           <p>
-            En La Dorada entregamos el mismo día para pedidos confirmados y referencias
-            disponibles. Fuera de La Dorada, la disponibilidad de entrega y el plazo de
-            tránsito dependen de la transportadora y el destino: como referencia del sector,
-            2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios.
+            En La Dorada entregamos a domicilio el mismo día para pedidos confirmados y
+            referencias disponibles. Fuera de La Dorada, la disponibilidad de entrega a
+            domicilio y el plazo de tránsito dependen de la transportadora y el destino:
+            como referencia del sector, 2–5 días hábiles en ciudades principales y 3–8 días
+            hábiles en otros municipios.
           </p>
           <ul class="checklist" style="margin-top: 1.5rem;">
-            <li><Icon name="check-circle" size={18} /> <span><strong>Entrega local</strong> el mismo día para pedidos confirmados y referencias disponibles.</span></li>
+            <li><Icon name="check-circle" size={18} /> <span><strong>Entrega local a domicilio</strong> el mismo día para pedidos confirmados y referencias disponibles.</span></li>
             <li><Icon name="check-circle" size={18} /> <span><strong>Retiro coordinado</strong> en el centro de La Dorada.</span></li>
             <li><Icon name="check-circle" size={18} /> <span><strong>Cobertura regional</strong> en Caldas, Cundinamarca, Tolima y Boyacá.</span></li>
             <li><Icon name="check-circle" size={18} /> <span><strong>Asesoría técnica</strong> para elegir cabeza, punta y medida.</span></li>
@@ -174,8 +175,8 @@ const faqSchema = {
             <li><Icon name="mail" size={16} /> <a href={`mailto:${site.email}`}>{site.email}</a></li>
           </ul>
           <p style="margin-top: 1rem;">
-            Confirma disponibilidad y horario antes de desplazarte. La entrega local se
-            coordina con la dirección y la hora de confirmación del pedido.
+            Confirma disponibilidad y horario antes de desplazarte. La entrega a domicilio
+            se coordina con la dirección y la hora de confirmación del pedido.
           </p>
           <a class="btn btn--dark btn--sm" style="margin-top: 1rem;" href="/logistica">
             Ver plazos y fletes <Icon name="arrow-right" size={15} />
@@ -189,7 +190,7 @@ const faqSchema = {
         <article class="feature">
           <span class="feature__icon"><Icon name="truck" size={20} /></span>
           <h3>Mismo día en La Dorada</h3>
-          <p>Para pedidos confirmados y referencias disponibles, sin esperar al siguiente despacho.</p>
+          <p>Para pedidos confirmados y referencias disponibles, con entrega a domicilio sin esperar al siguiente despacho.</p>
         </article>
         <article class="feature">
           <span class="feature__icon"><Icon name="map-pin" size={20} /></span>
@@ -248,9 +249,9 @@ const faqSchema = {
       </ul>
 
       <p class="form-note" style="margin-top: 1rem;">
-        Fuera de La Dorada, la disponibilidad y el plazo dependen de la transportadora y
-        el destino; el costo también depende del peso y el volumen. Los confirmamos en la
-        cotización antes de despachar.
+        Fuera de La Dorada, la disponibilidad y el plazo de entrega a domicilio dependen de
+        la transportadora y el destino; el costo también depende del peso y el volumen. Los
+        confirmamos en la cotización antes de despachar.
       </p>
     </section>
 
