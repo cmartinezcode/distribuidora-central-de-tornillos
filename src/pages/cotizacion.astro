@@ -27,7 +27,7 @@ const quickWhatsApp = whatsappHref(
 
 <Base
   title="Solicitar cotización de tornillería"
-  description="Solicita cotización de tornillería al por mayor en La Dorada y Colombia sin carrito ni registro. Pega varias referencias, indica cantidades y recibe precio por volumen, presentación y flete."
+  description="Solicita cotización de tornillería al por mayor en La Dorada y Colombia sin carrito. Pega varias referencias, indica cantidades y recibe precio por volumen."
 >
   <section class="page-hero quote-hero">
     <div class="container quote-hero__inner">
@@ -291,7 +291,7 @@ const quickWhatsApp = whatsappHref(
 
       const data = getData();
       if (!data) return;
-      const email = form.getAttribute("data-email") || "ventas@distribuidoracentraldetornillos.com";
+      const email = form.getAttribute("data-email") || "ventas@centraldetornillos.com.co";
       const subject = `Solicitud de cotización — ${data.empresa || data.nombre}`;
       const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildText())}`;
 

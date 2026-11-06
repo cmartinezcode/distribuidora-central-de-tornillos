@@ -26,9 +26,10 @@ El proyecto funciona, pero aún hay datos de negocio por confirmar antes de publ
 1. **Contacto y empresa** — `src/data/site.ts`: horario, año de fundación y datos
    registrales definitivos. El teléfono, WhatsApp, email, dirección y dominio ya están
    cargados (`314 771 3179`, `573147713179`, Carrera 6 # 15 - 56, La Dorada, Caldas,
-   `ventas@distribuidoracentraldetornillos.com` y
-   `distribuidoracentraldetornillos.com`); el horario, el año de fundación y los datos
-   registrales siguen pendientes de confirmar.
+   `ventas@centraldetornillos.com.co` y
+   `centraldetornillos.com.co`); el horario, el año de fundación y los datos
+   registrales siguen pendientes de confirmar. El correo se mantiene hasta confirmar si
+   también cambia al nuevo dominio.
 2. **Catálogo y presentaciones** — `src/data/products.ts` y `src/data/categories.ts`.
    El catálogo se organiza en 3 categorías (estructural, drywall y cubiertas), todas bajo
    pedido y sin precio publicado. Los tornillos se venden en presentaciones
@@ -49,7 +50,7 @@ El proyecto funciona, pero aún hay datos de negocio por confirmar antes de publ
    2013, Ley 1480 de 2011). Las páginas legales están fuera del sitemap, llevan
    `noindex` y están bloqueadas en `public/robots.txt`.
 6. **SEO local** — la URL configurada es
-   `https://distribuidoracentraldetornillos.com`; actualiza `site` en
+   `https://centraldetornillos.com.co`; actualiza `site` en
    `astro.config.mjs` y la URL de `public/robots.txt` si cambia el dominio. La página
    `/tornillos-la-dorada` concentra la cobertura de La Dorada, Caldas y municipios
    cercanos; el `HardwareStore` de `Base.astro` incluye dirección, geolocalización,

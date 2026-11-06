@@ -14,7 +14,7 @@ const quickWhatsApp = whatsappHref(
 
 <Base
   title="Contacto en La Dorada, Caldas"
-  description="Contacta con Central de Tornillos en La Dorada, Caldas: teléfono, WhatsApp, email y dirección. Consultas técnicas, muestras, medidas especiales y cotizaciones de tornillería al por mayor."
+  description="Contacta con Central de Tornillos en La Dorada, Caldas: teléfono, WhatsApp, email y dirección. Consultas técnicas y cotizaciones al por mayor."
 >
   <section class="page-hero">
     <div class="container">
@@ -231,7 +231,7 @@ const quickWhatsApp = whatsappHref(
 
       const data = getData();
       if (!data) return;
-      const email = form.getAttribute("data-email") || "ventas@distribuidoracentraldetornillos.com";
+      const email = form.getAttribute("data-email") || "ventas@centraldetornillos.com.co";
       const subject = `${data.asunto} — ${data.empresa || data.nombre}`;
       const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildText())}`;
 

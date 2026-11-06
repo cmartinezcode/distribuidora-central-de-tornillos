@@ -25,8 +25,8 @@ const recommended: Product[] = sector.recommended.flatMap((slug) => {
 ---
 
 <Base
-  title={`Tornillería para ${sector.name.toLowerCase()}`}
-  description={`${sector.description} Suministro al por mayor con cotización por volumen, presentaciones de 100 und., 1.000 und. o caja cerrada y asesoramiento técnico.`}
+  title={sector.metaTitle ?? `Tornillería para ${sector.name.toLowerCase()}`}
+  description={sector.metaDescription}
 >
   <section class="page-hero">
     <div class="container">

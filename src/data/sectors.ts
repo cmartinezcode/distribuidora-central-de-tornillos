@@ -3,6 +3,8 @@ export interface Sector {
   name: string;
   short: string;
   description: string;
+  metaTitle?: string;
+  metaDescription: string;
   icon: string;
   needs: string[];
   recommended: string[];
@@ -15,6 +17,8 @@ export const sectors: Sector[] = [
     short: "Paradas, montaje y reposición continua",
     description:
       "Suministro recurrente para fábricas, plantas de proceso y equipos de mantenimiento que necesitan referencias homogéneas, trazabilidad y entregas fiables.",
+    metaDescription:
+      "Tornillería al por mayor para industria y mantenimiento: reposición programada, trazabilidad por lote y cotización por volumen.",
     icon: "factory",
     needs: [
       "Reposición programada con precios estables",
@@ -34,6 +38,8 @@ export const sectors: Sector[] = [
     short: "Fijaciones para estructura y cerramiento",
     description:
       "Tornillería para obra nueva y rehabilitación, con soluciones para perfilería metálica, drywall, fachadas y cubierta.",
+    metaDescription:
+      "Tornillería estructural, drywall y cubiertas para obra nueva y rehabilitación. Cotiza por volumen con despacho nacional desde La Dorada.",
     icon: "hardhat",
     needs: [
       "Referencias para steel framing y drywall",
@@ -53,6 +59,9 @@ export const sectors: Sector[] = [
     short: "Montaje a medida y series cortas",
     description:
       "Para talleres que fabrican a medida y necesitan medidas concretas, asesoramiento técnico rápido y reposición de referencias.",
+    metaTitle: "Tornillería para talleres metálicos",
+    metaDescription:
+      "Tornillería para talleres y carpintería metálica: medidas concretas, asesoría técnica y reposición de referencias por volumen.",
     icon: "wrench",
     needs: [
       "Medidas especiales bajo consulta",
@@ -72,6 +81,8 @@ export const sectors: Sector[] = [
     short: "Fachadas, cubiertas y cerramientos",
     description:
       "Profesionales de la instalación que trabajan con panel sándwich, chapa, cubierta y fachada y necesitan tornillo autoperforante con estanqueidad.",
+    metaDescription:
+      "Tornillos flange con arandela de neopreno para fachadas, cubiertas y paneles sándwich. Cotiza por volumen y recibe asesoría técnica.",
     icon: "layers",
     needs: [
       "Tornillos flange con arandela de neopreno",

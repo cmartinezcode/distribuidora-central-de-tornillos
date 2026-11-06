@@ -15,6 +15,7 @@ interface Props {
   description?: string;
   noIndex?: boolean;
   bodyClass?: string;
+  includeSiteName?: boolean;
 }
 
 const {
@@ -22,10 +23,12 @@ const {
   description = site.description,
   noIndex = false,
   bodyClass = "",
+  includeSiteName = true,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, site.url).href;
-const fullTitle = title.includes(site.name) ? title : `${title} | ${site.name}`;
+const fullTitle =
+  title.includes(site.name) || !includeSiteName ? title : `${title} | ${site.name}`;
 const mapQuery = encodeURIComponent(
   `${site.address.street}, ${site.address.city}, ${site.address.region}, Colombia`
 );

@@ -9,11 +9,11 @@ export const site = {
   tagline: "Tornillería estructural al mejor precio",
   description:
     "Suministro al por mayor de tornillería estructural, drywall y cubiertas desde La Dorada, Caldas, para Colombia. Referencias bajo pedido, cotización por volumen y despacho nacional.",
-  url: "https://distribuidoracentraldetornillos.com",
+  url: "https://centraldetornillos.com.co",
   phone: "+57 314 771 3179",
   phoneDisplay: "314 771 3179",
   whatsapp: "573147713179",
-  email: "ventas@distribuidoracentraldetornillos.com",
+  email: "ventas@centraldetornillos.com.co",
   address: {
     street: "Carrera 6 # 15 - 56, Centro",
     city: "La Dorada",
