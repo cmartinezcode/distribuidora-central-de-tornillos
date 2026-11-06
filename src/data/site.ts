@@ -4,9 +4,9 @@
  * siendo marcadores: confírmalos antes de publicar.
  */
 export const site = {
-  name: "Central de tornillos",
-  legalName: "Central de tornillos",
-  tagline: "Fijaciones que perduran",
+  name: "Central de Tornillos",
+  legalName: "Central de Tornillos",
+  tagline: "Tornillería estructural al mejor precio",
   description:
     "Suministro al por mayor de tornillería estructural, drywall y cubiertas desde La Dorada, Caldas, para Colombia. Referencias bajo pedido, cotización por volumen y despacho nacional.",
   url: "https://centraldetornillos.com.co",

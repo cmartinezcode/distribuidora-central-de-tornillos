@@ -1,4 +1,4 @@
-# Central de tornillos
+# Central de Tornillos
 
 Sitio web estático de tornillería técnica al por mayor para Colombia, construido con
 Astro 7, TypeScript y CSS propio. Incluye catálogo filtrable, fichas de producto,

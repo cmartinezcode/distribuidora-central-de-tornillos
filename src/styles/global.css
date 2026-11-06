@@ -1,5 +1,5 @@
 /* ============================================================
-   Central de tornillos — estilos globales
+   Central de Tornillos — estilos globales
    ============================================================ */
 
 *,
@@ -518,10 +518,10 @@ button {
 
 .logo__name {
   font-family: var(--font-display);
-  font-size: 1.32rem;
+  font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  text-transform: none;
+  text-transform: uppercase;
 }
 
 .logo__name em {
@@ -3426,7 +3426,7 @@ body.no-scroll {
   }
 
   .logo__name {
-    font-size: 0.98rem;
+    font-size: 0.95rem;
   }
 
   .logo__mark {

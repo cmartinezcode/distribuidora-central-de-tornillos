@@ -1,5 +1,5 @@
 /* ============================================================
-   Central de tornillos — capa comercial Colombia
+   Central de Tornillos — capa comercial Colombia
    Se carga después de global.css para ordenar la jerarquía visual.
    ============================================================ */
 
@@ -3632,7 +3632,7 @@ body {
   }
 
   .logo__name {
-    font-size: 0.98rem;
+    font-size: 0.92rem;
   }
 
   .logo__mark {
