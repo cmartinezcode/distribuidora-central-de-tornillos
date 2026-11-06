@@ -15,11 +15,6 @@ export const faqs: Faq[] = [
       "Las referencias del catálogo se trabajan bajo pedido y no tienen precio publicado. Envíanos la lista con medidas y cantidades: la cotización confirma el precio por volumen, la presentación, el flete y el plazo antes de facturar.",
   },
   {
-    question: "¿Puedo pedir una muestra antes de comprar?",
-    answer:
-      "Sí. Para referencias estándar enviamos muestras de 5 a 10 unidades sin coste, con el flete cotizado según transportadora y destino. Indícalo en el formulario de cotización o escríbenos por WhatsApp con la referencia y el uso previsto.",
-  },
-  {
     question: "¿Qué plazo de despacho tienen?",
     answer:
       "En La Dorada entregamos a domicilio el mismo día para pedidos confirmados y referencias disponibles. Fuera de La Dorada, la disponibilidad de entrega a domicilio y el plazo de tránsito dependen de la transportadora y el destino: como referencia del sector, 2–5 días hábiles en ciudades principales y 3–8 días hábiles en otros municipios. Si la referencia está bajo pedido, el alistamiento habitual es de 5–8 días hábiles y se suma al tránsito. En la cotización confirmamos disponibilidad, transportadora, costo y fecha.",
