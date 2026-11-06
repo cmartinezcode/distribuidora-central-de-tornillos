@@ -3203,7 +3203,7 @@ body {
   }
 
   .quote-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .footer-cta__inner {
@@ -3592,7 +3592,7 @@ body {
   }
 
   .quote-form .form-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .quote-form-card {

@@ -26,7 +26,7 @@ export const categories: Category[] = [
     navLabel: "Estructural",
     short: "Framing, truss y lenteja",
     description:
-      "Tornillos para perfiles metálicos, entramados y cerramientos: framing, truss y cabeza lenteja con punta aguja o punta broca.",
+      "Tornillos para perfiles metálicos, entramados y cerramientos: framing, truss con punta aguja, truss con punta broca y cabeza lenteja.",
     art: "self",
     image: "/images/products/framing-aguja.png",
     keywords: [
@@ -49,7 +49,7 @@ export const categories: Category[] = [
     navLabel: "Drywall",
     short: "Roscas finas y punta aguja",
     description:
-      "Tornillos para placas de yeso y perfilería delgada: drywall ASTM C-1002 y truss con punta aguja.",
+      "Tornillos drywall ASTM C-1002 con rosca fina, cabeza bugle y punta aguja para placas de yeso y perfilería delgada.",
     art: "self",
     image: "/images/products/drywall-6x1.png",
     keywords: [

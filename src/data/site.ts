@@ -15,7 +15,7 @@ export const site = {
   whatsapp: "573147713179",
   email: "ventas@distribuidoracentraldetornillos.com",
   address: {
-    street: "Carrera 15 # 56, Centro",
+    street: "Carrera 6 # 15 - 56, Centro",
     city: "La Dorada",
     region: "Caldas",
     postalCode: "175031",

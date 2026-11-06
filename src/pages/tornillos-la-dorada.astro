@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import Icon from "../components/Icon.astro";
 import ProductCard from "../components/ProductCard.astro";
-import { featuredProducts, totalReferences } from "../data/products";
+import { featuredProducts } from "../data/products";
 import { site, whatsappHref } from "../data/site";
 
 const pageUrl = `${site.url}/tornillos-la-dorada`;
@@ -17,7 +17,7 @@ const localFaqs = [
   {
     question: "¿Dónde comprar tornillos en La Dorada, Caldas?",
     answer:
-      "En Central de Tornillos, Carrera 15 # 56, Centro, La Dorada, Caldas. Atendemos con cita o pedido confirmado en horario comercial: lunes a viernes de 8:00 a 18:00 y sábados de 8:00 a 12:00. Puedes revisar el catálogo, enviar tu lista por WhatsApp o solicitar una cotización con varias referencias.",
+      "En Central de Tornillos, Carrera 6 # 15 - 56, Centro, La Dorada, Caldas. Atendemos con cita o pedido confirmado en horario comercial: lunes a viernes de 8:00 a 18:00 y sábados de 8:00 a 12:00. Puedes revisar el catálogo, enviar tu lista por WhatsApp o solicitar una cotización con varias referencias.",
   },
   {
     question: "¿Hacen entregas el mismo día en La Dorada?",
@@ -37,7 +37,7 @@ const localFaqs = [
   {
     question: "¿Puedo retirar el pedido en La Dorada?",
     answer:
-      "Sí. Coordina el retiro en Carrera 15 # 56, Centro, La Dorada, dentro del horario comercial. Confirma antes la disponibilidad y el alistamiento para que el pedido esté listo cuando llegues.",
+      "Sí. Coordina el retiro en Carrera 6 # 15 - 56, Centro, La Dorada, dentro del horario comercial. Confirma antes la disponibilidad y el alistamiento para que el pedido esté listo cuando llegues.",
   },
 ];
 
@@ -216,8 +216,8 @@ const faqSchema = {
           <span class="eyebrow">Referencias habituales</span>
           <h2 class="section-title">Las más pedidas en La Dorada.</h2>
           <p class="section-lead">
-            {totalReferences} referencias bajo pedido para drywall, estructura metálica y
-            cubiertas. Elige 100 und., 1.000 und. o caja cerrada y solicita precio por volumen.
+            Referencias bajo pedido para drywall, estructura metálica y cubiertas. Elige
+            100 und., 1.000 und. o caja cerrada y solicita precio por volumen.
           </p>
         </div>
         <a class="link-arrow" href="/catalogo">

@@ -109,9 +109,7 @@ const showCategories = !lockedCategory;
         <span class="filter-count" data-filter-count hidden>0</span>
       </button>
 
-      <p class="catalog-count" aria-live="polite">
-        <strong data-results-count>{products.length}</strong> referencias
-      </p>
+      <p class="catalog-count" aria-live="polite">Referencias disponibles</p>
 
       <div class="catalog-toolbar__actions">
         <a class="catalog-quote-link" href="/cotizacion">
@@ -170,7 +168,6 @@ const showCategories = !lockedCategory;
   const cards = grid ? Array.from(grid.querySelectorAll("[data-product]")) : [];
   const searchInput = document.querySelector("[data-filter-search]");
   const sortSelect = document.querySelector("[data-sort]");
-  const resultsCounter = document.querySelector("[data-results-count]");
   const emptyState = document.querySelector("[data-catalog-empty]");
   const activeContainer = document.querySelector("[data-active-filters]");
   const filterCount = document.querySelector("[data-filter-count]");
@@ -326,7 +323,6 @@ const showCategories = !lockedCategory;
         if (show) visible += 1;
       });
 
-      if (resultsCounter) resultsCounter.textContent = String(visible);
       if (emptyState) emptyState.hidden = visible !== 0;
       applySort();
       updateChips();

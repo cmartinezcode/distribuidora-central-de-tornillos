@@ -25,13 +25,13 @@ El proyecto funciona, pero aún hay datos de negocio por confirmar antes de publ
 
 1. **Contacto y empresa** — `src/data/site.ts`: horario, año de fundación y datos
    registrales definitivos. El teléfono, WhatsApp, email, dirección y dominio ya están
-   cargados (`314 771 3179`, `573147713179`, Carrera 15 # 56, La Dorada, Caldas,
+   cargados (`314 771 3179`, `573147713179`, Carrera 6 # 15 - 56, La Dorada, Caldas,
    `ventas@distribuidoracentraldetornillos.com` y
    `distribuidoracentraldetornillos.com`); el horario, el año de fundación y los datos
    registrales siguen pendientes de confirmar.
 2. **Catálogo y presentaciones** — `src/data/products.ts` y `src/data/categories.ts`.
-   El catálogo tiene 9 referencias en 3 categorías (estructural, drywall y cubiertas),
-   todas bajo pedido y sin precio publicado. Los tornillos se venden en presentaciones
+   El catálogo se organiza en 3 categorías (estructural, drywall y cubiertas), todas bajo
+   pedido y sin precio publicado. Los tornillos se venden en presentaciones
    de 100 unidades, 1.000 unidades o caja cerrada; la cantidad de unidades de la caja
    cerrada se confirma por WhatsApp. Cada ficha muestra un peso aproximado por millar
    calculado con diámetro, longitud y densidad del acero. Ajusta los tramos de volumen
@@ -60,9 +60,8 @@ El proyecto funciona, pero aún hay datos de negocio por confirmar antes de publ
    `rsvg-convert -w 1200 -h 630 public/og.svg -o public/og.png`.
 8. **Imágenes de producto** — `public/images/products/` contiene recortes con fondo
    transparente a partir de las fotografías suministradas por el negocio. Son imágenes
-   de referencia, no fichas técnicas exactas. Las medidas 1 1/2&quot;, 12 × 3&quot; y la
-   referencia lenteja punta aguda comparten la imagen de su familia hasta contar con una
-   foto propia. Antes de publicar,
+   de referencia, no fichas técnicas exactas. Las medidas 1 1/2&quot; y 12 × 3&quot;
+   comparten la imagen de su familia hasta contar con una foto propia. Antes de publicar,
    valida que la geometría, el acabado y la arandela correspondan a la referencia real,
    confirma la autoría y reemplaza los archivos si es necesario.
    Autores, licencias y enlaces están en `/creditos` y en la sección
@@ -97,7 +96,7 @@ public/               Favicon, icono Apple, marca, OG, robots y sitemap generado
 
 ## Precios
 
-- Las 9 referencias del catálogo se trabajan **bajo pedido** y no publican precio.
+- Las referencias del catálogo se trabajan **bajo pedido** y no publican precio.
 - La cotización confirma precio por volumen, presentación, flete y plazo. Los precios
   se expresan en pesos colombianos (COP), por unidad.
 - Los tramos por volumen se aplican según la cantidad de unidades. La ficha muestra los
@@ -169,6 +168,6 @@ npm run check
 npm run build
 ```
 
-El build genera 30 páginas estáticas. La revisión manual debe cubrir navegación por
+El build genera 31 páginas estáticas. La revisión manual debe cubrir navegación por
 todas las rutas, filtros y búsqueda, precarga de cotización, enlaces de WhatsApp, menú
 móvil, barra inferior y legales.

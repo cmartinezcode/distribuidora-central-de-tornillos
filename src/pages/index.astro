@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import HeroDrywall from "../components/HeroDrywall.astro";
 import Icon from "../components/Icon.astro";
 import ProductCard from "../components/ProductCard.astro";
-import { featuredProducts, totalReferences } from "../data/products";
+import { featuredProducts } from "../data/products";
 import { faqs } from "../data/faqs";
 import { site, whatsappHref } from "../data/site";
 
@@ -17,8 +17,8 @@ const services = [
   },
   {
     icon: "package",
-    title: "Bajo pedido",
-    text: `${totalReferences} referencias activas`,
+    title: "Catálogo técnico",
+    text: "Norma, medida, presentación y peso por millar",
   },
   {
     icon: "calculator",
@@ -109,8 +109,8 @@ const websiteSchema = {
         <span class="store-hero__kicker">Tornillería al por mayor · La Dorada, Caldas</span>
         <h1>Tornillería estructural al <em>mejor precio.</em></h1>
         <p class="store-hero__lead">
-          Referencias bajo pedido, cotización por volumen y despacho nacional desde La
-          Dorada. En La Dorada, entrega a domicilio el mismo día para pedidos confirmados y
+          Referencias técnicas, cotización por volumen y despacho nacional desde La Dorada.
+          En La Dorada, entrega a domicilio el mismo día para pedidos confirmados y
           referencias disponibles; fuera, la disponibilidad y el plazo dependen de la
           transportadora y el destino.
         </p>
@@ -125,7 +125,7 @@ const websiteSchema = {
         </div>
 
         <ul class="store-hero__trust">
-          <li><Icon name="check-circle" size={15} /> {totalReferences} referencias</li>
+          <li><Icon name="check-circle" size={15} /> Referencias técnicas</li>
           <li><Icon name="check-circle" size={15} /> Cotización en COP</li>
           <li><Icon name="check-circle" size={15} /> Respuesta en 24 h</li>
           <li><Icon name="check-circle" size={15} /> La Dorada: mismo día</li>

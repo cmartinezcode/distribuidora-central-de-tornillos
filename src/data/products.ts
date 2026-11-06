@@ -149,11 +149,11 @@ const families: Family[] = [
     id: "truss-aguja",
     code: "TRA",
     name: "Tornillo truss ASME B18.6.4 punta aguja",
-    category: "drywall",
+    category: "tornillos-estructural",
     norm: "ASME B18.6.4",
     material: "Acero al carbono",
     finish: "Negro fosfatado",
-    head: "Truss",
+    head: "Lenteja (truss)",
     drive: "Phillips PH2",
     art: "self",
     image: "/images/products/truss-aguja.png",
@@ -161,17 +161,17 @@ const families: Family[] = [
     unit: "presentación",
     unitLabel: presentationLabel,
     description:
-      "Tornillo de cabeza truss y punta aguja para fijar placas de drywall a perfiles metálicos delgados. La cabeza ancha distribuye la presión y reduce el riesgo de rasgar el cartón.",
+      "Tornillo de cabeza lenteja (truss) y punta aguda para unir perfiles metálicos delgados, láminas y paneles. La cabeza ancha reparte la presión y la punta aguda arranca sin pretaladro en materiales de baja densidad.",
     applications: [
-      "Placas de yeso sobre perfil metálico",
-      "Cielos rasos y tabiques",
-      "Fijaciones con cabeza de bajo perfil",
-      "Montajes de drywall en seco",
+      "Uniones de perfiles metálicos delgados",
+      "Entramados y cerramientos de steel framing",
+      "Fijación de láminas y paneles sobre perfilería",
+      "Montajes de taller y remates",
     ],
     features: [
-      "Punta aguja para perfiles delgados",
-      "Cabeza truss de apoyo amplio",
-      "Rosca fina para placas de yeso",
+      "Cabeza lenteja (truss) de apoyo amplio",
+      "Punta aguda para arranque directo",
+      "Rosca fina para metal delgado",
       "Acabado negro fosfatado",
     ],
     variants: [
@@ -226,48 +226,6 @@ const families: Family[] = [
         stock: "order",
         featured: true,
         image: "/images/products/framing-aguja.png",
-      },
-    ],
-  },
-  {
-    id: "lenteja-aguja",
-    code: "LEN",
-    name: "Tornillo estructural cabeza lenteja punta aguda",
-    category: "tornillos-estructural",
-    norm: "ASME B18.6.4",
-    material: "Acero al carbono",
-    finish: "Cincado",
-    head: "Lenteja (truss)",
-    drive: "Phillips PH2",
-    art: "self",
-    image: "/images/products/truss-aguja.png",
-    pack: 1,
-    unit: "presentación",
-    unitLabel: presentationLabel,
-    description:
-      "Tornillo de cabeza lenteja y punta aguda para fijar láminas, paneles delgados y perfilería liviana. La cabeza ancha reparte la presión y la punta aguda arranca sin pretaladro en materiales de baja densidad.",
-    applications: [
-      "Fijación de láminas y paneles delgados",
-      "Uniones sobre perfilería liviana",
-      "Cerramientos, remates y montajes de taller",
-      "Fijaciones que requieren bajo perfil y apoyo amplio",
-    ],
-    features: [
-      "Cabeza lenteja de apoyo amplio",
-      "Punta aguda para arranque directo",
-      "Rosca fina para metal y lámina delgada",
-      "Acabado cincado",
-    ],
-    variants: [
-      {
-        measure: '#8 × 1/2"',
-        d: 4.2,
-        l: 12.7,
-        code: "08X12",
-        slug: "lenteja-aguja-8-x-1-2",
-        stock: "order",
-        featured: false,
-        image: "/images/products/truss-aguja.png",
       },
     ],
   },
@@ -539,11 +497,6 @@ export const relatedProducts = (product: Product, limit = 4) => {
   );
   return [...sameCategory, ...extra].slice(0, limit);
 };
-
-export const categoryCount = (slug: string) =>
-  products.filter((product) => product.category === slug).length;
-
-export const totalReferences = products.length;
 
 export const categoryNames = categories.map((category) => category.name);
 

@@ -3,7 +3,6 @@ import Base from "../layouts/Base.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
-import { totalReferences } from "../data/products";
 import { categories } from "../data/categories";
 
 const years = new Date().getFullYear() - site.founded;
@@ -65,11 +64,7 @@ const years = new Date().getFullYear() - site.founded;
               <span class="fact__v" style="font-family: var(--font-display); font-size: 1.5rem;">{years}+</span>
             </div>
             <div class="fact">
-              <span class="fact__k">Referencias</span>
-              <span class="fact__v" style="font-family: var(--font-display); font-size: 1.5rem;">{totalReferences}</span>
-            </div>
-            <div class="fact">
-              <span class="fact__k">Familias</span>
+              <span class="fact__k">Categorías</span>
               <span class="fact__v" style="font-family: var(--font-display); font-size: 1.5rem;">{categories.length}</span>
             </div>
             <div class="fact">

@@ -3,7 +3,7 @@ import Logo from "./Logo.astro";
 import Icon from "./Icon.astro";
 import { site, whatsappHref } from "../data/site";
 import { categories } from "../data/categories";
-import { categoryCount, products, totalReferences } from "../data/products";
+import { products } from "../data/products";
 
 const pathname = Astro.url.pathname;
 const isCurrent = (href: string) =>
@@ -38,7 +38,6 @@ const searchIndexJson = JSON.stringify(searchIndex).replace(/</g, "\\u003c");
 <div class="topbar" role="region" aria-label="Información de servicio">
   <div class="container topbar__inner">
     <div class="topbar__meta">
-      <span class="topbar__item"><Icon name="package" size={16} /> Bajo pedido</span>
       <span class="topbar__item"><Icon name="map-pin" size={16} /> Cobertura nacional</span>
     </div>
     <div class="topbar__links">
@@ -132,13 +131,13 @@ const searchIndexJson = JSON.stringify(searchIndex).replace(/</g, "\\u003c");
                 <span class="catalog-menu__icon"><Icon name="layers" size={17} /></span>
                 <span>
                   <strong>{category.name}</strong>
-                  <small>{category.short} · {categoryCount(category.slug)} ref.</small>
+                  <small>{category.short}</small>
                 </span>
               </a>
             ))}
           </div>
           <div class="catalog-menu__aside">
-            <span class="catalog-menu__kicker">{totalReferences} referencias activas</span>
+            <span class="catalog-menu__kicker">Catálogo técnico</span>
             <strong>Encuentra, compara y cotiza.</strong>
             <p>Cotización por volumen y despacho nacional desde La Dorada, Caldas.</p>
             <a class="btn btn--primary btn--sm" href="/catalogo">
@@ -291,7 +290,7 @@ const searchIndexJson = JSON.stringify(searchIndex).replace(/</g, "\\u003c");
           body.innerHTML = `
             <div class="search-live__head">
               <span>${matches.length} ${resultLabel}</span>
-              <span>Bajo pedido · sin precio publicado</span>
+              <span>Sin precio publicado</span>
             </div>
             <div class="search-live__list">
               ${shown

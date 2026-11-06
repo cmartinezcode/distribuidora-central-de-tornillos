@@ -4,7 +4,6 @@ import Breadcrumbs from "../components/Breadcrumbs.astro";
 import Icon from "../components/Icon.astro";
 import { site, whatsappHref } from "../data/site";
 import { faqs } from "../data/faqs";
-import { totalReferences } from "../data/products";
 
 const quickWhatsApp = whatsappHref(
   "Hola, quiero confirmar disponibilidad, entrega a domicilio en La Dorada y plazo de despacho para una lista de tornillería."
@@ -42,7 +41,7 @@ const quickWhatsApp = whatsappHref(
         <article class="feature">
           <span class="feature__icon"><Icon name="package" size={20} /></span>
           <h3>Bajo pedido</h3>
-          <p>{totalReferences} referencias activas con alistamiento habitual de 5–8 días hábiles.</p>
+          <p>Referencias bajo pedido con alistamiento habitual de 5–8 días hábiles.</p>
         </article>
         <article class="feature">
           <span class="feature__icon"><Icon name="map-pin" size={20} /></span>

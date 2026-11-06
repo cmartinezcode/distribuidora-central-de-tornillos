@@ -4,11 +4,7 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import CatalogView from "../../components/CatalogView.astro";
 import Icon from "../../components/Icon.astro";
 import { categories, type Category } from "../../data/categories";
-import {
-  categoryCount,
-  getCategoryProducts,
-  type Product,
-} from "../../data/products";
+import { getCategoryProducts, type Product } from "../../data/products";
 
 export function getStaticPaths() {
   return categories.map((category) => ({
@@ -57,9 +53,9 @@ const families = [...familyMap.values()];
         <h1>{category.name}</h1>
         <p>{category.description}</p>
         <div class="catalog-hero__facts">
-          <span><strong>{products.length}</strong> referencias</span>
-          <span><strong>{families.length}</strong> familias</span>
-          <span>Bajo pedido · cotización</span>
+          <span>Norma y medida</span>
+          <span>Peso por millar</span>
+          <span>Despacho nacional</span>
         </div>
         <div class="catalog-hero__actions">
           <a class="btn btn--primary" href="/cotizacion">
@@ -129,7 +125,7 @@ const families = [...familyMap.values()];
             <span class="sector-card__icon"><Icon name="package" size={20} /></span>
             <div>
               <h3>{item.name}</h3>
-              <p>{item.short} · {categoryCount(item.slug)} referencias</p>
+              <p>{item.short}</p>
             </div>
             <Icon name="arrow-up-right" size={16} class="sector-card__arrow" />
           </a>

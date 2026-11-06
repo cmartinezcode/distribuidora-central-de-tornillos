@@ -2862,6 +2862,32 @@ button {
   padding-block: clamp(2rem, 4vw, 3rem);
 }
 
+/* Evita que correos y enlaces largos ensanchen las columnas en móvil. */
+.quote-layout > *,
+.contact-layout > *,
+.quality-grid > *,
+.cta-band > *,
+.prose,
+.form-note,
+.footer-contact,
+.quote-form-card,
+.quote-aside,
+.budget-form,
+.budget-aside,
+.info-card,
+.footer-contact li > * {
+  min-width: 0;
+}
+
+a[href^="mailto:"],
+.form-note,
+.footer-contact a,
+.quote-aside__note a,
+.cta-band p {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 /* ---------- Footer ---------- */
 
 .site-footer {
@@ -3191,7 +3217,7 @@ body.no-scroll {
   }
 
   .budget-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .budget-aside {
@@ -3199,12 +3225,12 @@ body.no-scroll {
   }
 
   .quality-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
   }
 
   .contact-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -3224,7 +3250,7 @@ body.no-scroll {
   }
 
   .topbar__meta::before {
-    content: "Bajo pedido · Despacho nacional";
+    content: "Cobertura nacional";
     font-size: 0.73rem;
     letter-spacing: 0.02em;
   }
@@ -3361,7 +3387,7 @@ body.no-scroll {
   }
 
   .form-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .budget-row {
