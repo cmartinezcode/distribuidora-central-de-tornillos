@@ -24,7 +24,7 @@
 
   <text fill="#F6F3EC" font-family="DejaVu Sans, sans-serif" font-size="76" font-weight="700">
     <tspan x="80" y="228">Fijaciones</tspan>
-    <tspan x="80" y="318">que perduran.</tspan>
+    <tspan x="80" y="318">que perduran</tspan>
   </text>
 
   <rect x="84" y="448" width="74" height="5" fill="#FFCD11" />
