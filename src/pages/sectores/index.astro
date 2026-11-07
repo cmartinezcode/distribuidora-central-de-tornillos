@@ -3,12 +3,34 @@ import Base from "../../layouts/Base.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Icon from "../../components/Icon.astro";
 import { sectors } from "../../data/sectors";
+import { site } from "../../data/site";
+
+const sectorsUrl = new URL(Astro.url.pathname, site.url).href;
+const sectorsSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${sectorsUrl}#sectores`,
+  name: "Sectores de tornillería al por mayor",
+  itemListElement: sectors.map((sector, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "WebPage",
+      name: sector.name,
+      url: new URL(`/sectores/${sector.slug}/`, site.url).href,
+      description: sector.description,
+    },
+  })),
+};
 ---
 
 <Base
   title="Sectores de tornillería al por mayor"
   description="Tornillería al por mayor para industria, construcción, talleres e instaladores. Cotización por volumen y asesoría técnica según cada sector."
+  pageType="CollectionPage"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(sectorsSchema)} />
+
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Sectores</span>

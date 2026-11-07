@@ -6,9 +6,6 @@ import ProductCard from "../components/ProductCard.astro";
 import { featuredProducts } from "../data/products";
 import { site, whatsappHref } from "../data/site";
 
-const pageUrl = `${site.url}/tornillos-la-dorada`;
-const localAreas = site.serviceAreas.map((name) => ({ "@type": "City", name }));
-
 const quickWhatsApp = whatsappHref(
   "Hola, necesito tornillería en La Dorada, Caldas. Les comparto mi lista de referencias y la ciudad de entrega."
 );
@@ -41,49 +38,6 @@ const localFaqs = [
   },
 ];
 
-const localPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": `${pageUrl}#webpage`,
-  url: pageUrl,
-  name: "Tornillería en La Dorada, Caldas",
-  description:
-    "Tornillería estructural, drywall y cubiertas en La Dorada, Caldas. Entrega a domicilio el mismo día para pedidos confirmados y referencias disponibles; despacho a municipios cercanos y toda Colombia.",
-  inLanguage: "es-CO",
-  isPartOf: {
-    "@type": "WebSite",
-    name: site.name,
-    url: site.url,
-  },
-  about: {
-    "@id": `${site.url}/#organizacion`,
-  },
-  areaServed: localAreas,
-  primaryImageOfPage: {
-    "@type": "ImageObject",
-    url: `${site.url}/og.png`,
-  },
-};
-
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Inicio",
-      item: site.url,
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: "Tornillería en La Dorada",
-      item: pageUrl,
-    },
-  ],
-};
-
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -102,8 +56,6 @@ const faqSchema = {
   title="Tornillería en La Dorada, Caldas"
   description="Tornillería estructural, drywall y cubiertas en La Dorada, Caldas. Entrega local el mismo día y despacho a todo Colombia con transportadora."
 >
-  <script type="application/ld+json" set:html={JSON.stringify(localPageSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
   <section class="page-hero">

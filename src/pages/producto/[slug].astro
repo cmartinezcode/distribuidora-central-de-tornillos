@@ -29,8 +29,7 @@ const { product } = Astro.props;
 const stock = stockMeta[product.stock];
 const related = relatedProducts(product, 4);
 const categoryHref = `/categoria/${product.category}`;
-const availability =
-  product.stock === "order" ? "https://schema.org/PreOrder" : "https://schema.org/InStock";
+const productUrl = new URL(Astro.url.pathname, site.url).href;
 
 const quoteHref = `/cotizacion?producto=${encodeURIComponent(product.slug)}&presentacion=100&cantidad=1`;
 const baseWhatsApp = whatsappHref(
@@ -47,19 +46,41 @@ const metaDescription = `${descriptionExcerpt} Peso aprox. ${formatWeight(produc
 const productSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
+  "@id": `${productUrl}#producto`,
   name: product.name,
+  alternateName: product.name.replace(/×/g, "x"),
   sku: product.sku,
   image: `${site.url}${product.image}`,
   description: product.description,
+  url: productUrl,
+  mainEntityOfPage: { "@id": `${productUrl}#webpage` },
   category: product.categoryName,
   material: product.material,
   brand: { "@type": "Brand", name: site.name },
+  audience: {
+    "@type": "BusinessAudience",
+    audienceType: "Industria, construcción, talleres e instaladores",
+  },
+  keywords: [
+    product.family,
+    product.norm,
+    product.measure,
+    `tornillo ${product.categoryName.toLowerCase()}`,
+    "tornillería al por mayor",
+    "La Dorada",
+    "Colombia",
+  ].join(", "),
   additionalProperty: [
     { "@type": "PropertyValue", name: "Norma", value: product.norm },
     { "@type": "PropertyValue", name: "Medida", value: product.measure },
     { "@type": "PropertyValue", name: "Acabado", value: product.finish },
     { "@type": "PropertyValue", name: "Cabeza", value: product.head },
     { "@type": "PropertyValue", name: "Disponibilidad", value: stock.label },
+    {
+      "@type": "PropertyValue",
+      name: "Modalidad de venta",
+      value: "Cotización por volumen, sin precio publicado",
+    },
     {
       "@type": "PropertyValue",
       name: "Presentaciones",
@@ -72,34 +93,6 @@ const productSchema = {
       value: `${formatWeight(product.weightPerThousand)} (cálculo referencial)`,
     },
   ],
-  offers: {
-    "@type": "Offer",
-    priceCurrency: "COP",
-    availability,
-    url: `${site.url}/producto/${product.slug}`,
-    seller: { "@type": "Organization", name: site.name },
-  },
-};
-
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Inicio", item: site.url },
-    { "@type": "ListItem", position: 2, name: "Catálogo", item: `${site.url}/catalogo` },
-    {
-      "@type": "ListItem",
-      position: 3,
-      name: product.categoryName,
-      item: `${site.url}${categoryHref}`,
-    },
-    {
-      "@type": "ListItem",
-      position: 4,
-      name: product.name,
-      item: `${site.url}/producto/${product.slug}`,
-    },
-  ],
 };
 ---
 
@@ -107,9 +100,10 @@ const breadcrumbSchema = {
   title={product.name}
   description={metaDescription}
   includeSiteName={false}
+  pageType="ItemPage"
+  ogType="product"
 >
   <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
   <div class="container">
     <Breadcrumbs
@@ -129,7 +123,10 @@ const breadcrumbSchema = {
           class="pd-image"
           src={product.image}
           alt={`Imagen de referencia de ${product.name}`}
+          width="700"
+          height="700"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
         />
         <div class="pd-media__caption">

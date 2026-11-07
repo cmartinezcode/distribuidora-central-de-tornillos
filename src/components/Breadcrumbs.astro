@@ -1,4 +1,6 @@
 ---
+import { site } from "../data/site";
+
 interface Crumb {
   label: string;
   href?: string;
@@ -9,6 +11,19 @@ interface Props {
 }
 
 const { items } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const crumbs = [{ label: "Inicio", href: "/" }, ...items];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: crumbs.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.label,
+    item: item.href ? new URL(item.href, site.url).href : canonical,
+  })),
+};
 ---
 
 <nav class="breadcrumbs" aria-label="Migas de pan">
@@ -25,3 +40,5 @@ const { items } = Astro.props;
     ))}
   </ol>
 </nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />

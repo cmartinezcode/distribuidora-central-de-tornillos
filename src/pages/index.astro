@@ -84,16 +84,37 @@ const benefits = [
   },
 ];
 
-const websiteSchema = {
+const homeFaqSchema = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: site.name,
-  url: site.url,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${site.url}/catalogo?q={search_term_string}`,
-    "query-input": "required name=search_term_string",
-  },
+  "@type": "FAQPage",
+  "@id": `${site.url}/#preguntas`,
+  mainEntity: homeFaqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
+const featuredListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${site.url}/#referencias-destacadas`,
+  name: "Referencias destacadas de tornillería",
+  itemListElement: featuredProducts.map((product, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Product",
+      name: product.name,
+      url: new URL(`/producto/${product.slug}/`, site.url).href,
+      image: `${site.url}${product.image}`,
+      sku: product.sku,
+      brand: { "@type": "Brand", name: site.name },
+    },
+  })),
 };
 ---
 
@@ -101,13 +122,14 @@ const websiteSchema = {
   title="Tornillería estructural al por mayor"
   description="Tornillería estructural, drywall y cubiertas al por mayor en La Dorada y Colombia. Cotización por volumen, presentaciones desde 100 und. y despacho nacional."
 >
-  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(homeFaqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(featuredListSchema)} />
 
   <section class="store-hero">
     <div class="container store-hero__inner">
       <div class="store-hero__copy">
         <span class="store-hero__kicker">Tornillería al por mayor · La Dorada, Caldas</span>
-        <h1>Tornillería estructural al <em>mejor precio.</em></h1>
+        <h1>Fijaciones que <em>perduran</em></h1>
         <p class="store-hero__lead">
           Referencias técnicas, cotización por volumen y despacho nacional desde La Dorada.
           En La Dorada, entrega a domicilio el mismo día para pedidos confirmados y

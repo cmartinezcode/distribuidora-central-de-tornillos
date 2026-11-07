@@ -26,10 +26,10 @@ El proyecto funciona, pero aún hay datos de negocio por confirmar antes de publ
 1. **Contacto y empresa** — `src/data/site.ts`: horario, año de fundación y datos
    registrales definitivos. El teléfono, WhatsApp, email, dirección y dominio ya están
    cargados (`314 771 3179`, `573147713179`, Carrera 6 # 15 - 56, La Dorada, Caldas,
-   `ventas@centraldetornillos.com.co` y
+   `ventas.centraldetornillos@gmail.com` y
    `centraldetornillos.com.co`); el horario, el año de fundación y los datos
-   registrales siguen pendientes de confirmar. El correo se mantiene hasta confirmar si
-   también cambia al nuevo dominio.
+   registrales siguen pendientes de confirmar. El correo de ventas es una cuenta de
+   Gmail independiente del dominio y debe verificarse antes de publicar.
 2. **Catálogo y presentaciones** — `src/data/products.ts` y `src/data/categories.ts`.
    El catálogo se organiza en 3 categorías (estructural, drywall y cubiertas), todas bajo
    pedido y sin precio publicado. Los tornillos se venden en presentaciones
@@ -53,9 +53,12 @@ El proyecto funciona, pero aún hay datos de negocio por confirmar antes de publ
    `https://centraldetornillos.com.co`; actualiza `site` en
    `astro.config.mjs` y la URL de `public/robots.txt` si cambia el dominio. La página
    `/tornillos-la-dorada` concentra la cobertura de La Dorada, Caldas y municipios
-   cercanos; el `HardwareStore` de `Base.astro` incluye dirección, geolocalización,
-   horarios y `areaServed`. Ajusta `site.geo` y `site.serviceAreas` si cambia la sede o
-   la cobertura. El sitemap se genera en el build.
+   cercanos. `Base.astro` genera el grafo global `HardwareStore`, `WebSite` y `WebPage`
+   con dirección, geolocalización, horarios, `areaServed` y datos de contacto; catálogo,
+   categorías, sectores y fichas añaden `ItemList`, `Product`, `BreadcrumbList` y
+   `FAQPage` según corresponda. Ajusta `site.geo` y `site.serviceAreas` si cambia la sede
+   o la cobertura. El sitemap se genera en el build y `wrangler.jsonc` fuerza la barra
+   final para que las URLs coincidan con canonical y sitemap.
 7. **Imagen social** — `public/og.svg` es la fuente editable. Regenera `public/og.png`
    (1200 × 630) después de cambiar marca o claim con:
    `rsvg-convert -w 1200 -h 630 public/og.svg -o public/og.png`.

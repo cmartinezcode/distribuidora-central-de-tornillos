@@ -5,6 +5,7 @@ import Icon from "../../components/Icon.astro";
 import ProductCard from "../../components/ProductCard.astro";
 import { sectors, type Sector } from "../../data/sectors";
 import { getProduct, type Product } from "../../data/products";
+import { site } from "../../data/site";
 
 export function getStaticPaths() {
   return sectors.map((sector) => ({
@@ -22,12 +23,34 @@ const recommended: Product[] = sector.recommended.flatMap((slug) => {
   const product = getProduct(slug);
   return product ? [product] : [];
 });
+const sectorUrl = new URL(Astro.url.pathname, site.url).href;
+const sectorSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${sectorUrl}#productos`,
+  name: `Referencias para ${sector.name.toLowerCase()}`,
+  itemListElement: recommended.map((product, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Product",
+      name: product.name,
+      url: new URL(`/producto/${product.slug}/`, site.url).href,
+      image: `${site.url}${product.image}`,
+      sku: product.sku,
+      brand: { "@type": "Brand", name: site.name },
+    },
+  })),
+};
 ---
 
 <Base
   title={sector.metaTitle ?? `Tornillería para ${sector.name.toLowerCase()}`}
   description={sector.metaDescription}
+  pageType="CollectionPage"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(sectorSchema)} />
+
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Sectores · {sector.short}</span>

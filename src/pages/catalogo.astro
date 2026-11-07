@@ -5,12 +5,39 @@ import CatalogView from "../components/CatalogView.astro";
 import Icon from "../components/Icon.astro";
 import { categories } from "../data/categories";
 import { products } from "../data/products";
+import { site } from "../data/site";
+
+const catalogUrl = new URL(Astro.url.pathname, site.url).href;
+const catalogSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${catalogUrl}#productos`,
+  name: "Catálogo de tornillería al por mayor",
+  itemListElement: products.map((product, index) => {
+    const productUrl = new URL(`/producto/${product.slug}/`, site.url).href;
+    return {
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Product",
+        name: product.name,
+        url: productUrl,
+        image: `${site.url}${product.image}`,
+        sku: product.sku,
+        brand: { "@type": "Brand", name: site.name },
+      },
+    };
+  }),
+};
 ---
 
 <Base
   title="Catálogo de tornillería al por mayor"
   description="Catálogo de tornillos estructurales, drywall y cubiertas en La Dorada. Consulta norma, medida y peso por millar; cotiza desde 100 und. o caja cerrada."
+  pageType="CollectionPage"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(catalogSchema)} />
+
   <section class="catalog-hero catalog-hero--store">
     <div class="container catalog-hero__inner">
       <div class="catalog-hero__copy">

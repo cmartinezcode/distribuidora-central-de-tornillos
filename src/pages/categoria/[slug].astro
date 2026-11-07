@@ -5,6 +5,7 @@ import CatalogView from "../../components/CatalogView.astro";
 import Icon from "../../components/Icon.astro";
 import { categories, type Category } from "../../data/categories";
 import { getCategoryProducts, type Product } from "../../data/products";
+import { site } from "../../data/site";
 
 export function getStaticPaths() {
   return categories.map((category) => ({
@@ -40,12 +41,37 @@ products.forEach((product) => {
   }
 });
 const families = [...familyMap.values()];
+const categoryUrl = new URL(Astro.url.pathname, site.url).href;
+const categorySchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": `${categoryUrl}#productos`,
+  name: `${category.name} al por mayor`,
+  itemListElement: products.map((product, index) => {
+    const productUrl = new URL(`/producto/${product.slug}/`, site.url).href;
+    return {
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Product",
+        name: product.name,
+        url: productUrl,
+        image: `${site.url}${product.image}`,
+        sku: product.sku,
+        brand: { "@type": "Brand", name: site.name },
+      },
+    };
+  }),
+};
 ---
 
 <Base
   title={`${category.name} al por mayor`}
   description={category.metaDescription}
+  pageType="CollectionPage"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(categorySchema)} />
+
   <section class="catalog-hero catalog-hero--store">
     <div class="container catalog-hero__inner">
       <div class="catalog-hero__copy">
@@ -67,7 +93,15 @@ const families = [...familyMap.values()];
         </div>
       </div>
       <div class="catalog-hero__visual" aria-hidden="true">
-        <img src={category.image} alt="" loading="eager" decoding="async" />
+        <img
+          src={category.image}
+          alt=""
+          width="700"
+          height="700"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
         <span>{category.short}</span>
       </div>
     </div>

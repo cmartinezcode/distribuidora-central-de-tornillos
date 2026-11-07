@@ -291,7 +291,7 @@ const quickWhatsApp = whatsappHref(
 
       const data = getData();
       if (!data) return;
-      const email = form.getAttribute("data-email") || "ventas@centraldetornillos.com.co";
+      const email = form.getAttribute("data-email") || "ventas.centraldetornillos@gmail.com";
       const subject = `Solicitud de cotización — ${data.empresa || data.nombre}`;
       const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildText())}`;
 

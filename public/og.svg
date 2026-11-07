@@ -22,17 +22,16 @@
 
   <text x="80" y="118" fill="#FFCD11" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="700" letter-spacing="5">CENTRAL DE TORNILLOS</text>
 
-  <text fill="#F6F3EC" font-family="DejaVu Sans, sans-serif" font-size="76" font-weight="700">
-    <tspan x="80" y="228">Tornillería</tspan>
-    <tspan x="80" y="318">estructural al</tspan>
-    <tspan x="80" y="408">mejor precio.</tspan>
+  <text fill="#F6F3EC" font-family="DejaVu Sans, sans-serif" font-size="82" font-weight="700">
+    <tspan x="80" y="240">Fijaciones</tspan>
+    <tspan x="80" y="340">que perduran</tspan>
   </text>
 
-  <rect x="84" y="448" width="74" height="5" fill="#FFCD11" />
+  <rect x="84" y="410" width="74" height="5" fill="#FFCD11" />
 
   <text fill="#B9C4C9" font-family="DejaVu Sans, sans-serif" font-size="21">
-    <tspan x="80" y="505">Catálogo estructural, drywall y cubiertas</tspan>
-    <tspan x="80" y="537">Cotización por volumen y despacho nacional.</tspan>
+    <tspan x="80" y="475">Catálogo estructural, drywall y cubiertas</tspan>
+    <tspan x="80" y="507">Cotización por volumen y despacho nacional.</tspan>
   </text>
 
   <g transform="translate(950 315)">
