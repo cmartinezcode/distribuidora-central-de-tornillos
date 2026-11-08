@@ -48,8 +48,18 @@ const localBusiness = {
   email: site.email,
   description: site.description,
   slogan: site.tagline,
-  image: `${site.url}/og.png`,
-  logo: `${site.url}/apple-touch-icon.png`,
+  image: {
+    "@type": "ImageObject",
+    url: `${site.url}/og.png`,
+    width: 1200,
+    height: 630,
+  },
+  logo: {
+    "@type": "ImageObject",
+    url: `${site.url}/apple-touch-icon.png`,
+    width: 180,
+    height: 180,
+  },
   address: {
     "@type": "PostalAddress",
     streetAddress: site.address.street,
@@ -111,6 +121,7 @@ const websiteSchema = {
   "@id": `${site.url}/#website`,
   url: site.url,
   name: site.name,
+  alternateName: ["Central de Tornillos Colombia", "Centraldetornillos"],
   description: site.description,
   inLanguage: "es-CO",
   publisher: { "@id": `${site.url}/#organizacion` },

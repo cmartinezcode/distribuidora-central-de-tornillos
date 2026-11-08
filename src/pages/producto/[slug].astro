@@ -36,12 +36,7 @@ const baseWhatsApp = whatsappHref(
   `Hola, quiero cotizar ${product.name} (${product.sku}). ¿Me confirman precio por volumen, presentación y disponibilidad?`
 );
 const weightPerHundred = product.weightPerThousand / 10;
-const descriptionSource = product.description.split(". ")[0];
-const descriptionExcerpt =
-  descriptionSource.length > 90
-    ? `${descriptionSource.slice(0, 87).replace(/\s+\S*$/, "")}…`
-    : descriptionSource;
-const metaDescription = `${descriptionExcerpt} Peso aprox. ${formatWeight(product.weightPerThousand)}/millar. Cotiza desde 100 und. o caja cerrada.`;
+const metaDescription = `${product.name}, ${product.finish.toLowerCase()}. Peso aprox. ${formatWeight(product.weightPerThousand)}/millar. Cotiza desde 100 und. o caja cerrada.`;
 
 const productSchema = {
   "@context": "https://schema.org",

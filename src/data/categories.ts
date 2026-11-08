@@ -11,6 +11,7 @@ export type ArtType =
 export interface Category {
   slug: string;
   name: string;
+  title: string;
   navLabel: string;
   short: string;
   description: string;
@@ -24,6 +25,7 @@ export const categories: Category[] = [
   {
     slug: "tornillos-estructural",
     name: "Tornillos estructurales",
+    title: "Tornillos estructurales al por mayor",
     navLabel: "Estructural",
     short: "Framing, truss y lenteja",
     description:
@@ -49,6 +51,7 @@ export const categories: Category[] = [
   {
     slug: "drywall",
     name: "Drywall",
+    title: "Tornillos drywall al por mayor",
     navLabel: "Drywall",
     short: "Roscas finas y punta aguja",
     description:
@@ -70,6 +73,7 @@ export const categories: Category[] = [
   {
     slug: "cubiertas",
     name: "Cubiertas",
+    title: "Tornillos para cubiertas al por mayor",
     navLabel: "Cubiertas",
     short: "Flange con neopreno",
     description:
