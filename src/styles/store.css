@@ -798,27 +798,6 @@ body {
   min-height: 48px;
 }
 
-.store-hero__trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem 1.35rem;
-  margin-top: 1.65rem;
-  padding: 0;
-  list-style: none;
-  color: rgba(255, 255, 255, 0.62);
-  font-size: 0.72rem;
-}
-
-.store-hero__trust li {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.store-hero__trust svg {
-  color: var(--amber);
-}
-
 /* Composición del hero */
 .hero-visual {
   position: relative;
@@ -3008,7 +2987,6 @@ body {
 .nav-wa:hover,
 .store-hero__kicker,
 .store-hero h1 em,
-.store-hero__trust svg,
 .catalog-hero .eyebrow,
 .catalog-hero__visual > span,
 .standards-band__label,
@@ -3108,6 +3086,24 @@ body {
 
   .header-actions {
     justify-self: end;
+  }
+
+  .header-quote {
+    display: none;
+  }
+
+  .logo__name {
+    font-size: 1.12rem;
+  }
+
+  .logo__mark {
+    width: 46px;
+    height: 50px;
+  }
+
+  .logo__tag {
+    font-size: 0.64rem;
+    letter-spacing: 0.13em;
   }
 
   .nav-toggle {
@@ -3265,12 +3261,6 @@ body {
     gap: 0.4rem;
   }
 
-  .header-quote {
-    min-height: 40px;
-    padding-inline: 0.72rem;
-    font-size: 0.76rem;
-  }
-
   .header-search .search__category {
     display: none;
   }
@@ -3299,11 +3289,6 @@ body {
 
   .store-hero__actions .btn {
     width: 100%;
-  }
-
-  .store-hero__trust {
-    gap: 0.45rem 0.85rem;
-    font-size: 0.71rem;
   }
 
   .hero-visual {
@@ -3627,21 +3612,13 @@ body {
 }
 
 @media (max-width: 480px) {
-  .logo__tag {
-    display: none;
-  }
-
   .logo__name {
-    font-size: 0.92rem;
+    font-size: 1rem;
   }
 
   .logo__mark {
-    width: 35px;
-    height: 39px;
-  }
-
-  .header-quote span {
-    display: none;
+    width: 39px;
+    height: 43px;
   }
 
   .shelf-grid {

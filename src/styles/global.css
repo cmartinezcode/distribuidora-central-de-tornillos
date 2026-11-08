@@ -3421,10 +3421,6 @@ body.no-scroll {
 }
 
 @media (max-width: 480px) {
-  .logo__tag {
-    display: none;
-  }
-
   .logo__name {
     font-size: 0.95rem;
   }
