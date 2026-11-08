@@ -99,6 +99,7 @@ const localBusiness = {
     "@type": "ContactPoint",
     telephone: site.phone,
     email: site.email,
+    url: `${site.url}/contacto/`,
     contactType: "sales",
     areaServed: "CO",
     availableLanguage: "es",
@@ -165,6 +166,10 @@ const quickWhatsApp = whatsappHref(
     <meta name="application-name" content={site.name} />
     <meta name="apple-mobile-web-app-title" content={site.name} />
     <meta name="author" content={site.name} />
+    <meta name="geo.region" content="CO-CAL" />
+    <meta name="geo.placename" content={`${site.address.city}, ${site.address.region}`} />
+    <meta name="geo.position" content={`${site.geo.latitude};${site.geo.longitude}`} />
+    <meta name="ICBM" content={`${site.geo.latitude}, ${site.geo.longitude}`} />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta
@@ -174,7 +179,11 @@ const quickWhatsApp = whatsappHref(
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
     />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="es-CO" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
     <link rel="sitemap" type="application/xml" href={`${site.url}/sitemap-index.xml`} />
+    <link rel="sitemap" type="application/xml" href={`${site.url}/sitemap-images.xml`} />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

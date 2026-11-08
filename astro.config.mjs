@@ -5,6 +5,7 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://centraldetornillos.com.co",
+  trailingSlash: "always",
   integrations: [
     sitemap({
       filter: (page) => !page.includes("/legal/"),

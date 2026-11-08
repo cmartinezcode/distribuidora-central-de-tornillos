@@ -56,9 +56,14 @@ El proyecto funciona, pero aún hay datos de negocio por confirmar antes de publ
    cercanos. `Base.astro` genera el grafo global `HardwareStore`, `WebSite` y `WebPage`
    con dirección, geolocalización, horarios, `areaServed` y datos de contacto; catálogo,
    categorías, sectores y fichas añaden `ItemList`, `Product`, `BreadcrumbList` y
-   `FAQPage` según corresponda. Ajusta `site.geo` y `site.serviceAreas` si cambia la sede
-   o la cobertura. El sitemap se genera en el build y `wrangler.jsonc` fuerza la barra
-   final para que las URLs coincidan con canonical y sitemap.
+   `Service` y `FAQPage` según corresponda. Ajusta `site.geo` y `site.serviceAreas` si
+   cambia la sede o la cobertura. El sitemap de páginas se genera en el build y
+   `src/pages/sitemap-images.xml.ts` genera el sitemap de imágenes de producto; ambos
+   están declarados en `public/robots.txt`. `wrangler.jsonc` fuerza la barra final para
+   que las URLs coincidan con canonical y sitemap. `public/site.webmanifest` aporta
+   nombre, color e iconos para móviles. Fuera del código, verifica el dominio en Google
+   Search Console y Bing Webmaster Tools, envía ambos sitemaps y reclama o actualiza la
+   ficha de Google Business Profile con la misma dirección y teléfono.
 7. **Imagen social** — `public/og.svg` es la fuente editable. Regenera `public/og.png`
    (1200 × 630) después de cambiar marca o claim con:
    `rsvg-convert -w 1200 -h 630 public/og.svg -o public/og.png`.
