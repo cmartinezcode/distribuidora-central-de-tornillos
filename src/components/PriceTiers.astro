@@ -1,5 +1,5 @@
 ---
-import { volumeTiers, type Product } from "../data/products";
+import type { Product } from "../data/products";
 
 interface Props {
   product: Product;
@@ -18,12 +18,10 @@ const { product } = Astro.props;
   </div>
 
   <p class="price-box__note">
-    <strong>Presentaciones:</strong> 100 unidades, 1.000 unidades o caja cerrada.
+    <strong>Presentaciones:</strong> 100, 1.000 o caja cerrada.
     La cantidad de unidades de la caja cerrada se confirma por WhatsApp.
   </p>
   <p class="price-box__note">
-    <strong>Precio por volumen:</strong>{" "}
-    {volumeTiers.map((tier) => tier.label).join(" · ")} La cotización confirma
-    cantidad, precio y flete.
+    <strong>Precio por volumen:</strong> la cotización confirma precio, cantidad y flete.
   </p>
 </div>

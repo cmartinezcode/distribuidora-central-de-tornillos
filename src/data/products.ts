@@ -80,9 +80,9 @@ export const volumeTiers = [
 ] as const;
 
 export const presentations = [
-  { value: "100", label: "100 unidades", units: 100 },
-  { value: "1000", label: "1.000 unidades", units: 1000 },
-  { value: "caja", label: "Caja cerrada", units: null },
+  { value: "100", label: "100", longLabel: "100 unidades", units: 100 },
+  { value: "1000", label: "1.000", longLabel: "1.000 unidades", units: 1000 },
+  { value: "caja", label: "Caja cerrada", longLabel: "caja cerrada", units: null },
 ] as const;
 
 export const stockMeta: Record<

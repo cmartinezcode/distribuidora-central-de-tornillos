@@ -36,7 +36,7 @@ const baseWhatsApp = whatsappHref(
   `Hola, quiero cotizar ${product.name} (${product.sku}). ¿Me confirman precio por volumen, presentación y disponibilidad?`
 );
 const weightPerHundred = product.weightPerThousand / 10;
-const metaDescription = `${product.name}, ${product.finish.toLowerCase()}. Peso aprox. ${formatWeight(product.weightPerThousand)}/millar. Cotiza desde 100 und. o caja cerrada.`;
+const metaDescription = `${product.name}, ${product.finish.toLowerCase()}. Peso aprox. ${formatWeight(product.weightPerThousand)}/millar. Cotiza en 100, 1.000 und. o caja cerrada.`;
 
 const productSchema = {
   "@context": "https://schema.org",
@@ -94,7 +94,6 @@ const productSchema = {
 <Base
   title={product.name}
   description={metaDescription}
-  includeSiteName={false}
   pageType="ItemPage"
   ogType="product"
 >
@@ -187,11 +186,11 @@ const productSchema = {
           <div class="qty-box__row">
             <div>
               <span class="field__label">Presentación</span>
-              <p class="form-note">Elige 100 unidades, 1.000 unidades o caja cerrada.</p>
+              <p class="form-note">Elige 100, 1.000 o caja cerrada.</p>
             </div>
             <select class="qty-select" data-presentation aria-label="Presentación">
               {presentations.map((item) => (
-                <option value={item.value}>{item.label}</option>
+                <option value={item.value} data-label={item.longLabel}>{item.label}</option>
               ))}
             </select>
           </div>
@@ -388,7 +387,9 @@ const productSchema = {
 
       const selectedLabel = () =>
         presentation instanceof HTMLSelectElement
-          ? presentation.selectedOptions[0]?.textContent?.trim() || "100 unidades"
+          ? presentation.selectedOptions[0]?.dataset.label ||
+            presentation.selectedOptions[0]?.textContent?.trim() ||
+            "100 unidades"
           : "100 unidades";
 
       const update = () => {

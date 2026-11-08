@@ -53,8 +53,6 @@ export const site = {
     "Precios bajo cotización: confirmamos presentación, volumen, disponibilidad y flete.",
   minOrderNote:
     "Pedidos desde 100 unidades, en presentaciones de 100, 1.000 o caja cerrada. La cantidad de unidades de la caja cerrada se confirma por WhatsApp. En La Dorada, entrega a domicilio el mismo día para pedidos confirmados y referencias disponibles. Fuera de La Dorada, la disponibilidad y el plazo dependen de la transportadora y el destino; el costo también depende del peso y el volumen.",
-  coverage:
-    "La Dorada, Caldas y municipios del Magdalena Medio; cobertura nacional con transportadora aliada.",
   founded: 2004,
 } as const;
 

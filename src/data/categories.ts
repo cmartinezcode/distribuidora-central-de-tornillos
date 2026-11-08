@@ -31,7 +31,7 @@ export const categories: Category[] = [
     description:
       "Tornillos para perfiles metálicos, entramados y cerramientos: framing, truss con punta aguja, truss con punta broca y cabeza lenteja.",
     metaDescription:
-      "Tornillos estructurales framing, truss punta aguja, truss punta broca y cabeza lenteja. Cotiza desde 100 und. o caja cerrada con despacho nacional.",
+      "Tornillos estructurales framing, truss punta aguja, truss punta broca y cabeza lenteja. Cotiza en 100, 1.000 und. o caja cerrada con despacho nacional.",
     art: "self",
     image: "/images/products/framing-aguja.png",
     keywords: [
@@ -57,7 +57,7 @@ export const categories: Category[] = [
     description:
       "Tornillos drywall ASTM C-1002 con rosca fina, cabeza bugle y punta aguja para placas de yeso y perfilería delgada.",
     metaDescription:
-      "Tornillos drywall ASTM C-1002 con rosca fina, cabeza bugle y punta aguja. Cotiza desde 100 und. o caja cerrada con despacho nacional.",
+      "Tornillos drywall ASTM C-1002 con rosca fina, cabeza bugle y punta aguja. Cotiza en 100, 1.000 und. o caja cerrada con despacho nacional.",
     art: "self",
     image: "/images/products/drywall-6x1.png",
     keywords: [
@@ -79,7 +79,7 @@ export const categories: Category[] = [
     description:
       "Tornillos flange autoperforantes con arandela de neopreno para cubiertas, fachadas y paneles sándwich.",
     metaDescription:
-      "Tornillos flange autoperforantes con arandela de neopreno para cubiertas, fachadas y paneles sándwich. Cotiza desde 100 und. o caja cerrada.",
+      "Tornillos flange autoperforantes con arandela de neopreno para cubiertas, fachadas y paneles sándwich. Cotiza en 100, 1.000 und. o caja cerrada.",
     art: "self",
     image: "/images/products/flange-10x1.png",
     keywords: [
